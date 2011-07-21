@@ -1,6 +1,8 @@
 GIT_PS1=true
 
-. $HOME/.bashrc_default
+if [ -f $HOME/.bashrc_default ]; then
+	. $HOME/.bashrc_default
+fi
 . /etc/.bashrc_common
 
 if [ -f $HOME/.keys/id_rsa-open ]; then
