@@ -31,7 +31,13 @@ __git_dirty () {
 	[[ $STATUS ]] && [[ $(echo "$STATUS" | tail -n1) != 'nothing to commit (working directory clean)' ]] && echo '*'
 }
 
-PS1INNER="\[$LIGHTGREEN\]\u@\h\[$RESET\]:\[$LIGHTBLUE\]\W\[$RESET\]"
+if [[ $EUID == 0 ]]; then
+	USERCOLOUR=$LIGHTRED
+else
+	USERCOLOUR=$LIGHTGREEN
+fi
+
+PS1INNER="\[$USERCOLOUR\]\u@\h\[$RESET\]:\[$LIGHTBLUE\]\W\[$RESET\]"
 if [[ $GIT_PS1 == true ]] && [ $(which git 2> /dev/null) ]; then
 	PS1INNER=$PS1INNER'$(__git_ps1 "|\['$BROWN'\]%s")\['$RED'\]$(__git_dirty)\['$RESET'\]'
 fi

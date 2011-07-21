@@ -1,7 +1,7 @@
 GIT_PS1=true
 
 . $HOME/.bashrc_default
-. /etc/common.bashrc
+. /etc/.bashrc_common
 
 if [ -f $HOME/.keys/id_rsa-open ]; then
 	ssh-add $HOME/.keys/id_rsa-open 2> /dev/null
