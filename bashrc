@@ -20,3 +20,7 @@ alias l='ls -CF'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+
+if [ -f $HOME/.bashrc_local ]; then
+	. $HOME/.bashrc_local
+fi
