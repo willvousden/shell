@@ -1,4 +1,5 @@
 GIT_PS1=true
+LIVE_TERM_TITLE=true
 
 if [ -f $HOME/.bashrc_default ]; then
 	. $HOME/.bashrc_default
