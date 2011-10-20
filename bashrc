@@ -5,7 +5,9 @@ if [[ -f $HOME/.bashrc_default ]]; then
 	. $HOME/.bashrc_default
 fi
 
-if [[ -f /etc/.bashrc_common ]]; then
+if [[ -f $HOME/.bashrc_common ]]; then
+	. $HOME/.bashrc_common
+elif [[ -f /etc/.bashrc_common ]]; then
 	. /etc/.bashrc_common
 fi
 
