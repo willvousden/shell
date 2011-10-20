@@ -1,15 +1,15 @@
 GIT_PS1=true
 LIVE_TERM_TITLE=true
 
-if [ -f $HOME/.bashrc_default ]; then
+if [[ -f $HOME/.bashrc_default ]]; then
 	. $HOME/.bashrc_default
 fi
 
-if [ -f /etc/.bashrc_common ]; then
+if [[ -f /etc/.bashrc_common ]]; then
 	. /etc/.bashrc_common
 fi
 
-if [ -d $HOME/.bashrc.d ]; then
+if [[ -d $HOME/.bashrc.d ]]; then
 	for i in $(ls -A $HOME/.bashrc.d); do
 		. $HOME/.bashrc.d/$i
 	done
@@ -26,6 +26,6 @@ alias egrep='egrep --color=auto'
 
 alias pf='ps aux | grep -v grep | grep'
 
-if [ -f $HOME/.bashrc_local ]; then
+if [[ -f $HOME/.bashrc_local ]]; then
 	. $HOME/.bashrc_local
 fi
