@@ -4,7 +4,12 @@ LIVE_TERM_TITLE=true
 if [ -f $HOME/.bashrc_default ]; then
 	. $HOME/.bashrc_default
 fi
-. /etc/.bashrc_common
+
+if [ -f $HOME/.bashrc_common ]; then
+	. $HOME/.bashrc_common
+elif [ -f /etc/.bashrc_common ]; then
+	. /etc/.bashrc_common
+fi
 
 alias ls='ls --color=auto'
 alias ll='ls -AlF'
