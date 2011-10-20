@@ -5,8 +5,8 @@ if [ -f $HOME/.bashrc_default ]; then
 	. $HOME/.bashrc_default
 fi
 
-if [ -f $HOME/.bashrc_common ]; then
-	. $HOME/.bashrc_common
+if [ -f /etc/.bashrc_common ]; then
+	. /etc/.bashrc_common
 fi
 
 if [ -d $HOME/.bashrc.d ]; then
