@@ -7,8 +7,12 @@ fi
 
 if [ -f $HOME/.bashrc_common ]; then
 	. $HOME/.bashrc_common
-elif [ -f /etc/.bashrc_common ]; then
-	. /etc/.bashrc_common
+fi
+
+if [ -d $HOME/.bashrc.d ]; then
+	for i in $(ls -A $HOME/.bashrc.d); do
+		. $HOME/.bashrc.d/$i
+	done
 fi
 
 alias ls='ls --color=auto'
