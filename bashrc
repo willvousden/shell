@@ -1,3 +1,5 @@
+#!/bin/bash
+
 GIT_PS1=true
 LIVE_TERM_TITLE=true
 
