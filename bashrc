@@ -24,6 +24,8 @@ alias ll='ls -AlF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias stat='stat -x'
+
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
