@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PYTHONSTARTUP=$HOME/.profile-aux/python-startup.py
+
 # If running bash...
 if [[ -n $BASH_VERSION ]]; then
 	# ...and .bashrc exists...

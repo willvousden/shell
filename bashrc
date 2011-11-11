@@ -24,6 +24,8 @@ alias ll='ls -AlF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias mvim='mvim --remote-tab-silent'
+
 alias stat='stat -x'
 
 alias grep='grep --color=auto'
@@ -34,4 +36,8 @@ alias pf='ps aux | grep -v grep | grep'
 
 if [[ -f $HOME/.bashrc_local ]]; then
 	. $HOME/.bashrc_local
+fi
+
+if [[ -f /opt/local/etc/bash_completion ]]; then
+	. /opt/local/etc/bash_completion
 fi
