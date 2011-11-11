@@ -3,6 +3,9 @@
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export PYTHONSTARTUP=$HOME/.profile-aux/python-startup.py
 
+export EDITOR=/usr/bin/vim
+export PATH="$HOME/.bin:$PATH"
+
 # If running bash...
 if [[ -n $BASH_VERSION ]]; then
 	# ...and .bashrc exists...
@@ -15,9 +18,6 @@ fi
 if [[ -f $HOME/.keys/id_rsa-open ]]; then
 	ssh-add $HOME/.keys/id_rsa-open 2> /dev/null
 fi
-
-export EDITOR=/usr/bin/vim
-export PATH="$HOME/.bin:$PATH"
 
 # Set up some SSH tunnel stuff.
 export SSH_TUNNEL_COMMAND_PREFIX='ssh -fC2qTN -D'

@@ -36,7 +36,7 @@ else
 fi
 
 PS1INNER="\[$USERCOLOUR\]\u@\h\[$RESET\]:\[$LIGHTBLUE\]\W\[$RESET\]"
-if [[ $GIT_PS1 == true ]] && [ $(which git 2> /dev/null) ]; then
+if [[ $GIT_PS1 == true ]] && [[ -x $(which git) ]]; then
 	PS1INNER=$PS1INNER'$(__git_ps1 "|\['$BROWN'\]%s")\['$RED'\]$(__git_dirty)\['$RESET'\]'
 fi
 
