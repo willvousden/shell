@@ -24,9 +24,49 @@ WHITE="\033[1;37"
 BOLD=""
 RESET="\033[m"
 
-__git_dirty () {
-	STATUS=$(git status 2> /dev/null)
-	[[ $STATUS ]] && [[ $(echo "$STATUS" | tail -n1) != 'nothing to commit (working directory clean)' ]] && echo '*'
+# Generate dirty status flag for Git and SVN.
+__git_svn_status () {
+	local git_status=$(git status 2> /dev/null)
+	local svn_info=$(svn info 2> /dev/null)
+	if [[ $git_status ]]; then
+		# Generate Git output for PS1.
+		[[ $(echo "$git_status" | tail -n1) != 'nothing to commit (working directory clean)' ]] && echo '*'
+	elif [[ $svn_info ]]; then
+		# Generate SVN output for PS1.
+		[[ -n $(svn status | grep '^\s*[?ACDMR?!]') ]] && echo '*'
+	fi
+}
+
+# Generate branch/location information for Git and SVN repositories.
+__git_svn_info () {
+	local git_status=$(git status 2> /dev/null)
+	local svn_info=$(svn info 2> /dev/null)
+	local tag=
+	if [[ $git_status ]]; then
+		# Generate Git output for PS1.
+		tag=$(git symbolic-ref HEAD 2> /dev/null | sed -e 's/^refs\/heads\/\(.*\)/\1/')
+	elif [[ $svn_info ]]; then
+		# Generate SVN output for PS1.
+		local url=`svn info | awk '/URL:/ {print $2}'`
+		if [[ $url =~ trunk ]]; then
+			tag=trunk
+		elif [[ $url =~ /branches/ ]]; then
+			tag=$(echo $url | sed -e 's#^.*/\(branches/.*\)/.*$#\1#')
+		elif [[ $url =~ /tags/ ]]; then
+			tag=$(echo $url | sed -e 's#^.*/\(tags/.*\)/.*$#\1#')
+		else
+			tag=..
+		fi
+	fi
+
+	format=' (%s)'
+	if [[ -n $1 ]]; then
+		format=$1
+	fi
+
+	if [[ -n $tag ]]; then
+		printf "$format" $tag
+	fi
 }
 
 if [[ $EUID == 0 ]]; then
@@ -36,8 +76,8 @@ else
 fi
 
 PS1INNER="\[$USERCOLOUR\]\u@\h\[$RESET\]:\[$LIGHTBLUE\]\W\[$RESET\]"
-if [[ $GIT_PS1 == true ]] && [[ -x $(which git) ]]; then
-	PS1INNER=$PS1INNER'$(__git_ps1 "|\['$BROWN'\]%s")\['$RED'\]$(__git_dirty)\['$RESET'\]'
+if [[ $BETTER_PS1 == true ]]; then
+	PS1INNER=$PS1INNER'$(__git_svn_info "|\['$BROWN'\]%s")\['$RED'\]$(__git_svn_status)\['$RESET'\]'
 fi
 
 PS1='['$PS1INNER']\$ '
