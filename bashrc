@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GIT_PS1=true
+BETTER_PS1=true
 LIVE_TERM_TITLE=true
 
 if [[ -f $HOME/.bashrc_default ]]; then
