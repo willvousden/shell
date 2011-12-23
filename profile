@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export MANPATH=/usr/share/man:/opt/local/man:$MANPATH
 export PYTHONSTARTUP=$HOME/.profile-aux/python-startup.py
 
 export EDITOR=/usr/bin/vim
