@@ -19,7 +19,7 @@ if [[ -d $HOME/.bashrc.d ]]; then
 	done
 fi
 
-alias ll='ls --color=auto'
+alias ls='ls --color=auto'
 alias ll='ls -AlF'
 alias la='ls -A'
 alias l='ls -CF'
