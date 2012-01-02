@@ -42,7 +42,9 @@ __git_svn_info () {
 	local git_status=$(git status 2> /dev/null)
 	local svn_info=$(svn info 2> /dev/null)
 	local tag=
-	if [[ $git_status ]]; then
+    if [[ -n $(type -t __git_ps1) ]]; then
+        tag=$(__git_ps1 '%s')
+	elif [[ $git_status ]]; then
 		# Generate Git output for PS1.
 		tag=$(git symbolic-ref HEAD 2> /dev/null | sed -e 's/^refs\/heads\/\(.*\)/\1/')
 	elif [[ $svn_info ]]; then
