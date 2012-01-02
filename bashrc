@@ -19,14 +19,13 @@ if [[ -d $HOME/.bashrc.d ]]; then
 	done
 fi
 
-alias ls='ls -G'
+alias ll='ls --color=auto'
 alias ll='ls -AlF'
 alias la='ls -A'
 alias l='ls -CF'
 
 alias mvim='mvim --remote-tab-silent'
-
-alias stat='stat -x'
+alias pbcopy='xargs echo -n | pbcopy'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
