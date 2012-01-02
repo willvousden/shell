@@ -14,15 +14,20 @@ elif [[ -f /etc/.bashrc_common ]]; then
 fi
 
 if [[ -d $HOME/.bashrc.d ]]; then
-	for i in $(ls -A $HOME/.bashrc.d); do
+	for i in $(\ls -A $HOME/.bashrc.d); do
 		. $HOME/.bashrc.d/$i
 	done
 fi
 
-alias ls='ls --color=auto'
-alias ll='ls -AlF'
-alias la='ls -A'
-alias l='ls -CF'
+if [[ $TERM != 'dumb' ]]; then
+    export LS_OPTIONS='--color=auto'
+    eval $(dircolors $HOME/.dir_colors)
+fi
+
+alias ls='ls $LS_OPTIONS -h'
+alias ll='ls --color=auto -AlhF'
+alias la='ls --color=auto -Ah'
+alias ..='cd ..'
 
 alias mvim='mvim --remote-tab-silent'
 alias pbcopy='xargs echo -n | pbcopy'
