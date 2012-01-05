@@ -1,0 +1,48 @@
+#!/bin/bash
+
+function die()
+{
+    echo $1
+    exit 1
+}
+
+TARGET_DIR=.
+CURRENT_DIR=$(pwd)
+
+([[ -n $1 ]] && [[ -n $2 ]]) || die "Missing remote URLs!"
+[[ -z $(\ls -A $TARGET_DIR) ]] || die "Target directory not empty! Panic!"
+
+cd $TARGET_DIR
+
+UPSTREAM_URL=$1
+UPSTREAM_REMOTE=upstream
+UPSTREAM_BRANCH=master
+
+DOWNSTREAM_URL=$2
+DOWNSTREAM_REMOTE=origin
+DOWNSTREAM_BRANCH=master
+
+# The name by which to refer to the cloned upstream branch (which is typically master).
+LOCAL_UPSTREAM_BRANCH=u-$UPSTREAM_BRANCH
+
+# Clone the upstream repository and add the downstream repository as a new remote.
+echo "Cloning upstream remote:"
+git clone $UPSTREAM_URL $TARGET_DIR -o $UPSTREAM_REMOTE -b $UPSTREAM_BRANCH || die "Could not clone upstream repository."
+git remote add $DOWNSTREAM_REMOTE $DOWNSTREAM_URL
+git fetch $DOWNSTREAM_REMOTE || die "Could not fetch from downstream repository."
+
+# Rename the cloned upstream branch and adjust the current repository's push behaviour.
+echo "Renaming upstream branch:"
+git branch -m $UPSTREAM_BRANCH $LOCAL_UPSTREAM_BRANCH
+git config push.default upstream
+
+# Check out the new "master" downstream branch, push it, and set it up as a tracking branch (could
+# use --set-upstream instead of config here, but this is only supported in 1.7.0 and later).
+echo "Checking out and pushing new branch \"$DOWNSTREAM_BRANCH\" to downstream remote \"$DOWNSTREAM_REMOTE\":"
+git checkout -b $DOWNSTREAM_BRANCH
+git push $DOWNSTREAM_REMOTE $DOWNSTREAM_BRANCH:$DOWNSTREAM_BRANCH || die "Could not push to downstream repository."
+git config branch.$DOWNSTREAM_BRANCH.remote $DOWNSTREAM_REMOTE
+git config branch.$DOWNSTREAM_BRANCH.merge refs/heads/$DOWNSTREAM_BRANCH
+
+# All done!
+cd $CURRENT_DIR
