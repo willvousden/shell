@@ -21,7 +21,9 @@ fi
 
 if [[ $TERM != 'dumb' ]]; then
     export LS_OPTIONS='--color=auto'
-    eval $(dircolors $HOME/.dir_colors)
+    if [[ -f $HOME/.dir_colors ]]; then
+        eval $(dircolors $HOME/.dir_colors)
+    fi
 fi
 
 alias ls='ls $LS_OPTIONS -h'
