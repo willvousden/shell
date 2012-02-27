@@ -31,7 +31,7 @@ alias ll='ls --color=auto -AlhF'
 alias la='ls --color=auto -Ah'
 alias ..='cd ..'
 
-alias mvim='mvim --remote-tab-silent'
+alias mvim='mvim --remote-silent'
 alias pbcopy='xargs echo -n | pbcopy'
 
 alias grep='grep --color=auto'
