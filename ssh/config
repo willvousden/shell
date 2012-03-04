@@ -1,0 +1,29 @@
+Host atlas
+User will.vousden
+Port 22
+HostName atlas1.atlas.aei.uni-hannover.de
+
+Host github
+User git
+Port 22
+HostName github.com
+
+Host vousden
+User wvousd01
+Port 22
+HostName willvousden.co.uk
+
+Host ejl
+User janelee
+Port 22
+HostName eleanorjanelee.co.uk
+
+Host eos
+User will
+Port 22
+HostName 147.188.32.54
+
+Host lnx0
+User will
+Port 22
+HostName lnx0.sr.bham.ac.uk
