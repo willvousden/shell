@@ -1,3 +1,8 @@
+Host titan
+User will.vousden
+Port 22
+HostName titan1.atlas.aei.uni-hannover.de
+
 Host atlas
 User will.vousden
 Port 22
