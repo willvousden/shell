@@ -16,6 +16,9 @@ if [[ -n $BASH_VERSION ]]; then
 	fi
 fi
 
+if [[ -z $(ps -u $USER | grep ssh-agent) ]]; then
+	eval $(ssh-agent) > /dev/null
+fi
 if [[ -f $HOME/.keys/id_rsa-open ]]; then
 	ssh-add $HOME/.keys/id_rsa-open 2> /dev/null
 fi
