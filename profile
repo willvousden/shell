@@ -12,9 +12,13 @@ if [[ -n $BASH_VERSION ]]; then
 	fi
 fi
 
-if [[ -z $(ps -u $USER | grep ssh-agent) ]]; then
-	eval $(ssh-agent) > /dev/null
+if [[ ! -e $HOME/.ssh-agent ]]; then
+    killall ssh-agent
+    ssh-agent > $HOME/.ssh-agent
+elif [[ -z $(ps -u $USER | grep ssh-agent) ]]; then
+    ssh-agent > $HOME/.ssh-agent
 fi
+eval $(cat $HOME/.ssh-agent)
 if [[ -f $HOME/.keys/id_rsa-open ]]; then
 	ssh-add $HOME/.keys/id_rsa-open 2> /dev/null
 fi
