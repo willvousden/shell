@@ -13,6 +13,10 @@ if [[ -n $BASH_VERSION ]]; then
 fi
 
 SSH_AGENT_FILE=$HOME/.ssh-agent/$(hostname -s)
+if [[ ! -e $HOME/.ssh-agent ]]; then
+    # Make sure the directory exists.
+    mkdir $HOME/.ssh-agent
+fi
 if [[ ! -e $SSH_AGENT_FILE ]]; then
     # The file doesn't exist, so kill any existing ssh-agent and start a new one,
     # creating a new file.
