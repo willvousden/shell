@@ -12,8 +12,7 @@ if [[ -n $BASH_VERSION ]]; then
 	fi
 fi
 
-$HOSTNAME=$(hostname)
-SSH_AGENT_FILE=$HOME/.ssh-agent/$HOSTNAME
+SSH_AGENT_FILE=$HOME/.ssh-agent/$(hostname -s)
 if [[ ! -e $SSH_AGENT_FILE ]]; then
     # The file doesn't exist, so kill any existing ssh-agent and start a new one,
     # creating a new file.
