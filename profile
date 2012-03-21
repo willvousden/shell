@@ -16,7 +16,7 @@ if [[ -n $BASH_VERSION ]]; then
 	fi
 fi
 
-$HOSTNAME=helios
+HOSTNAME=helios
 SSH_AGENT_FILE=$HOME/.ssh-agent/$HOSTNAME
 if [[ ! -e $HOME/.ssh-agent ]]; then
     # Make sure the directory exists.
