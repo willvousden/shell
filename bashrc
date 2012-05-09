@@ -31,8 +31,15 @@ alias ll='ls --color=auto -AlhF'
 alias la='ls --color=auto -Ah'
 alias ..='cd ..'
 
-alias mvim='mvim --remote-silent'
 alias pbcopy='xargs echo -n | pbcopy'
+function mvim {
+    local mvim_bin=$(which mvim)
+    if [[ $1 ]]; then
+        $mvim_bin --remote-silent "$1"
+    else
+        $mvim_bin
+    fi
+}
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
