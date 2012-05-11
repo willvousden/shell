@@ -1,0 +1,13 @@
+"1.0b7.2 "(created 2011/08/05 11:03:59)"
+
+loadplugins '\.(js|penta)$'
+group user
+set guioptions=bCrsT
+set passkeys+=www.google.com/reader:npjkrojkvghus?
+set passkeys+=www.google.com/calendar:c?/jknptqr
+set passkeys+=twitter.com:frnljk/.ghc?
+set passkeys+=duckduckgo.com:jk/
+set editor='~/.bin/gvim -f +<line> +"sil! call cursor(0, <column>)" <file>'
+set defsearch='duck'
+
+" vim: set ft=pentadactyl:
