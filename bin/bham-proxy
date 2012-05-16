@@ -1,0 +1,2 @@
+#!/bin/bash
+ssh -fC2qTN -D 10241 lnx0
