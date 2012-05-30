@@ -4,6 +4,7 @@ loadplugins '\.(js|penta)$'
 group user
 set guioptions=bCrsT
 set passkeys+=www.google.com/reader:npjkrojkvghus?
+set passkeys+=www.google.co.uk/reader:npjkrojkvghus?
 set passkeys+=www.google.com/calendar:c?/jknptqr
 set passkeys+=twitter.com:frnljk/.ghc?
 set passkeys+=duckduckgo.com:jk/
