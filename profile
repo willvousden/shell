@@ -38,6 +38,11 @@ if [[ -f $HOME/.keys/id_rsa-open ]]; then
 	ssh-add $HOME/.keys/id_rsa-open 2> /dev/null
 fi
 
+# Initialize an LSC grid proxy.
+grid-proxy-init > /dev/null
+alias ssh=gsissh
+export GIT_SSH=gsissh
+
 # Set up some SSH tunnel stuff.
 export SSH_TUNNEL_COMMAND_PREFIX='ssh -fC2qTN -D'
 SSH_TUNNEL_PORT=10241
