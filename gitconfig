@@ -1,0 +1,25 @@
+[user]
+	name = Will Vousden
+	email = will@vousden.me.uk
+[color]
+	ui = auto
+[alias]
+	s = status -sb
+	c = checkout
+	d = diff
+	dc = diff --cached
+	dw = diff --word-diff
+	dcw = diff --cached --word-diff
+[core]
+	pager = less -RS -x4
+	excludesfile = ~/.gitignore
+[merge]
+	tool = gvimdiff
+[mergetool "vimdiff"]
+	cmd=vim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
+	keepbackup=false
+[mergetool "gvimdiff"]
+	cmd=gvim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
+	keepbackup=false
+[github]
+	user = willvousden
