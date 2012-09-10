@@ -54,3 +54,11 @@ fi
 if [[ -f /opt/local/etc/bash_completion ]]; then
 	. /opt/local/etc/bash_completion
 fi
+
+# Output some MacPorts info.
+port_status=$(port outdated)
+port_count=$(echo $port_status | wc -l)
+port_message="No installed ports are outdated."
+if [[ $port_status != $port_message ]] && [[ $port_count > 0 ]]; then
+    echo "MacPorts: $port_count package(s) need updating."
+fi
