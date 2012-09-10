@@ -37,6 +37,18 @@ alias egrep='egrep --color=auto'
 
 alias pf='ps aux | grep -v grep | grep'
 
+function open {
+    xdg-open $1 &> /dev/null
+}
+function gvim {
+    local gvim_bin=$(which gvim)
+    if [[ $1 ]]; then
+        $gvim_bin --remote-silent "$1"
+    else
+        $gvim_bin
+    fi
+}
+
 if [[ -f $HOME/.bashrc_local ]]; then
 	. $HOME/.bashrc_local
 fi
