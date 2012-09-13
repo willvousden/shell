@@ -15,6 +15,7 @@
 	excludesfile = ~/.gitignore
 [merge]
 	tool = gvimdiff
+	ff = false
 [mergetool "vimdiff"]
 	cmd=vim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
 	keepbackup=false
