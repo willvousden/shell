@@ -1,0 +1,3 @@
+[submodule "bashrc.d/git-flow-completion"]
+	path = bashrc.d/git-flow-completion
+	url = git://github.com/bobthecow/git-flow-completion.git
