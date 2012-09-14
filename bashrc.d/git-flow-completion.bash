@@ -1,1 +1,1 @@
-../extra/git-glow-completion/git-flow-completion.bash
+git-flow-completion/git-flow-completion.bash

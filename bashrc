@@ -14,8 +14,10 @@ elif [[ -f /etc/.bashrc_common ]]; then
 fi
 
 if [[ -d $HOME/.bashrc.d ]]; then
-	for i in $(\ls -A $HOME/.bashrc.d); do
-		. $HOME/.bashrc.d/$i
+    for i in $HOME/.bashrc.d/*; do
+        if [[ -f $i ]]; then
+            . $i
+        fi
 	done
 fi
 
