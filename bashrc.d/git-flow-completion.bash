@@ -1,0 +1,1 @@
+../extra/git-glow-completion/git-flow-completion.bash

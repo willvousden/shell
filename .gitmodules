@@ -1,0 +1,3 @@
+[submodule "extra/git-glow-completion"]
+	path = extra/git-glow-completion
+	url = git://github.com/bobthecow/git-flow-completion.git
