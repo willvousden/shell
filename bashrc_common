@@ -30,11 +30,19 @@ __git_svn_status () {
 	local svn_info=$(svn info 2> /dev/null)
 	if [[ $git_status ]]; then
 		# Generate Git output for PS1.
-		[[ $(echo "$git_status" | tail -n1) != 'nothing to commit (working directory clean)' ]] && echo '*'
+		[[ $(echo "$git_status") =~ 'Changes not staged for commit:' ]] && echo -n '*'
 	elif [[ $svn_info ]]; then
 		# Generate SVN output for PS1.
-		[[ -n $(svn status | grep '^\s*[?ACDMR?!]') ]] && echo '*'
+		[[ -n $(svn status | grep '^\s*[?ACDMR?!]') ]] && echo -n '*'
 	fi
+}
+
+__git_stash_flag () {
+    [[ -n $(git stash list 2> /dev/null) ]] && echo -n '+'
+}
+
+__git_new_flag () {
+    [[ $(git status 2> /dev/null) =~ "Untracked files:" ]] && echo -n '?'
 }
 
 # Generate branch/location information for Git and SVN repositories.
@@ -54,9 +62,9 @@ __git_svn_info () {
 		if [[ $url =~ trunk ]]; then
 			tag=trunk
 		elif [[ $url =~ /branches/ ]]; then
-			tag=$(echo $url | sed -e 's#^.*/\(branches/.*\)/.*$#\1#')
+			tag=$(echo -n $url | sed -e 's#^.*/\(branches/.*\)/.*$#\1#')
 		elif [[ $url =~ /tags/ ]]; then
-			tag=$(echo $url | sed -e 's#^.*/\(tags/.*\)/.*$#\1#')
+			tag=$(echo -n $url | sed -e 's#^.*/\(tags/.*\)/.*$#\1#')
 		else
 			tag=..
 		fi
@@ -80,7 +88,7 @@ fi
 
 PS1INNER="\[$USERCOLOUR\]\u@\h\[$RESET\]:\[$LIGHTBLUE\]\W\[$RESET\]"
 if [[ $BETTER_PS1 == true ]]; then
-	PS1INNER=$PS1INNER'$(__git_svn_info "|\['$BROWN'\]%s")\['$RED'\]$(__git_svn_status)\['$RESET'\]'
+    PS1INNER=$PS1INNER'$(__git_svn_info "|\['$BROWN'\]%s")\['$BROWN'\]$(__git_stash_flag)\['$RED'\]$(__git_svn_status)\['$PURPLE'\]$(__git_new_flag)\['$RESET'\]'
 fi
 
 PS1='['$PS1INNER']\$ '
