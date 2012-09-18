@@ -26,7 +26,7 @@ __git_svn_status () {
 	local svn_info=$(svn info 2> /dev/null)
 	if [[ $git_status ]]; then
 		# Generate Git output for PS1.
-		[[ $(echo "$git_status") =~ 'Changes not staged for commit:' ]] && echo -n $1
+		[[ $git_status =~ 'Changes not staged for commit:' ]] || [[ $git_status =~ 'Changes to be committed:' ]] && echo -n $1
 
 	elif [[ $svn_info ]]; then
 		# Generate SVN output for PS1.
