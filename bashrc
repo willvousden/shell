@@ -12,9 +12,9 @@ elif [[ -f /etc/.bashrc_common ]]; then
 fi
 
 if [[ -d $HOME/.bashrc.d ]]; then
-    for i in $HOME/.bashrc.d/*; do
-        if [[ -f $i ]]; then
-            . $i
+    for file in $HOME/.bashrc.d/*; do
+        if [[ -f $file ]]; then
+            . "$file"
         fi
 	done
 fi
