@@ -1,5 +1,3 @@
-#!/bin/bash
-
 BETTER_PS1=true
 LIVE_TERM_TITLE=true
 
