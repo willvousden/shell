@@ -24,3 +24,5 @@
 	keepbackup=false
 [github]
 	user = willvousden
+[push]
+	default = simple
