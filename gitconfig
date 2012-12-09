@@ -14,7 +14,7 @@
 	pager = less -RS -x4
 	excludesfile = ~/.gitignore
 [merge]
-	tool = gvimdiff
+	tool = threesome
 	ff = false
 [mergetool "vimdiff"]
 	cmd=vim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
@@ -22,6 +22,12 @@
 [mergetool "gvimdiff"]
 	cmd=gvim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
 	keepbackup=false
+[mergetool "threesome"]
+	cmd="vim -f $BASE $LOCAL $REMOTE $MERGED -c 'ThreesomeInit'"
+    trustExitCode=true
+[mergetool "gthreesome"]
+	cmd="gvim -f $BASE $LOCAL $REMOTE $MERGED -c 'ThreesomeInit'"
+    trustExitCode=true
 [github]
 	user = willvousden
 [push]
