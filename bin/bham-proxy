@@ -1,0 +1,17 @@
+#!/bin/bash
+port=10241
+server=lnx0
+stub="ssh -fC2qTN -D"
+command="$stub $port $server"
+
+if [[ $1 == -k ]]; then
+    echo "Killing proxy."
+    kill $(ps aux | grep "$stub" | grep -v grep | awk '{ print $2 }')
+else
+    if [[ -z $(ps aux | grep "$stub" | grep -v grep) ]]; then
+        echo "Starting proxy on port $port to $server."
+        $command
+    else
+        echo "Proxy already running!"
+    fi
+fi
