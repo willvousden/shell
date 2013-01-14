@@ -1,2 +1,0 @@
-#!/bin/bash
-kill $(ps aux | grep 'ssh -fC2qTN -D ' | grep -v grep | awk '{ print $2 }')
