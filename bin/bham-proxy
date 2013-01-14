@@ -4,14 +4,21 @@ server=lnx0
 stub="ssh -fC2qTN -D"
 command="$stub $port $server"
 
+proc=$(ps aux | grep "$stub" | grep -v grep | awk '{ print $2 }')
 if [[ $1 == -k ]]; then
-    echo "Killing proxy."
-    kill $(ps aux | grep "$stub" | grep -v grep | awk '{ print $2 }')
-else
-    if [[ -z $(ps aux | grep "$stub" | grep -v grep) ]]; then
-        echo "Starting proxy on port $port to $server."
-        $command
+    if [[ -n $proc ]]; then
+        echo "Killing proxy."
+        kill $proc
     else
-        echo "Proxy already running!"
+        echo "No proxy exists."
     fi
+else
+    if [[ -z $proc ]]; then
+        echo "Starting proxy on port $port to $server."
+    else
+        $0 -k > /dev/null
+        echo "Renewing proxy."
+    fi
+
+    $command
 fi
