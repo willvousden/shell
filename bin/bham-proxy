@@ -1,9 +1,10 @@
 #!/bin/bash
-port=10241
-server=lnx0
-stub="ssh -fC2qTN -D"
-command="$stub $port $server"
+port=10241                  # Local port on which to set up the proxy service.
+target=lnx0.sr.bham.ac.uk   # Remote machine (through which the connection is bounced).
+user=will                   # User on remote machine.
 
+stub="ssh -fC2qTN -D"
+command="$stub $port $user@$target"
 proc=$(ps aux | grep "$stub" | grep -v grep | awk '{ print $2 }')
 if [[ $1 == -k ]]; then
     networksetup -setsocksfirewallproxystate Wi-Fi off
@@ -16,7 +17,7 @@ if [[ $1 == -k ]]; then
     fi
 else
     if [[ -z $proc ]]; then
-        echo "Starting proxy on port $port to $server."
+        echo "Starting proxy on port $port to $user@$target."
     else
         $0 -k > /dev/null
         echo "Renewing proxy."
