@@ -7,9 +7,11 @@ command="$stub $port $server"
 if [[ $1 == -k ]]; then
     echo "Killing proxy."
     kill $(ps aux | grep "$stub" | grep -v grep | awk '{ print $2 }')
+    networksetup -setsocksfirewallproxystate Wi-Fi off
 else
     if [[ -z $(ps aux | grep "$stub" | grep -v grep) ]]; then
         echo "Starting proxy on port $port to $server."
+        networksetup -setsocksfirewallproxystate Wi-Fi on
         $command
     else
         echo "Proxy already running!"
