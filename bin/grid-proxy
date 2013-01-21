@@ -1,0 +1,3 @@
+grid-proxy-init > /dev/null
+alias ssh=gsissh
+export GIT_SSH=gsissh
