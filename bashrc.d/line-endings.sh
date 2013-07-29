@@ -1,5 +1,3 @@
-#!/bin/bash
-
 if [[ ! -x $(which unix2dos) ]] && [[ -x $(which perl) ]]; then
     function dos2unix {
         __patternify 's/\r$//' "$1" "$2"

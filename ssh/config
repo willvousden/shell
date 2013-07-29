@@ -1,3 +1,8 @@
+Host fenrir
+User will
+Port 22
+HostName fenrir.sr.bham.ac.uk
+
 Host titan
 User will.vousden
 Port 22

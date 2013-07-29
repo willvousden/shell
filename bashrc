@@ -1,5 +1,3 @@
-#!/bin/bash
-
 BETTER_PS1=true
 LIVE_TERM_TITLE=true
 
@@ -14,8 +12,10 @@ elif [[ -f /etc/.bashrc_common ]]; then
 fi
 
 if [[ -d $HOME/.bashrc.d ]]; then
-	for i in $(\ls -A $HOME/.bashrc.d); do
-		. $HOME/.bashrc.d/$i
+    for file in $HOME/.bashrc.d/*; do
+        if [[ -f $file ]]; then
+            . "$file"
+        fi
 	done
 fi
 
