@@ -16,7 +16,6 @@
 	editor = vim
 [merge]
 	tool = gsplice
-    ff = only
 [mergetool "vimdiff"]
 	cmd=vim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
 	keepbackup=false
