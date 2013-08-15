@@ -33,3 +33,5 @@
 	user = willvousden
 [push]
 	default = tracking
+[include]
+    path = .gitconfig_local
