@@ -16,7 +16,7 @@
 	editor = vim
 [merge]
 	tool = gsplice
-	ff = false
+    ff = only
 [mergetool "vimdiff"]
 	cmd=vim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
 	keepbackup=false
@@ -32,4 +32,4 @@
 [github]
 	user = willvousden
 [push]
-	default = simple
+	default = tracking
