@@ -51,12 +51,9 @@ if [[ -f $HOME/.bashrc_local ]]; then
 	. $HOME/.bashrc_local
 fi
 
-if [[ -f /opt/local/etc/bash_completion ]]; then
-	. /opt/local/etc/bash_completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
 fi
 
-# Output some MacPorts info.
-port_count=$(port list outdated | wc -l)
-if [[ $port_count > 0 ]]; then
-    echo "MacPorts: $port_count package(s) need updating."
-fi
+# List outdated Homebrew formulae
+brew outdated

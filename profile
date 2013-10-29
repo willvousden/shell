@@ -1,5 +1,5 @@
-export PATH=/opt/local/apache2/bin:/opt/local/bin:/opt/local/sbin:/opt/local/libexec/gnubin:$PATH
-export MANPATH=/opt/local/libexec/gnubin/man:/opt/local/man:/usr/share/man:$MANPATH
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 export PYTHONSTARTUP=$HOME/.profile-aux/python-startup.py
 
 export EDITOR=/usr/bin/vim
