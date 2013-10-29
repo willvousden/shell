@@ -1,4 +1,4 @@
-export EDITOR=/usr/bin/vim
+export EDITOR="/usr/bin/env vim"
 export PATH="$HOME/.bin:$PATH"
 
 # If running bash...
