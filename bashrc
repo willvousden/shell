@@ -44,9 +44,9 @@ function mvim {
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-
 alias pf='ps aux | grep -v grep | grep'
 
+# If there's a .bashrc_local (untracked by git), source it.
 if [[ -f $HOME/.bashrc_local ]]; then
 	. $HOME/.bashrc_local
 fi

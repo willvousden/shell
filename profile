@@ -2,7 +2,7 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 export PYTHONSTARTUP=$HOME/.profile-aux/python-startup.py
 
-export EDITOR=/usr/bin/vim
+export EDITOR="/usr/bin/env vim"
 export PATH="$HOME/.bin:$PATH"
 
 # If running bash...
