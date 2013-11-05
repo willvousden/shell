@@ -13,6 +13,11 @@ User will.vousden
 Port 22
 HostName atlas1.atlas.aei.uni-hannover.de
 
+Host titan
+User will.vousden
+Port 22
+HostName titan1.atlas.aei.uni-hannover.de
+
 Host github
 User git
 Port 22
