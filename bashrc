@@ -1,22 +1,18 @@
-BETTER_PS1=true
-LIVE_TERM_TITLE=true
-
-if [[ -f $HOME/.bashrc_default ]]; then
-	. $HOME/.bashrc_default
-fi
-
-if [[ -f $HOME/.bashrc_common ]]; then
-	. $HOME/.bashrc_common
-elif [[ -f /etc/.bashrc_common ]]; then
-	. /etc/.bashrc_common
-fi
-
 if [[ -d $HOME/.bashrc.d ]]; then
     for file in $HOME/.bashrc.d/*; do
         if [[ -f $file ]]; then
             . "$file"
         fi
 	done
+fi
+
+BETTER_PS1=${BETTER_PS1:-true}
+LIVE_TERM_TITLE=${LIVE_TERM_TITLE:-true}
+
+if [[ -f $HOME/.bashrc_common ]]; then
+	. $HOME/.bashrc_common
+elif [[ -f /etc/.bashrc_common ]]; then
+	. /etc/.bashrc_common
 fi
 
 if [[ $TERM != 'dumb' ]]; then
