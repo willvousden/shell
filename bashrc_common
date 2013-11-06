@@ -1,24 +1,24 @@
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-BROWN='\033[0;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-CYAN='\033[0;036m'
+RED='\[\033[0;31m\]'
+GREEN='\[\033[0;32m\]'
+BROWN='\[\033[0;33m\]'
+BLUE='\[\033[0;34m\]'
+PURPLE='\[\033[0;35m\]'
+CYAN='\[\033[0;036m\]'
 
-LIGHTRED='\033[1;31m'
-LIGHTGREEN='\033[1;32m'
-YELLOW='\033[1;33m'
-LIGHTBLUE='\033[1;34m'
-LIGHTPURPLE='\033[1;35m'
-LIGHTCYAN='\033[1;036m'
+LIGHTRED='\[\033[1;31m\]'
+LIGHTGREEN='\[\033[1;32m\]'
+YELLOW='\[\033[1;33m\]'
+LIGHTBLUE='\[\033[1;34m\]'
+LIGHTPURPLE='\[\033[1;35m\]'
+LIGHTCYAN='\[\033[1;036m\]'
 
-BLACK='\033[0;30'
-DARKGREY='\033[1;30'
-LIGHTGREY='\033[0;37'
-WHITE='\033[1;37'
+BLACK='\[\033[0;30\]'
+DARKGREY='\[\033[1;30\]'
+LIGHTGREY='\[\033[0;37\]'
+WHITE='\[\033[1;37\]'
 
 BOLD=''
-OFF='\033[m'
+OFF='\[\033[m\]'
 
 # Generate dirty status flag for Git and SVN.
 __git_svn_status () {
@@ -85,9 +85,9 @@ else
 	user_color=$LIGHTGREEN
 fi
 
-PS1INNER="\[$user_color\]\u@\h\[$OFF\]:\[$LIGHTBLUE\]\W\[$OFF\]"
+PS1INNER="${user_color}\u@\h${OFF}:${LIGHTBLUE}\W${OFF}"
 if [[ $BETTER_PS1 == true ]]; then
-    PS1INNER=$PS1INNER'$(__git_svn_info "|\['$BROWN'\]%s")$(__git_stash_flag "\['$BROWN'\]'$stash_flag'")$(__git_svn_status "\['$RED'\]'$dirty_flag'")$(__git_added_flag "\['$PURPLE'\]'$added_flag'")\['$OFF'\]'
+    PS1INNER=$PS1INNER'$(__git_svn_info "|'${BROWN}'%s")$(__git_stash_flag "'${BROWN}''$stash_flag'")$(__git_svn_status "'${RED}''$dirty_flag'")$(__git_added_flag "'${PURPLE}''$added_flag'")'${OFF}''
 fi
 
 PS1='['$PS1INNER']\$ '
