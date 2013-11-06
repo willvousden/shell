@@ -9,12 +9,6 @@ fi
 BETTER_PS1=${BETTER_PS1:-true}
 LIVE_TERM_TITLE=${LIVE_TERM_TITLE:-true}
 
-if [[ -f $HOME/.bashrc_common ]]; then
-	. $HOME/.bashrc_common
-elif [[ -f /etc/.bashrc_common ]]; then
-	. /etc/.bashrc_common
-fi
-
 if [[ $TERM != 'dumb' ]]; then
     export LS_OPTIONS='--color=auto'
     if [[ -f $HOME/.dir_colors ]]; then
