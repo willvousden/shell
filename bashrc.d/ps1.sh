@@ -76,23 +76,42 @@ __git_svn_info () {
 	fi
 }
 
-dirty_flag='*'
-stash_flag='+'
-added_flag='?'
-if [[ $EUID == 0 ]]; then
-	user_color=$LIGHTRED
-else
-	user_color=$LIGHTGREEN
-fi
+export PROMPT_COMMAND="__prompt_command"
+__prompt_command() {
+    # What was the exit code of the last command the user ran?
+    local exit_code="$?"
+    PS1=
 
-PS1INNER="${user_color}\u@\h${OFF}:${LIGHTBLUE}\W${OFF}"
-if [[ $BETTER_PS1 == true ]]; then
-    PS1INNER=$PS1INNER'$(__git_svn_info "|'${BROWN}'%s")$(__git_stash_flag "'${BROWN}''$stash_flag'")$(__git_svn_status "'${RED}''$dirty_flag'")$(__git_added_flag "'${PURPLE}''$added_flag'")'${OFF}''
-fi
+    # Decide on a colour for the user name (are we root?).
+    if [[ $EUID == 0 ]]; then
+        local user_color=$LIGHTRED
+    else
+        local user_color=$LIGHTGREEN
+    fi
 
-PS1='['$PS1INNER']\$ '
-if [[ $LIVE_TERM_TITLE == true ]]; then
-	PS1="\[\033]0;\u@\h:\W\007\]$PS1"
-fi
+    # Set a standard PS1 contents: user@host:dir (with colours).
+    local ps1_inner="${user_color}\u@\h${OFF}:${LIGHTBLUE}\W${OFF}"
 
-export PS1
+    # If "better PS1" is asked for, augment this with (coloured) Git/SVN
+    # information.
+    if [[ $BETTER_PS1 == true ]]; then
+        local dirty_flag='*'
+        local stash_flag='+'
+        local added_flag='?'
+
+        ps1_inner+='$(__git_svn_info "|'$BROWN'%s")'
+        ps1_inner+='$(__git_stash_flag "'$BROWN$stash_flag'")'
+        ps1_inner+='$(__git_svn_status "'$RED$dirty_flag'")'
+        ps1_inner+='$(__git_added_flag "'$PURPLE$added_flag'")'$OFF
+    fi
+
+    # What prompt symbol shall we use?
+    local prompt_symbol='\$'
+    if [[ $exit_code != 0 ]]; then
+        # Last command failed; spruce it up a bit.
+        prompt_symbol="$RED!$OFF"
+    fi
+
+    # Now wrap the contents in some decoration and export.
+    export PS1="[$ps1_inner]$prompt_symbol "
+}
