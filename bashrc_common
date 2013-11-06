@@ -22,12 +22,11 @@ OFF='\033[m'
 
 # Generate dirty status flag for Git and SVN.
 __git_svn_status () {
-	local git_status=$(git status 2> /dev/null)
+	local git_status=$(git status -s 2> /dev/null)
 	local svn_info=$(svn info 2> /dev/null)
-	if [[ $git_status ]]; then
+	if [[ $git_status =~ ^\ *[AMD] ]]; then
 		# Generate Git output for PS1.
-		[[ $git_status =~ 'Changes not staged for commit:' ]] || [[ $git_status =~ 'Changes to be committed:' ]] && echo -n $1
-
+        echo -n $1
 	elif [[ $svn_info ]]; then
 		# Generate SVN output for PS1.
 		[[ -n $(svn status | grep '^\s*[?ACDMR?!]') ]] && echo -n $1
