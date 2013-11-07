@@ -22,37 +22,33 @@ OFF='\[\033[m\]'
 
 # Generate dirty status flag for Git and SVN.
 __git_svn_status () {
-	local git_status=$(git status -s 2> /dev/null)
-	local svn_info=$(svn info 2> /dev/null)
-	if [[ $git_status =~ ^\ *[AMD] ]]; then
+	if git status -s 2> /dev/null | grep -q '^\s*[AMD]'; then
 		# Generate Git output for PS1.
         echo -n $1
-	elif [[ $svn_info ]]; then
+	elif svn info &> /dev/null; then
 		# Generate SVN output for PS1.
-		[[ -n $(svn status | grep '^\s*[?ACDMR?!]') ]] && echo -n $1
+		svn status | grep -q '^\s*[?ACDMR?!]' && echo -n $1
 	fi
 }
 
 __git_stash_flag () {
-    [[ -n $(git stash list 2> /dev/null) ]] && echo -n $1
+    [[ $(git stash list 2> /dev/null) ]] && echo -n $1
 }
 
 __git_added_flag () {
-    [[ $(git status 2> /dev/null) =~ "Untracked files:" ]] && echo -n $1
+    git status -s 2> /dev/null | grep -q '^\s*??' && echo -n $1
 }
 
 # Generate branch/location information for Git and SVN repositories.
 __git_svn_info () {
-	local git_status=$(git status 2> /dev/null)
-	local svn_info=$(svn info 2> /dev/null)
 	local tag=
-    if [[ -n $(type -t __git_ps1) ]] && [[ -n $(__git_ps1) ]]; then
+    if [[ $(type -t __git_ps1) ]]; then
         # Generate Git output using standard completion function.
         tag=$(__git_ps1 '%s')
-	elif [[ -n $git_status ]]; then
+	elif git status &> /dev/null; then
         # Generate Git output for PS1.
         tag=$(git symbolic-ref HEAD 2> /dev/null | sed -e 's/^refs\/heads\/\(.*\)/\1/')
-	elif [[ -n $svn_info ]]; then
+	elif svn info 2> /dev/null; then
 		# Generate SVN output for PS1.
 		local url=`svn info | awk '/URL:/ {print $2}'`
 		if [[ $url =~ trunk ]]; then
@@ -67,11 +63,11 @@ __git_svn_info () {
 	fi
 
 	format=' (%s)'
-	if [[ -n $1 ]]; then
+	if [[ $1 ]]; then
 		format=$1
 	fi
 
-	if [[ -n $tag ]]; then
+	if [[ $tag ]]; then
 		printf "$format" $tag
 	fi
 }
