@@ -1,3 +1,8 @@
+BSD_STYLE=true
+if ls --color -d /dev/null &> /dev/null; then
+    BSD_STYLE=
+fi
+
 BETTER_PS1=${BETTER_PS1:-true}
 LIVE_TERM_TITLE=${LIVE_TERM_TITLE:-true}
 
@@ -21,15 +26,20 @@ if [[ -d $HOME/.bashrc.d ]]; then
 fi
 
 if [[ $TERM != 'dumb' ]]; then
-    export LS_OPTIONS='--color=auto'
+    if [[ $BSD_STYLE ]]; then
+        export LS_OPTIONS='-G'
+    else
+        export LS_OPTIONS='--color=auto'
+    fi
+
     if [[ -f $HOME/.dir_colors ]]; then
         eval $(dircolors $HOME/.dir_colors)
     fi
 fi
 
-alias ls='ls $LS_OPTIONS -h'
-alias ll='ls --color=auto -AlhF'
-alias la='ls --color=auto -Ah'
+alias ls="ls $LS_OPTIONS -h"
+alias ll="ls $LS_OPTIONS -AlhF"
+alias la="ls $LS_OPTIONS -Ah"
 alias ..='cd ..'
 
 alias grep='grep --color=auto'
