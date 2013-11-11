@@ -32,7 +32,9 @@ alias ll='ls --color=auto -AlhF'
 alias la='ls --color=auto -Ah'
 alias ..='cd ..'
 
-alias pbcopy='xargs echo -n | pbcopy'
+if [[ -x $(which pbcopy) ]]; then
+    alias pbcopy='xargs echo -n | pbcopy'
+fi
 function mvim {
     local mvim_bin=$(which mvim)
     if [[ $1 ]]; then
@@ -52,12 +54,15 @@ if [[ -f $HOME/.bashrc_local ]]; then
 	. $HOME/.bashrc_local
 fi
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
-fi
+# Homebrew stuff (Mac).
+if [[ -x $(which brew) ]]; then
+    # List outdated Homebrew formulae
+    brew outdated
 
-# List outdated Homebrew formulae
-brew outdated
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+        . $(brew --prefix)/etc/bash_completion
+    fi
+fi
 
 # Colours for man pages (via less)
 export LESS_TERMCAP_mb=$'\E[01;31m'       # Begin blinking
