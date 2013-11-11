@@ -13,4 +13,7 @@ if [[ -x $(which gsissh) ]]; then
     alias scp=gsiscp
     GIT_SSH=gsissh
     export GIT_SSH
+    
+    # Short-cut alias.
+    alias ligo-proxy-init="ligo-proxy-init will.vousden"
 fi
