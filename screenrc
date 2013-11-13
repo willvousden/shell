@@ -6,6 +6,3 @@ defutf8 on
 caption always
 caption string "%{= wk}%w"
 defscrollback 5000
-
-# Make xterm scrolling work properly with screen.
-termcapinfo xterm* ti@:te@
