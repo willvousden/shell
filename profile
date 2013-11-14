@@ -1,7 +1,13 @@
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-export PYTHONSTARTUP=$HOME/.profile-aux/python-startup.py
+# If Homebrew is installed...
+if [[ -d /usr/local/Cellar ]]; then
+    # Then set the relevant paths.
+    export PATH="/usr/local/bin:$PATH"
+    export MANPATH="/usr/local/share/man:$MANPATH"
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+fi
 
+export PYTHONSTARTUP=$HOME/.profile-aux/python-startup.py
 export EDITOR="/usr/bin/env vim"
 export PATH="$HOME/.bin:$PATH"
 
