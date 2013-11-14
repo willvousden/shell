@@ -6,3 +6,4 @@ defutf8 on
 caption always
 caption string "%{= wk}%w"
 defscrollback 5000
+term screen-256color
