@@ -59,21 +59,6 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias pf='ps aux | grep -v grep | grep'
 
-# If there's a .bashrc_local (untracked by git), source it.
-if [[ -f $HOME/.bashrc_local ]]; then
-	. $HOME/.bashrc_local
-fi
-
-# Homebrew stuff (Mac).
-if [[ -x $(which brew) ]]; then
-    # List outdated Homebrew formulae
-    brew outdated
-
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        . $(brew --prefix)/etc/bash_completion
-    fi
-fi
-
 # Colours for man pages (via less)
 export LESS_TERMCAP_mb=$'\E[01;31m'       # Begin blinking
 export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # Begin bold
