@@ -6,7 +6,7 @@ export PATH="$HOME/.bin:$PATH"
 
 # Source additional profile scripts.
 if [[ -d $HOME/.profile.d ]]; then
-    for file in $HOME/.profile.d/*; do
+    for file in $HOME/.profile.d/*.sh; do
         [[ ! -f $file ]] || . $file
 	done
 fi
