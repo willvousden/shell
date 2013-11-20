@@ -9,9 +9,7 @@ LIVE_TERM_TITLE=${LIVE_TERM_TITLE:-true}
 # First execute "one-off" local (untracked) scripts.  These are ignored by Git.
 if [[ -d $HOME/.bashrc.d.local ]]; then
     for file in $HOME/.bashrc.d.local/*; do
-        if [[ -f $file ]]; then
-            . "$file"
-        fi
+        [[ ! -f $file ]] || . $file
 	done
 fi
 
@@ -19,9 +17,7 @@ fi
 if [[ -d $HOME/.bashrc.d ]]; then
     # N.B. Any file in .bashrc.d matching *.local.sh is also ignored by Git.
     for file in $HOME/.bashrc.d/*; do
-        if [[ -f $file ]]; then
-            . "$file"
-        fi
+        [[ ! -f $file ]] || . $file
 	done
 fi
 
