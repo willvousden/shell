@@ -50,12 +50,6 @@ __git_svn_info () {
 	fi
 }
 
-# Encase non-printing characters.
-c()
-{
-    echo '\['$1'\]'
-}
-
 export PROMPT_COMMAND="__prompt_command"
 __prompt_command() {
     # What was the exit code of the last command the user ran?
@@ -70,7 +64,7 @@ __prompt_command() {
     fi
 
     # Set a standard PS1 contents: user@host:dir (with colours).
-    local ps1_inner="$(c $user_color)\u@\h$(c $off):$(c $iblue)\W$(c $off)"
+    local ps1_inner="${user_color}\u@\h${off}:${iblue}\W${off}"
 
     # If "better PS1" is asked for, augment this with (coloured) Git/SVN
     # information.
@@ -79,19 +73,19 @@ __prompt_command() {
         local stash_flag='+'
         local added_flag='?'
 
-        ps1_inner+='$(__git_svn_info "|'$(c $yellow)'%s")'
-        ps1_inner+='$(__git_stash_flag "'$(c $iyellow)$stash_flag'")'
-        ps1_inner+='$(__git_svn_status "'$(c $red)$dirty_flag'")'
-        ps1_inner+='$(__git_added_flag "'$(c $purple)$added_flag'")'$(c $off)
+        ps1_inner+='$(__git_svn_info "|'${yellow}'%s")'
+        ps1_inner+='$(__git_stash_flag "'${iyellow}$stash_flag'")'
+        ps1_inner+='$(__git_svn_status "'${red}$dirty_flag'")'
+        ps1_inner+='$(__git_added_flag "'${purple}$added_flag'")'${off}
     fi
 
     # What prompt symbol shall we use?
     local prompt_symbol='\$'
     if [[ $exit_code != 0 ]]; then
         # Last command failed; spruce it up a bit.
-        prompt_symbol="$(c $red)!$(c $off)"
+        prompt_symbol="${red}!${off}"
     fi
 
     # Now wrap the contents in some decoration and export.
-    export PS1="$(c $off)[$ps1_inner]$prompt_symbol "
+    export PS1="${off}[$ps1_inner]$prompt_symbol "
 }
