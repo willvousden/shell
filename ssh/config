@@ -38,6 +38,11 @@ User will
 Port 22
 HostName 147.188.32.54
 
+Host hydra
+User will
+Port 22
+HostName hydra.sr.bham.ac.uk
+
 Host lnx0
 User will
 Port 22
