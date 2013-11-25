@@ -4,6 +4,13 @@ export PYTHONSTARTUP=$HOME/.profile.d/python-startup.py
 export EDITOR="/usr/bin/env vim"
 export PATH="$HOME/.bin:$PATH"
 
+# Source local profile scripts.
+if [[ -d $HOME/.profile.d.local ]]; then
+    for file in $HOME/.profile.d.local/*.sh; do
+        [[ ! -f $file ]] || . $file
+	done
+fi
+
 # Source additional profile scripts.
 if [[ -d $HOME/.profile.d ]]; then
     for file in $HOME/.profile.d/*.sh; do
