@@ -47,3 +47,9 @@ Host lnx0
 User will
 Port 22
 HostName lnx0.sr.bham.ac.uk
+
+Host punga
+HostName punga
+User will
+Port 22
+ProxyCommand ssh -q hydra.sr.bham.ac.uk -W %h:%p
