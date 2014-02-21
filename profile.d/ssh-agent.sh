@@ -7,7 +7,7 @@ if [[ ! -f $SSH_AGENT_FILE ]]; then
     # creating a new file.
     killall ssh-agent 2> /dev/null
     SSH_AGENT_CONTENT=$(ssh-agent)
-elif [[ ! $(ps -u $USER | grep ssh-agent) ]]; then
+elif [[ ! $(ps -u $USER | grep ssh-agent | grep -v grep) ]]; then
     # The file does exist, but there's no process, so start a new one and create a new file.
     SSH_AGENT_CONTENT=$(ssh-agent)
 fi
