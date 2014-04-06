@@ -1,0 +1,5 @@
+alias mysql-start='sudo /opt/local/share/mysql5/mysql/mysql.server start'
+alias mysql-stop='sudo /opt/local/share/mysql5/mysql/mysql.server stop'
+alias apache-start='sudo apachectl start'
+alias apache-restart='sudo apachectl restart'
+alias apache-stop='sudo apachectl stop'

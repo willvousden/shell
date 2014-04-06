@@ -38,6 +38,18 @@ alias ll="ls $LS_OPTIONS -AlhF"
 alias la="ls $LS_OPTIONS -Ah"
 alias ..='cd ..'
 
+if [[ -x $(which pbcopy) ]]; then
+    alias pbcopy='xargs echo -n | pbcopy'
+fi
+function mvim {
+    local mvim_bin=$(which mvim)
+    if [[ $1 ]]; then
+        $mvim_bin --remote-silent "$1"
+    else
+        $mvim_bin
+    fi
+}
+
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
