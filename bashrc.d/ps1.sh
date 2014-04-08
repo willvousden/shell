@@ -1,6 +1,6 @@
 # Generate dirty status flag for Git and SVN.
 __git_svn_status () {
-	if git status --porcelain 2> /dev/null | grep -q '^\s*[AMD]'; then
+	if git status --porcelain 2> /dev/null | grep -q '^\s*[ACDMRU]'; then
 		# Generate Git output for PS1.
         echo -n $1
 	elif svn info &> /dev/null; then
