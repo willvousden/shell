@@ -199,9 +199,9 @@ ytick.direction      : in     # direction: in or out
 
 
 ### GRIDS
-#grid.color       :   black   # grid color
-#grid.linestyle   :   :       # dotted
-#grid.linewidth   :   0.5     # in points
+grid.color       :   bcbcbc   # grid color
+grid.linestyle   :   -       # solid
+grid.linewidth   :   0.5     # in points
 
 ### Legend
 legend.fancybox      : True  # if True, use a rounded box for the
