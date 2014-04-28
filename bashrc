@@ -9,7 +9,9 @@ LIVE_TERM_TITLE=${LIVE_TERM_TITLE:-true}
 # First execute "one-off" local (untracked) scripts.  These are ignored by Git.
 if [[ -d $HOME/.bashrc.d.local ]]; then
     for file in $HOME/.bashrc.d.local/*; do
-        [[ ! -f $file ]] || . $file
+        if [[ ! $file =~ \.post(\.sh)?$ ]]; then
+            [[ ! -f $file ]] || . $file
+        fi
 	done
 fi
 
@@ -17,7 +19,9 @@ fi
 if [[ -d $HOME/.bashrc.d ]]; then
     # N.B. Any file in .bashrc.d matching *.local.sh is also ignored by Git.
     for file in $HOME/.bashrc.d/*; do
-        [[ ! -f $file ]] || . $file
+        if [[ ! $file =~ \.post(\.sh)?$ ]]; then
+            [[ ! -f $file ]] || . $file
+        fi
 	done
 fi
 
@@ -63,3 +67,21 @@ export LESS_TERMCAP_so=$'\E[0;34;107m'    # Begin standout-mode (search results)
 export LESS_TERMCAP_se=$'\E[0m'           # End standout-mode
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # Begin underline
 export LESS_TERMCAP_ue=$'\E[0m'           # End underline
+
+# Now execute post-bashrc scripts.
+if [[ -d $HOME/.bashrc.d ]]; then
+    for file in $HOME/.bashrc.d/*; do
+        if [[ $file =~ \.post(\.sh)?$ ]]; then
+            [[ ! -f $file ]] || . $file
+        fi
+	done
+fi
+
+# ...and untracked ones.
+if [[ -d $HOME/.bashrc.d.local ]]; then
+    for file in $HOME/.bashrc.d.local/*; do
+        if [[ $file =~ \.post(\.sh)?$ ]]; then
+            [[ ! -f $file ]] || . $file
+        fi
+	done
+fi
