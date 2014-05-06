@@ -64,13 +64,13 @@ __prompt_command() {
 
     # Decide on a colour for the user name (are we root?).
     if [[ $EUID == 0 ]]; then
-        local user_color=$ired
+        local user_color=$red
     else
-        local user_color=$igreen
+        local user_color=$green
     fi
 
     # Set a standard PS1 contents: user@host:dir (with colours).
-    local ps1_inner="$(c $user_color)\u@\h$(c $off):$(c $iblue)\W$(c $off)"
+    local ps1_inner="$(c $user_color)\u@\h$(c $off):$(c $blue)\W$(c $off)"
 
     # If "better PS1" is asked for, augment this with (coloured) Git/SVN
     # information.
@@ -80,7 +80,7 @@ __prompt_command() {
         local added_flag='?'
 
         ps1_inner+='$(__git_svn_info "|'$(c $yellow)'%s")'
-        ps1_inner+='$(__git_stash_flag "'$(c $iyellow)$stash_flag'")'
+        ps1_inner+='$(__git_stash_flag "'$(c $yellow)$stash_flag'")'
         ps1_inner+='$(__git_svn_status "'$(c $red)$dirty_flag'")'
         ps1_inner+='$(__git_added_flag "'$(c $purple)$added_flag'")'$(c $off)
     fi
