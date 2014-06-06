@@ -4,6 +4,12 @@ Host *
     ControlPersist 240
     RemoteForward 8378 localhost:8378
 
+Host github github.com
+    User git
+    Port 22
+    HostName github.com
+    ClearAllForwardings yes
+
 Host fenrir
     User will
     Port 22
@@ -23,11 +29,6 @@ Host titan
     User will.vousden
     Port 22
     HostName titan1.atlas.aei.uni-hannover.de
-
-Host github
-    User git
-    Port 22
-    HostName github.com
 
 Host vousden
     User wvousd01
