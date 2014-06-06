@@ -42,7 +42,7 @@ alias ll="ls $LS_OPTIONS -AlhF"
 alias la="ls $LS_OPTIONS -Ah"
 alias ..='cd ..'
 
-alias clip="nc localhost 8377"
+alias clip="clipnc localhost 8378"
 if [[ -x $(which pbcopy) ]]; then
     alias pbcopy='xargs echo -n | pbcopy'
 fi

@@ -2,7 +2,7 @@ Host *
     ControlMaster auto
     ControlPath ~/.ssh/%r@%h:%p
     ControlPersist 240
-    RemoteForward 8377 localhost:8377
+    RemoteForward 8378 localhost:8378
 
 Host fenrir
     User will

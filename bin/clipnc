@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+if [[ -x $(which nc) ]]; then
+    text=$(nc -h)
+    old='^\[v1.\10'
+    gnu='GNU'
+    if [[ $text =~ $old ]]; then
+        # Using the original version.
+        cmd='nc -q 0'
+    elif [[ $text =~ $gnu ]]; then
+        # Using GNU version.
+        cmd='nc -c'
+    elif [[ -n $text ]]; then
+        # Using BSD version.
+        cmd='nc'
+    fi
+
+    $cmd $@
+else
+    echo 'Netcat not found!' >&2
+    exit 1
+fi
