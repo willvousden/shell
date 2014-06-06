@@ -1,55 +1,61 @@
+Host *
+    ControlMaster auto
+    ControlPath ~/.ssh/%r@%h:%p
+    ControlPersist 240
+    RemoteForward 8377 localhost:8377
+
 Host fenrir
-User will
-Port 22
-HostName fenrir.sr.bham.ac.uk
+    User will
+    Port 22
+    HostName fenrir.sr.bham.ac.uk
 
 Host titan
-User will.vousden
-Port 22
-HostName titan1.atlas.aei.uni-hannover.de
+    User will.vousden
+    Port 22
+    HostName titan1.atlas.aei.uni-hannover.de
 
 Host atlas
-User will.vousden
-Port 22
-HostName atlas1.atlas.aei.uni-hannover.de
+    User will.vousden
+    Port 22
+    HostName atlas1.atlas.aei.uni-hannover.de
 
 Host titan
-User will.vousden
-Port 22
-HostName titan1.atlas.aei.uni-hannover.de
+    User will.vousden
+    Port 22
+    HostName titan1.atlas.aei.uni-hannover.de
 
 Host github
-User git
-Port 22
-HostName github.com
+    User git
+    Port 22
+    HostName github.com
 
 Host vousden
-User wvousd01
-Port 22
-HostName willvousden.co.uk
+    User wvousd01
+    Port 22
+    HostName willvousden.co.uk
 
 Host ejl
-User janelee
-Port 22
-HostName eleanorjanelee.co.uk
+    User janelee
+    Port 22
+    HostName eleanorjanelee.co.uk
 
 Host eos
-User will
-Port 22
-HostName 147.188.32.54
+    User will
+    Port 22
+    HostName 147.188.32.54
 
 Host hydra
-User will
-Port 22
-HostName hydra.sr.bham.ac.uk
+    User will
+    Port 22
+    HostName hydra.sr.bham.ac.uk
 
 Host lnx0
-User will
-Port 22
-HostName lnx0.sr.bham.ac.uk
+    User will
+    Port 22
+    HostName lnx0.sr.bham.ac.uk
 
 Host punga
-HostName punga
-User will
-Port 22
-ProxyCommand ssh -q hydra.sr.bham.ac.uk -W %h:%p
+    HostName punga
+    User will
+    Port 22
+    ProxyCommand ssh -q hydra.sr.bham.ac.uk -W %h:%p
