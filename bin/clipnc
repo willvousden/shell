@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 if [[ -x $(which nc) ]]; then
-    text=$(nc -h)
-    old='^\[v1.\10'
+    text=$(nc -h 2>&1)
+    old='^\[v1\.10'
     gnu='GNU'
     if [[ $text =~ $old ]]; then
         # Using the original version.
