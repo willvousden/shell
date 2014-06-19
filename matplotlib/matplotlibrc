@@ -1,3 +1,7 @@
+# Some stuff I've added.
+figure.autolayout : True
+
+
 ### LINES
 # See http://matplotlib.sourceforge.net/api/artist_api.html#module-matplotlib.lines for more
 # information on line properties.
@@ -128,7 +132,7 @@ text.usetex         : True  # use latex for all text handling. The following fon
 
 #text.antialiased : True # If True (default), the text will be antialiased.
                          # This only affects the Agg backend.
-                     
+
 # The following settings allow you to select the fonts in math mode.
 # They map from a TeX font name to a fontconfig font pattern.
 # These settings are only used if mathtext.fontset is 'custom'.
