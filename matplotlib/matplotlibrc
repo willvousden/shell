@@ -160,7 +160,7 @@ text.usetex         : True  # use latex for all text handling. The following fon
 # default fontsizes for ticklabels, and so on.  See
 # http://matplotlib.sourceforge.net/api/axes_api.html#module-matplotlib.axes
 #axes.hold           : True    # whether to clear the axes by default on
-axes.facecolor      : f9f9f9   # axes background color
+axes.facecolor      : fbfbfb   # axes background color
 axes.edgecolor      : bcbcbc   # axes edge color
 axes.linewidth      : 1        # edge linewidth
 axes.grid           : True     # display grid or not
@@ -178,7 +178,8 @@ axes.axisbelow      : True     # whether axis gridlines and ticks are below
                                    # separator in the fr_FR locale.
 #axes.unicode_minus  : True    # use unicode for the minus symbol
                                # rather than hypen.  See http://en.wikipedia.org/wiki/Plus_sign#Plus_sign
-axes.color_cycle    : 348ABD, 7A68A6, A60628, 467821, CF4457, 188487, E24A33
+#axes.color_cycle    : 348ABD, 7A68A6, A60628, 467821, CF4457, 188487, E24A33
+axes.color_cycle    : 456BA3, CA8000, 7B9F16, D4400F, 7161A1, B15700, 4086B4, E6AC00, 954A8B, 838700, D23211, 4769C3, DF8800, A94169, 2CA455
 
 #polaraxes.grid      : True    # display grid on polar axes
 #axes3d.grid         : True    # display grid on 3d axes
