@@ -7,7 +7,7 @@ if [[ -z $GLOBUS_PATH ]] && [[ -d /opt/ldg ]]; then
     fi
 fi
 
-if [[ -x $(which gsissh) ]]; then
+if [[ $GSI_ALIAS && -x $(which gsissh) ]]; then
     # Set the default SSH client to use the "Grid".
     alias ssh=gsissh
     alias scp=gsiscp

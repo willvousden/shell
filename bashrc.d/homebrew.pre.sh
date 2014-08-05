@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 if [[ -x $(which brew) ]]; then
     # Set up virtualenv stuff.
-    . $(brew --prefix)/bin/virtualenvwrapper.sh &> /dev/null
+    . $(brew --prefix)/bin/virtualenvwrapper.sh
 
     # Source bash completion.
-    . $(brew --prefix)/etc/bash_completion &> /dev/null
-
-    # List outdated Homebrew formulae
-    brew outdated
+    . $(brew --prefix)/etc/bash_completion
 fi

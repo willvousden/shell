@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+#export PROFILING=true
+if [[ $PROFILING == true ]]; then
+    # Add profiling code.
+    PS4='+ $(date "+%s.%N")\011 '
+    exec 3>&2 2>/tmp/bashstart.$$.log
+    set -x
+fi
+
 export PYTHONSTARTUP=$HOME/.profile.d/python-startup.py
 export EDITOR="/usr/bin/env vim"
 export PATH="$HOME/.bin:$PATH"

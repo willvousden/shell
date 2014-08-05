@@ -86,3 +86,9 @@ if [[ -d $HOME/.bashrc.d.local ]]; then
         fi
 	done
 fi
+
+if [[ -n $PROFILING ]] && shopt -q login_shell; then
+    # Disable profiling code.
+    set +x
+    exec 2>&3 3>&-
+fi
