@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 if [[ -x $(which brew) ]]; then
-    # Set up virtualenv stuff.
-    . $(brew --prefix)/bin/virtualenvwrapper.sh
+    prefix=$(brew --prefix)
 
-    # Source bash completion.
-    . $(brew --prefix)/etc/bash_completion
+    # Source bash completion and virtualenvwrapper.
+    files="share/bash-completion/bash_completion bin/virtualenvwrapper.sh"
+    for file in $files; do
+        if [[ -f $prefix/$file ]]; then
+            . $prefix/$file
+        fi
+    done
 fi
