@@ -1,6 +1,6 @@
 #!/bin/bash
 port=10241                  # Local port on which to set up the proxy service.
-target=lnx0.sr.bham.ac.uk   # Remote machine (through which the connection is bounced).
+target=hydra.sr.bham.ac.uk  # Remote machine (through which the connection is bounced).
 user=will                   # User on remote machine.
 
 stub="ssh -fC2qTN -D"
