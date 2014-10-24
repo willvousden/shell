@@ -60,3 +60,7 @@ Host punga
     User will
     Port 22
     ProxyCommand ssh -q hydra.sr.bham.ac.uk -W %h:%p
+
+Host styx
+    HostName 178.62.107.144
+    User will
