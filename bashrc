@@ -97,3 +97,6 @@ fi
 if [[ -x $(which pip) ]]; then
     eval $(pip completion --bash)
 fi
+
+# Inspect the path.
+alias ppath='echo $PATH | tr : "\n"'

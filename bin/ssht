@@ -5,4 +5,4 @@ if [[ $2 ]]; then
 else
     command="tmux a || tmux new"
 fi
-ssh -t $1 "$command"
+ssh -Xt $1 "$command"

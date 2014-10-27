@@ -16,14 +16,14 @@ export PATH="$HOME/.bin:$PATH"
 if [[ -d $HOME/.profile.d.local ]]; then
     for file in $HOME/.profile.d.local/*.sh; do
         [[ ! -f $file ]] || . $file
-	done
+    done
 fi
 
 # Source additional profile scripts.
 if [[ -d $HOME/.profile.d ]]; then
     for file in $HOME/.profile.d/*.sh; do
         [[ ! -f $file ]] || . $file
-	done
+    done
 fi
 
 # If running bash...
