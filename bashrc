@@ -32,8 +32,8 @@ if [[ $TERM != 'dumb' ]]; then
         export LS_OPTIONS='--color=auto'
     fi
 
-    if [[ -f $HOME/.dir_colors ]]; then
-        eval $(dircolors $HOME/.dir_colors)
+    if [[ -x $(which dircolors) && -r $HOME/.dir_colors ]]; then
+        eval $(dircolors -b $HOME/.dir_colors)
     fi
 fi
 
@@ -100,3 +100,6 @@ fi
 
 # Inspect the path.
 alias ppath='echo $PATH | tr : "\n"'
+
+# Check window size after each command and update LINES and COLUMNS.
+shopt -s checkwinsize

@@ -31,3 +31,6 @@ if [[ $BASH_VERSION && -f $HOME/.bashrc ]]; then
     # ...then include .bashrc.
     . $HOME/.bashrc
 fi
+
+# Dissallow write access to terminal.
+mesg n
