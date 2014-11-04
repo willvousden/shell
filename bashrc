@@ -93,6 +93,10 @@ if [[ -n $PROFILING ]] && shopt -q login_shell; then
     exec 2>&3 3>&-
 fi
 
+if [[ -f /etc/bash_completion ]]; then
+    . /etc/bash_completion
+fi
+
 # Pip bash completion.
 if [[ -x $(which pip) ]]; then
     eval $(pip completion --bash)
