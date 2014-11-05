@@ -1,15 +1,23 @@
+#!/user/bin/env bash
+
 dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 linkfile()
 {
-    if [[ -e .$1 ]]; then
-        echo ".$1 exists; skipping."
+    source=.$1
+    if [[ -e $source || -L $source ]]; then
+        echo "$source exists; skipping."
         return 1
     else
-        ln -s $dir/$1 .$1
+        if [[ -n $2 ]]; then
+            target=$(realpath $dir/$2)
+        else
+            target=$dir/$1
+        fi
+
+        ln -s $target $source
         return 0
     fi
 }
-
 
 pushd ~ > /dev/null
 
