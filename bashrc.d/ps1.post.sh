@@ -95,3 +95,6 @@ __prompt_command() {
     # Now wrap the contents in some decoration and export.
     export PS1="$(c $off)[$ps1_inner]$prompt_symbol "
 }
+
+# Set PS2 (secondary prompt) as well.
+export PS2="$(c $blue)>$(c $off) "
