@@ -21,6 +21,7 @@ install_dotfiles: $(DOTFILES) install_ssh
 	done
 
 install_ssh:
-	[[ -d ${HOME}/.ssh ]] || mkdir ${HOME}/.ssh
+	[ -d ${HOME}/.ssh ] || mkdir ${HOME}/.ssh
+	chmod 700 ${HOME}/.ssh
 	ln -snfv `pwd`/ssh/config ${HOME}/.ssh/config
 	ln -snfv `pwd`/ssh/authorized_keys ${HOME}/.ssh/authorized_keys
