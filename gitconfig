@@ -17,6 +17,7 @@
     editor = /usr/bin/env vim
 [merge]
     tool = splice
+    conflictstyle = diff3
 [mergetool "vimdiff"]
     cmd=vim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
     keepbackup=false
