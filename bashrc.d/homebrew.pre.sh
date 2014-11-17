@@ -2,11 +2,9 @@
 if [[ -x $(which brew) ]]; then
     prefix=$(brew --prefix)
 
-    # Source bash completion and anything else.
-    files="share/bash-completion/bash_completion"
-    for file in $files; do
-        if [[ -f $prefix/$file ]]; then
-            . $prefix/$file
-        fi
-    done
+    if [[ -f $prefix/share/bash-completion/bash_completion ]]; then
+        . $prefix/share/bash-completion/bash_completion
+    elif [[ -f $prefix/etc/bash_completion ]]; then
+        . $prefix/etc/bash_completion
+    fi
 fi
