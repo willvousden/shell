@@ -12,12 +12,24 @@ DOTFILES = bashrc \
 		   screenrc \
 		   dircolors.d \
 		   bin
+CONFIGFILES = matplotlib/matplotlibrc
+OS := $(shell uname)
+ifeq ($(OS), Darwin)
+	CONFIGPREFIX := ${HOME}/.
+else
+	CONFIGPREFIX := ${HOME}/.config/
+endif
 
 install: install_dotfiles
 
 install_dotfiles: $(DOTFILES) install_ssh
 	@for i in $(DOTFILES); do \
 		ln -snfv `pwd`/$$i ${HOME}/.$$i; \
+	done
+	
+	@for i in $(CONFIGFILES); do \
+		mkdir -p $(CONFIGPREFIX)$$(dirname $$i); \
+		ln -snfv `pwd`/$$i $(CONFIGPREFIX)$$i; \
 	done
 
 install_ssh:
