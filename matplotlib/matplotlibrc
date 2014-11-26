@@ -209,6 +209,7 @@ grid.linestyle   :   -       # solid
 grid.linewidth   :   0.5     # in points
 
 ### Legend
+legend.loc           : best
 legend.fancybox      : True  # if True, use a rounded box for the
                                # legend, else a rectangle
 #legend.isaxes        : True
