@@ -5,6 +5,7 @@ DOTFILES = bashrc \
 		   profile \
 		   profile.d \
 		   inputrc \
+		   latexmkrc \
 		   gitconfig \
 		   gitignore \
 		   tmux.conf \
