@@ -60,6 +60,8 @@ alias egrep='egrep --color=auto'
 alias pf='ps aux | grep -v grep | grep'
 alias du='du -sh'
 
+alias pip-upgrade='pip install --upgrade $(pip list -o | grep -oP "^\S+")'
+
 # Colours for man pages (via less).
 export LESS_TERMCAP_mb=$'\E[01;31m'       # Begin blinking
 export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # Begin bold (headings)
