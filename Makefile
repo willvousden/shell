@@ -1,5 +1,7 @@
 default: install
 
+.PHONY: default install install_dotfiles install_ssh
+
 DOTFILES = bashrc \
 		   bashrc.d \
 		   profile \
