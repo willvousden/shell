@@ -4,3 +4,4 @@
 *.bak
 *.orig
 .nfs*
+.python-version
