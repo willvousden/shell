@@ -1,9 +1,9 @@
 # Generate dirty status flag for Git and SVN.
 __git_svn_status () {
-	if git status --porcelain 2> /dev/null | grep -q '^\s*[ACDMRU]'; then
+    if [[ $(type -t git) ]] && git status --porcelain 2> /dev/null | grep -q '^\s*[ACDMRU]'; then
 		# Generate Git output for PS1.
         echo -n $1
-	elif svn info &> /dev/null; then
+    elif [[ $(type -t svn) ]] && svn info &> /dev/null; then
 		# Generate SVN output for PS1.
 		svn status | grep -q '^\s*[?ACDMR?!]' && echo -n $1
 	fi
@@ -18,15 +18,14 @@ __git_added_flag () {
 }
 
 # Generate branch/location information for Git and SVN repositories.
-__git_svn_info () {
+__git_svn_tag () {
 	local tag=
-    if [[ $(type -t __git_ps1) ]]; then
+    if [[ $(type -t git) ]] && [[ $(type -t __git_ps1) ]]; then
         # Generate Git output using standard completion function.
         tag=$(__git_ps1 '%s')
-	elif git status &> /dev/null; then
-        # Generate Git output for PS1.
-        tag=$(git symbolic-ref HEAD 2> /dev/null | sed -e 's/^refs\/heads\/\(.*\)/\1/')
-	elif svn info 2> /dev/null; then
+    elif [[ $(type -t git) ]] && git status --porcelain &> /dev/null; then
+        tag=?
+    elif [[ $(type -t svn) ]] && svn info 2> /dev/null; then
 		# Generate SVN output for PS1.
 		local url=`svn info | awk '/URL:/ {print $2}'`
 		if [[ $url =~ trunk ]]; then
@@ -79,7 +78,7 @@ __prompt_command() {
         local stash_flag='+'
         local added_flag='?'
 
-        ps1_inner+='$(__git_svn_info "|'$(c $yellow)'%s")'
+        ps1_inner+='$(__git_svn_tag "|'$(c $yellow)'%s")'
         ps1_inner+='$(__git_stash_flag "'$(c $yellow)$stash_flag'")'
         ps1_inner+='$(__git_svn_status "'$(c $red)$dirty_flag'")'
         ps1_inner+='$(__git_added_flag "'$(c $purple)$added_flag'")'$(c $off)
