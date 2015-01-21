@@ -1,13 +1,18 @@
 #!/bin/bash
 port=10241                  # Local port on which to set up the proxy service.
-target=hydra.sr.bham.ac.uk  # Remote machine (through which the connection is bounced).
-user=will                   # User on remote machine.
+host=hydra.sr.bham.ac.uk    # Remote machine (through which the connection is bounced).
+user=                       # User on remote machine (blank for default).
 device=Wi-Fi
 
 stub="ssh -fC2qTN -D"
-command="$stub $port $user@$target"
+target=$host
+if [[ -n $user ]]; then
+    target=$user@$host
+fi
 proc=$(ps aux | grep "$stub" | grep -v grep | awk '{ print $2 }')
 if [[ $1 == -k ]]; then
+    # Kill the proxy.
+
     # Disable SOCKS proxy (for Mac).
     if [[ -x $(which networksetup) ]]; then
         sudo networksetup -setsocksfirewallproxystate $device off
@@ -20,14 +25,16 @@ if [[ $1 == -k ]]; then
         echo "No proxy exists."
     fi
 else
+    # Set up the proxy.
+
     if [[ -z $proc ]]; then
-        echo "Starting proxy on port $port to $user@$target."
+        echo "Starting proxy on port $port to $target."
     else
         $0 -k > /dev/null
         echo "Renewing proxy."
     fi
 
-    $command
+    $stub $port $target
 
     # Enable SOCKS proxy (for Mac).
     if [[ -x $(which networksetup) ]]; then
