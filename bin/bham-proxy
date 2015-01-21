@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 port=10241                  # Local port on which to set up the proxy service.
 host=hydra.sr.bham.ac.uk    # Remote machine (through which the connection is bounced).
 user=                       # User on remote machine (blank for default).
@@ -9,7 +10,11 @@ target=$host
 if [[ -n $user ]]; then
     target=$user@$host
 fi
-proc=$(ps aux | grep "$stub" | grep -v grep | awk '{ print $2 }')
+
+function get_pid {
+    echo $(ps aux | grep "$stub" | grep -v grep | awk '{ print $2 }')
+}
+
 if [[ $1 == -k ]]; then
     # Kill the proxy.
 
@@ -18,16 +23,17 @@ if [[ $1 == -k ]]; then
         sudo networksetup -setsocksfirewallproxystate $device off
     fi
 
-    if [[ -n $proc ]]; then
-        echo "Killing proxy."
-        kill $proc
+    pid=$(get_pid)
+    if [[ -n $pid ]]; then
+        echo "Killing proxy with PID: $pid."
+        kill $pid
     else
         echo "No proxy exists."
     fi
 else
     # Set up the proxy.
 
-    if [[ -z $proc ]]; then
+    if [[ -z $(get_pid) ]]; then
         echo "Starting proxy on port $port to $target."
     else
         $0 -k > /dev/null
@@ -35,6 +41,7 @@ else
     fi
 
     $stub $port $target
+    echo "Proxy started with PID: $(get_pid)."
 
     # Enable SOCKS proxy (for Mac).
     if [[ -x $(which networksetup) ]]; then
