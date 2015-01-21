@@ -11,6 +11,7 @@ if [[ -n $user ]]; then
     target=$user@$host
 fi
 
+# Get PID of existing tunnels.
 function get_pid {
     echo $(ps aux | grep "$stub" | grep -v grep | awk '{ print $2 }')
 }
@@ -20,9 +21,16 @@ if [[ $1 == -k ]]; then
 
     # Disable SOCKS proxy (for Mac).
     if [[ -x $(which networksetup) ]]; then
+        echo "Disabling SOCKS proxy..."
         sudo networksetup -setsocksfirewallproxystate $device off
+        if [[ $? == 0 ]]; then
+            echo "...done."
+        else
+            echo "...failed."
+        fi
     fi
 
+    # Is there already a tunnel?
     pid=$(get_pid)
     if [[ -n $pid ]]; then
         echo "Killing proxy with PID: $pid."
@@ -33,6 +41,7 @@ if [[ $1 == -k ]]; then
 else
     # Set up the proxy.
 
+    # Is there already a tunnel?
     if [[ -z $(get_pid) ]]; then
         echo "Starting proxy on port $port to $target."
     else
@@ -45,7 +54,13 @@ else
 
     # Enable SOCKS proxy (for Mac).
     if [[ -x $(which networksetup) ]]; then
+        echo "Enabling SOCKS proxy..."
         sudo networksetup -setsocksfirewallproxy $device localhost $port
         sudo networksetup -setsocksfirewallproxystate $device on
+        if [[ $? == 0 ]]; then
+            echo "...done."
+        else
+            echo "...failed."
+        fi
     fi
 fi
