@@ -1,7 +1,7 @@
 Host *
     ControlMaster auto
-    ControlPath ~/.ssh/%r@%h:%p
-    ControlPersist 240
+    ControlPath ~/.ssh/cm_socket/%r@%h:%p
+    ControlPersist 1
     RemoteForward 8378 localhost:8378
 
 Host github github.com
