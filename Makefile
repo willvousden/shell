@@ -17,6 +17,7 @@ DOTFILES = bashrc \
 		   bin
 CONFIGFILES = matplotlib/matplotlibrc
 OS := $(shell uname)
+SHELL = /usr/bin/env bash
 ifeq ($(OS), Darwin)
 	CONFIGPREFIX := ${HOME}/.
 else
