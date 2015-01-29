@@ -109,3 +109,10 @@ alias ppath='echo $PATH | tr : "\n"'
 
 # Check window size after each command and update LINES and COLUMNS.
 shopt -s checkwinsize
+
+# Helpful alias for adding new paths.
+pathadd() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        export PATH="${PATH:+"$PATH:"}$1"
+    fi
+}
