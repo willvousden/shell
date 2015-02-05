@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-ligo-proxy-init will.vousden
-alias ssh=gsissh
-alias scp=gsiscp
-export GIT_SSH=gsissh
