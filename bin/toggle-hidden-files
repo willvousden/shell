@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $(defaults read com.apple.finder AppleShowAllFiles) == 1 ]]; then 
+if [[ $(defaults read com.apple.finder AppleShowAllFiles 2> /dev/null) == 1 ]]; then 
   echo "Hiding hidden files."
   defaults write com.apple.finder AppleShowAllFiles -bool false
 else 
