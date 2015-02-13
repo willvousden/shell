@@ -39,8 +39,8 @@ fi
 
 sshc() {
     for f in ~/.ssh/cm_socket/*; do
-        if [[ -s $f ]]; then
-            echo $f
+        if [[ -f $f ]]; then
+            rm $f
         fi
     done
 }
