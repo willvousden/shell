@@ -15,21 +15,6 @@ Host fenrir
     Port 22
     HostName fenrir.sr.bham.ac.uk
 
-Host titan
-    User will.vousden
-    Port 22
-    HostName titan1.atlas.aei.uni-hannover.de
-
-Host atlas
-    User will.vousden
-    Port 22
-    HostName atlas1.atlas.aei.uni-hannover.de
-
-Host titan
-    User will.vousden
-    Port 22
-    HostName titan1.atlas.aei.uni-hannover.de
-
 Host vousden
     User wvousd01
     Port 22
@@ -64,3 +49,19 @@ Host punga
 Host styx
     HostName 178.62.107.144
     User will
+
+Host ligo-cit
+  HostName ldas-grid.ligo.caltech.edu
+  User will.vousden
+
+Host ligo-lho
+  HostName ldas-grid.ligo-wa.caltech.edu
+  User will.vousden
+
+Host ligo-uwm
+  HostName pcdev1.phys.uwm.edu
+  User will.vousden
+
+Host ligo-atlas
+  HostName atlas5.atlas.aei.uni-hannover.de
+  User will.vousden
