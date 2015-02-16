@@ -1,3 +1,8 @@
+if [[ -z $PROFILE_SOURCE ]]; then
+    export BASHRC_FIRST=true
+    . ~/.profile
+fi
+
 BSD_STYLE=true
 if ls --color -d /dev/null &> /dev/null; then
     BSD_STYLE=
@@ -32,7 +37,7 @@ if [[ $TERM != 'dumb' ]]; then
         export LS_OPTIONS='--color=auto'
     fi
 
-    if [[ -x $(which dircolors) && -r $HOME/.dir_colors ]]; then
+    if [[ -x $(which dircolors 2> /dev/null) && -r $HOME/.dir_colors ]]; then
         eval $(dircolors -b $HOME/.dir_colors)
     fi
 fi
@@ -50,7 +55,7 @@ alias ll="ls $LS_OPTIONS -AlhF"
 alias la="ls $LS_OPTIONS -Ah"
 alias ..='cd ..'
 
-if [[ -x $(which pbcopy) ]]; then
+if [[ -x $(which pbcopy 2> /dev/null) ]]; then
     alias pbcopy='xargs echo -n | pbcopy'
 fi
 
@@ -94,7 +99,7 @@ if [[ -f /etc/bash_completion ]]; then
 fi
 
 # Pip bash completion.
-if [[ -x $(which pip) ]]; then
+if [[ -x $(which pip 2> /dev/null) ]]; then
     eval $(pip completion --bash)
 fi
 

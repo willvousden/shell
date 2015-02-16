@@ -20,7 +20,7 @@ if [[ $1 == -k ]]; then
     # Kill the proxy.
 
     # Disable SOCKS proxy (for Mac).
-    if [[ -x $(which networksetup) ]]; then
+    if [[ -x $(which networksetup 2> /dev/null) ]]; then
         echo "Disabling SOCKS proxy..."
         sudo networksetup -setsocksfirewallproxystate $device off
         if [[ $? == 0 ]]; then
@@ -53,7 +53,7 @@ else
     echo "Proxy started with PID: $(get_pid)."
 
     # Enable SOCKS proxy (for Mac).
-    if [[ -x $(which networksetup) ]]; then
+    if [[ -x $(which networksetup 2> /dev/null) ]]; then
         echo "Enabling SOCKS proxy..."
         sudo networksetup -setsocksfirewallproxy $device localhost $port
         sudo networksetup -setsocksfirewallproxystate $device on

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-if [[ -x $(which brew) ]]; then
+if [[ -x $(which brew 2> /dev/null) ]]; then
     prefix=$(brew --prefix)
 
     if [[ -f $prefix/share/bash-completion/bash_completion ]]; then

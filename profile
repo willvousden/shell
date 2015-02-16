@@ -27,7 +27,11 @@ if [[ -d $HOME/.profile.d ]]; then
 fi
 
 # If running bash...
-if [[ $BASH_VERSION && -f $HOME/.bashrc ]]; then
-    # ...then include .bashrc.
-    . $HOME/.bashrc
+if [[ -z BASHRC_FIRST ]]; then
+    if [[ $BASH_VERSION && -f $HOME/.bashrc ]]; then
+        # ...then include .bashrc.
+        . $HOME/.bashrc
+    fi
 fi
+
+export PROFILE_SOURCED=true
