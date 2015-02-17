@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+export PROFILE_SOURCED=true
 
 #export PROFILING=true
 if [[ $PROFILING == true ]]; then
@@ -26,12 +26,11 @@ if [[ -d $HOME/.profile.d ]]; then
     done
 fi
 
-# If running bash...
-if [[ -z BASHRC_FIRST ]]; then
-    if [[ $BASH_VERSION && -f $HOME/.bashrc ]]; then
-        # ...then include .bashrc.
+# If we haven't already sourced .bashrc...
+if [[ -z $BASHRC_SORUCED ]]; then
+    # and we're running bash...
+    if [[ $BASH_VERSION ]]; then
+        # ...then source it.
         . $HOME/.bashrc
     fi
 fi
-
-export PROFILE_SOURCED=true

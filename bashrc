@@ -1,5 +1,5 @@
-if [[ -z $PROFILE_SOURCE ]]; then
-    export BASHRC_FIRST=true
+export BASHRC_SOURCED=true
+if [[ -z $PROFILE_SOURCED ]]; then
     . ~/.profile
 fi
 
