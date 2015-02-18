@@ -1,29 +1,46 @@
 #!/usr/bin/env bash
 
+lal-activate-dir()
+{
+    if [[ ! -d $1/etc ]]; then
+        echo "Couldn't find $1/etc."
+        return 1
+    fi
+    export LAL_LOCATION=$1
+
+    local modules=(lal lalframe lalmetaio lalsimulation lalburst lalinspiral lalstochastic lalpulsar lalinference lalapps pylal glue)
+    for m in $modules; do
+        script=$LAL_LOCATION/etc/$m-user-env.sh
+        if [[ -r $script ]]; then
+            . $script &> /dev/null || true
+        fi
+    done
+}
+
 lal-activate() {
-    if [[ ! -d $LALDIR ]]; then
-        echo "\$LALDIR not found."
+    if [[ ! -d $LAL_DIR ]]; then
+        echo "\$LAL_DIR not found."
         return 1
     fi
 
     local branch=$1
-    local branches=$(find $LALDIR -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -n 1 basename)
+    local branches=$(find $LAL_DIR -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -n 1 basename)
 
     if [[ -z $branch ]]; then
         echo "$branches" | tr " " "\n"
     elif [[ $branches =~ (^|[[:space:]])$branch($|[[:space:]]) ]]; then
-        if [[ -n $LALBRANCH ]]; then
-            PATH=$(echo $PATH | sed "s%:$LALDIR/$LALBRANCH:")
-            MANPATH=$(echo $MANPATH | sed "s%:$LALDIR/$LALBRANCH:")
+        if [[ -n $LAL_BRANCH ]]; then
+            echo "Branch $LAL_BRANCH already active."
+            return 1
         fi
 
-        . $LALDIR/$branch/etc/lscsoftrc.sh
+        echo "Activating $LAL_DIR/$branch..."
+        lal-activate-dir $LAL_DIR/$branch
 
         local result=$?
-        echo "Activating $LALDIR/$branch..."
         if [[ $result == 0 ]]; then
             echo "Activated \"$branch\"."
-            export LALBRANCH=$branch
+            export LAL_BRANCH=$branch
         else
             echo "Something went wrong."
         fi
