@@ -1,4 +1,4 @@
-export PROFILE_SOURCED=true
+PROFILE_SOURCED=true
 
 #export PROFILING=true
 if [[ $PROFILING == true ]]; then

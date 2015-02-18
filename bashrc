@@ -1,4 +1,4 @@
-export BASHRC_SOURCED=true
+BASHRC_SOURCED=true
 if [[ -z $PROFILE_SOURCED ]]; then
     . ~/.profile
 fi
