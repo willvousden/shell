@@ -15,6 +15,7 @@ DOTFILES = bashrc \
 		   screenrc \
 		   dircolors.d \
 		   bin
+DIRCOLORS = solarized.ansi-universal
 CONFIGFILES = matplotlib/matplotlibrc
 OS := $(shell uname)
 SHELL = /usr/bin/env bash
@@ -25,6 +26,7 @@ else
 endif
 
 install: install_dotfiles
+	ln -svf ${HOME}/.dircolors.d/$(DIRCOLORS) ${HOME}/.dir_colors
 
 install_dotfiles: $(DOTFILES) install_ssh
 	@for i in $(DOTFILES); do \
