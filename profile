@@ -34,3 +34,5 @@ if [[ -z $BASHRC_SORUCED ]]; then
         . $HOME/.bashrc
     fi
 fi
+
+export TZ=/usr/share/zoneinfo/Europe/London
