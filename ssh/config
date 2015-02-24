@@ -62,6 +62,10 @@ Host ligo-uwm
   HostName pcdev1.phys.uwm.edu
   User will.vousden
 
+Host ligo-uwm2
+  HostName pcdev2.phys.uwm.edu
+  User will.vousden
+
 Host ligo-atlas
   HostName atlas5.atlas.aei.uni-hannover.de
   User will.vousden
