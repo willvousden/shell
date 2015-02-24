@@ -17,6 +17,10 @@ lal-activate-dir()
     done
 }
 
+lal-activate-current() {
+    echo $LAL_BRANCH
+}
+
 lal-activate() {
     if [[ ! -d $LAL_DIR ]]; then
         echo "\$LAL_DIR not found."
