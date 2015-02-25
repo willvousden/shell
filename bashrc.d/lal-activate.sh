@@ -8,12 +8,8 @@ lal-activate-dir()
     fi
     export LAL_LOCATION=$1
 
-    local modules=(lal lalframe lalmetaio lalsimulation lalburst lalinspiral lalstochastic lalpulsar lalinference lalapps pylal glue)
-    for m in $modules; do
-        script=$LAL_LOCATION/etc/$m-user-env.sh
-        if [[ -r $script ]]; then
-            . $script &> /dev/null || true
-        fi
+    for script in $LAL_LOCATION/etc/*-user-env.sh; do
+        . $script &> /dev/null || true
     done
 }
 
