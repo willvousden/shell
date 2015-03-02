@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
 if [[ $2 ]]; then
-    command="tmux a -t $2 || tmux new -s $2"
+    remote_command="tmux a -t $2 || tmux new -s $2"
 else
-    command="tmux a || tmux new"
+    remote_command="tmux a || tmux new"
 fi
-ssh -Xt $1 "$command"
+
+if ligo-proxy-test; then
+    command=gsissh
+else
+    command=ssh
+fi
+
+$command -Xt $1 "$remote_command"
