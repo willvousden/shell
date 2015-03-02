@@ -21,8 +21,6 @@ ligo-proxy() {
 }
 
 # If there's one available, set up aliases, etc.
-export -f ligo-proxy
-export -f ligo-proxy-test
 if ligo-proxy-test; then
     ligo-proxy
 fi
