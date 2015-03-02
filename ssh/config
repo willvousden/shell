@@ -69,3 +69,6 @@ Host ligo-uwm2
 Host ligo-atlas
   HostName atlas5.atlas.aei.uni-hannover.de
   User will.vousden
+
+Host ligo-geo
+  HostName geo2.arcca.cf.ac.uk
