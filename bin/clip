@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-host=localhost
-port=8378
-
-if [[ -x $(which nc) ]]; then
+if [[ -z $CLIPPER_PORT ]]; then
+    echo '$CLIPPER_PORT not defined.' >&2
+    exit 1
+elif [[ -x $(which nc) ]]; then
     text=$(nc -h 2>&1)
     old='^\[v1\.10'
     gnu='GNU'
@@ -18,7 +18,7 @@ if [[ -x $(which nc) ]]; then
         cmd='nc'
     fi
 
-    $cmd $host $port
+    $cmd localhost $CLIPPER_PORT
 else
     echo 'Netcat not found!' >&2
     exit 1
