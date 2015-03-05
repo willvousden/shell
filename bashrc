@@ -89,16 +89,16 @@ if [[ -d $HOME/.bashrc.d.local ]]; then
 fi
 
 if [[ -f /etc/bash_completion ]]; then
-    . /etc/bash_completion
+    . /etc/bash_completion 2> /dev/null
 elif [[ -d /etc/bash_completion.d ]]; then
     for file in /etc/bash_completion.d/*; do
-        . $file
+        . $file 2> /dev/null
     done
 fi
 
 # Pip bash completion.
 if [[ -x $(which pip 2> /dev/null) ]]; then
-    eval $(pip completion --bash)
+    eval $(pip completion --bash) 2> /dev/null
 fi
 
 # Inspect the path.
