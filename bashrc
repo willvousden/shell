@@ -42,8 +42,6 @@ if [[ $TERM != 'dumb' ]]; then
     fi
 fi
 
-alias sshc="rm -f ~/.ssh/cm_socket/* 2> /dev/null"
-
 alias ls="ls $LS_OPTIONS -h"
 alias ll="ls $LS_OPTIONS -AlhF"
 alias la="ls $LS_OPTIONS -Ah"

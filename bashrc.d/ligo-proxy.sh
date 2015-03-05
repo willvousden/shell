@@ -12,9 +12,19 @@ ligo-proxy-test() {
 }
 
 ligo-proxy() {
-    alias ssh=gsissh
-    alias scp=gsiscp
+    # Set up GSI aliases.
     export GIT_SSH=gsissh
+    alias scp=gsiscp
+    alias rsync='rsync --rsh=gsissh'
+
+    # If SSH is already aliased, just replace the binary name with gsissh.
+    local ssh_old=$(alias ssh 2> /dev/null)
+    if [[ -n $ssh_old ]]; then
+        eval $(echo $ssh_old | sed -e "s/alias ssh='ssh/alias ssh='gsissh/")
+    else
+        alias ssh=gsissh
+    fi
+
     if ! ligo-proxy-test; then
         ligo-proxy-init $LIGO_USER
     fi
