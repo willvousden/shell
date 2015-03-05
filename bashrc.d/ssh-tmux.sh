@@ -12,7 +12,7 @@ ssht() {
 
     local ssh_command=ssh
     if [[ $(type -t ssh) == alias ]]; then
-        ssh_command=$(alias ssh | sed -Ee "s/alias ssh='(.+)'/\1/")
+        ssh_command=$(alias ssh | sed -Ee "s/^alias ssh='(.+)'$/\1/")
     fi
     $ssh_command -Xt $1 "$command"
 }
