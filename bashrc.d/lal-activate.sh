@@ -2,15 +2,29 @@
 
 lal-activate-dir()
 {
+    #if [[ ! -d $1/etc ]]; then
+        #echo "Couldn't find $1/etc."
+        #return 1
+    #fi
+    if [[ ! -f $1/etc/lscsoftrc ]]; then
+        lal-activate-emit $1 || return 1
+    fi
+
+    . $1/etc/lscsoftrc
+}
+
+lal-activate-emit() {
     if [[ ! -d $1/etc ]]; then
         echo "Couldn't find $1/etc."
         return 1
     fi
-    export LAL_LOCATION=$1
 
-    for script in $LAL_LOCATION/etc/*-user-env.sh; do
-        . $script &> /dev/null || true
-    done
+    cat << EOF > $1/etc/lscsoftrc
+export LAL_LOCATION=$1
+for script in $1/etc/*-user-env.sh; do
+    . \$script &> /dev/null || true
+done
+EOF
 }
 
 lal-activate-current() {
