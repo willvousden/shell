@@ -47,6 +47,10 @@ alias ll="ls $LS_OPTIONS -AlhF"
 alias la="ls $LS_OPTIONS -Ah"
 alias ..='cd ..'
 
+echp() {
+    echo $1 | tr : '\n'
+}
+
 if [[ -x $(which pbcopy 2> /dev/null) ]]; then
     alias pbcopy='xargs echo -n | pbcopy'
 fi
