@@ -15,7 +15,7 @@ DOTFILES = bashrc \
 		   screenrc \
 		   dircolors.d \
 		   bin
-DIRCOLORS = solarized.ansi-universal
+DIRCOLORS = solarized.ansi-dark
 CONFIGFILES = matplotlib/matplotlibrc
 OS := $(shell uname)
 SHELL = /usr/bin/env bash
