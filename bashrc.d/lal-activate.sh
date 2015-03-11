@@ -41,7 +41,13 @@ lal-activate() {
     local branches=$(find $LAL_DIR -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -n 1 basename)
 
     if [[ -z $branch ]]; then
-        echo "$branches" | tr " " "\n"
+        for b in $branches; do
+            if [[ $b == $LAL_BRANCH ]]; then
+                echo "$b (active)"
+            else
+                echo $b
+            fi
+        done
     elif [[ $branches =~ (^|[[:space:]])$branch($|[[:space:]]) ]]; then
         if [[ -n $LAL_BRANCH ]]; then
             echo "Branch $LAL_BRANCH already active."
