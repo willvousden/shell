@@ -2,7 +2,7 @@
 
 port=10241                  # Local port on which to set up the proxy service.
 host=hydra.sr.bham.ac.uk    # Remote machine (through which the connection is bounced).
-user=                       # User on remote machine (blank for default).
+user=will                   # User on remote machine (blank for default).
 device=Wi-Fi
 
 stub="ssh -fC2qTN -D"
@@ -13,7 +13,7 @@ fi
 
 # Get PID of existing tunnels.
 function get_pid {
-    echo $(ps aux | grep "$stub" | grep -v grep | awk '{ print $2 }')
+    ps x | grep "$stub" | grep -v grep | awk '{ print $1 }'
 }
 
 if [[ $1 == -k ]]; then
