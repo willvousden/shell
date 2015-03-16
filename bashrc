@@ -103,9 +103,6 @@ if [[ -x $(which pip 2> /dev/null) ]]; then
     eval $(pip completion --bash) 2> /dev/null
 fi
 
-# Inspect the path.
-alias ppath='echo $PATH | tr : "\n"'
-
 # Check window size after each command and update LINES and COLUMNS.
 shopt -s checkwinsize
 
