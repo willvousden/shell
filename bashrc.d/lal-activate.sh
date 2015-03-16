@@ -1,34 +1,3 @@
-lal-activate-dir()
-{
-    #if [[ ! -d $1/etc ]]; then
-        #echo "Couldn't find $1/etc."
-        #return 1
-    #fi
-    if [[ ! -f $1/etc/lscsoftrc ]]; then
-        lal-activate-emit $1 || return 1
-    fi
-
-    . $1/etc/lscsoftrc
-}
-
-lal-activate-emit() {
-    if [[ ! -d $1/etc ]]; then
-        echo "Couldn't find $1/etc."
-        return 1
-    fi
-
-    cat << EOF > $1/etc/lscsoftrc
-export LAL_LOCATION=$1
-for script in $1/etc/*-user-env.sh; do
-    . \$script &> /dev/null || true
-done
-EOF
-}
-
-lal-activate-current() {
-    echo $LAL_BRANCH
-}
-
 lal-activate() {
     if [[ ! -d $LAL_DIR ]]; then
         echo "\$LAL_DIR not found."
@@ -53,7 +22,7 @@ lal-activate() {
         fi
 
         echo "Activating $LAL_DIR/$branch..."
-        lal-activate-dir $LAL_DIR/$branch
+        . $LAL_DIR/$branch/etc/lalsuiterc
 
         local result=$?
         if [[ $result == 0 ]]; then
