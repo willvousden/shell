@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 lal-activate-dir()
 {
     #if [[ ! -d $1/etc ]]; then

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [[ $(defaults read com.apple.finder AppleShowAllFiles 2> /dev/null) == 1 ]]; then 
   echo "Hiding hidden files."

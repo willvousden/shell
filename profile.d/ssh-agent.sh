@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 SSH_AGENT_FILE=$HOME/.ssh-agent/$(hostname -s)
 SSH_AGENT_CONTENT=
 [[ -d $HOME/.ssh-agent ]] || mkdir $HOME/.ssh-agent
@@ -17,8 +16,5 @@ if [[ $SSH_AGENT_CONTENT ]]; then
     echo "$SSH_AGENT_CONTENT" > $SSH_AGENT_FILE
 fi
 
-# Evaluate the file contents and add the unlocked RSA key if it exists.
+# Evaluate the file contents.
 eval $(cat $SSH_AGENT_FILE | grep -v echo)
-if [[ -f $HOME/.keys/id_rsa-open ]]; then
-	ssh-add $HOME/.keys/id_rsa-open 2> /dev/null
-fi

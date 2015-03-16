@@ -47,11 +47,20 @@ alias ll="ls $LS_OPTIONS -AlhF"
 alias la="ls $LS_OPTIONS -Ah"
 alias ..='cd ..'
 
+# Echo path list on separate lines.
 echp() {
     echo $1 | tr : '\n'
 }
 
+# Helpful alias for adding new paths.
+pathadd() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        export PATH="${PATH:+"$PATH:"}$1"
+    fi
+}
+
 if [[ -x $(which pbcopy 2> /dev/null) ]]; then
+    # Remove trailing new line before piping to pbcopy.
     alias pbcopy='xargs echo -n | pbcopy'
 fi
 
@@ -105,13 +114,6 @@ fi
 
 # Check window size after each command and update LINES and COLUMNS.
 shopt -s checkwinsize
-
-# Helpful alias for adding new paths.
-pathadd() {
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        export PATH="${PATH:+"$PATH:"}$1"
-    fi
-}
 
 if [[ -n $PROFILING ]] && shopt -q login_shell; then
     # Disable profiling code.

@@ -1,8 +1,6 @@
-#!/usr/bin/env bash
-
 # If Homebrew is installed...
 if [[ -x /usr/local/bin/brew ]]; then
-    # Then set the relevant paths.
+    # ...then set the relevant paths.
     prefix=/usr/local
     export PATH="$prefix/bin:$PATH"
     export MANPATH="$prefix/share/man:$MANPATH"

@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 if [[ -x $(which brew 2> /dev/null) ]]; then
     prefix=$(brew --prefix)
 

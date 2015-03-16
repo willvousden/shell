@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 export LIGO_USER=will.vousden
 
 ligo-proxy-test() {
