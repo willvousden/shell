@@ -49,7 +49,7 @@ else
         echo "Renewing proxy."
     fi
 
-    $stub $port $target
+    eval $stub $port "-o 'ControlPath none'" $target
     echo "Proxy started with PID: $(get_pid)."
 
     # Enable SOCKS proxy (for Mac).
