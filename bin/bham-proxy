@@ -50,6 +50,11 @@ else
     fi
 
     eval $stub $port "-o 'ControlPath none'" $target
+    result=$?
+    if [[ $result != 0 ]]; then
+        echo "Couldn't start proxy."
+        exit $result
+    fi
     echo "Proxy started with PID: $(get_pid)."
 
     # Enable SOCKS proxy (for Mac).
