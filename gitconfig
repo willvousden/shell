@@ -21,14 +21,8 @@
 [mergetool "vimdiff"]
 	cmd=vim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
 	keepbackup=false
-[mergetool "gvimdiff"]
-	cmd=gvim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
-	keepbackup=false
 [mergetool "splice"]
 	cmd="vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
-	trustExitCode=true
-[mergetool "gsplice"]
-	cmd="gvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
 	trustExitCode=true
 [github]
 	user = willvousden
