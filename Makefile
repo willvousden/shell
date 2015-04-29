@@ -8,7 +8,6 @@ DOTFILES = bashrc \
 		   profile.d \
 		   inputrc \
 		   latexmkrc \
-		   gitconfig \
 		   gitignore \
 		   tmux.conf \
 		   tmux.conf.d \
@@ -37,6 +36,9 @@ install_dotfiles: $(DOTFILES) install_ssh
 		mkdir -p $(CONFIGPREFIX)$$(dirname $$i); \
 		ln -snfv `pwd`/$$i $(CONFIGPREFIX)$$i; \
 	done
+	
+	cp `pwd`/gitconfig ${HOME}/.gitconfig
+	./gitconfig.sh
 
 install_ssh:
 	[ -d ${HOME}/.ssh/cm_socket ] || mkdir -p ${HOME}/.ssh/cm_socket
