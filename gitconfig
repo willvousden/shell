@@ -1,38 +1,38 @@
 [user]
-    name = Will Vousden
-    email = will@vousden.me.uk
+	name = Will Vousden
+	email = will@vousden.me.uk
 [color]
-    ui = auto
+	ui = auto
 [alias]
-    s = status -sb
-    c = checkout
-    d = diff
-    dc = diff --cached
-    dw = diff --word-diff
-    dcw = diff --cached --word-diff
-    pf = pull --ff-only
+	s = status -sb
+	c = checkout
+	d = diff
+	dc = diff --cached
+	dw = diff --word-diff
+	dcw = diff --cached --word-diff
+	pf = pull --ff-only
 [core]
-    pager = less -RS -x4
-    excludesfile = ~/.gitignore
-    editor = /usr/bin/env vim
+	pager = less -RS -x4
+	excludesfile = ~/.gitignore
+	editor = /usr/bin/env vim
 [merge]
-    tool = splice
-    conflictstyle = diff3
+	tool = splice
+	conflictstyle = diff3
 [mergetool "vimdiff"]
-    cmd=vim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
-    keepbackup=false
+	cmd=vim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
+	keepbackup=false
 [mergetool "gvimdiff"]
-    cmd=gvim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
-    keepbackup=false
+	cmd=gvim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
+	keepbackup=false
 [mergetool "splice"]
-    cmd="vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
-    trustExitCode=true
+	cmd="vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+	trustExitCode=true
 [mergetool "gsplice"]
-    cmd="gvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
-    trustExitCode=true
+	cmd="gvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+	trustExitCode=true
 [github]
-    user = willvousden
+	user = willvousden
 [push]
-    default = tracking
+	default = tracking
 [include]
-    path = .gitconfig_local
+	path = .gitconfig_local
