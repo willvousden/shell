@@ -1,7 +1,3 @@
-# Some stuff I've added.
-figure.autolayout : True
-
-
 ### LINES
 # See http://matplotlib.sourceforge.net/api/artist_api.html#module-matplotlib.lines for more
 # information on line properties.
