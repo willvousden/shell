@@ -4,6 +4,7 @@ default: install
 
 DOTFILES = bashrc \
 		   bashrc.d \
+		   bash_logout \
 		   profile \
 		   profile.d \
 		   inputrc \
