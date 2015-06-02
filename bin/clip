@@ -18,7 +18,12 @@ elif [[ -x $(which nc) ]]; then
         cmd='nc'
     fi
 
-    $cmd localhost $CLIPPER_PORT
+    clip_cmd="$cmd localhost $CLIPPER_PORT"
+    if [[ $1 == '-n' ]]; then
+        xargs echo -n | $clip_cmd
+    else
+        $clip_cmd
+    fi
 else
     echo 'Netcat not found!' >&2
     exit 1
