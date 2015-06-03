@@ -6,3 +6,4 @@
 .nfs*
 .python-version
 .lvimrc
+*.egg-info
