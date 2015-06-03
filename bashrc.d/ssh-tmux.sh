@@ -10,9 +10,13 @@ ssht() {
         command="tmux a || tmux new"
     fi
 
+    if [[ $1 == -d ]]; then
+        command="tmux detach -a 2> /dev/null; $command"
+    fi
+
     local ssh_command=ssh
     if [[ $(type -t ssh) == alias ]]; then
         ssh_command=$(alias ssh | sed -Ee "s/^alias ssh='(.+)'$/\1/")
     fi
-    $ssh_command -Xt $1 "$command"
+    eval $ssh_command -Xt $1 \"$command\"
 }
