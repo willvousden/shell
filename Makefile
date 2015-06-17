@@ -14,6 +14,8 @@ DOTFILES = bashrc \
 		   tmux.conf.d \
 		   screenrc \
 		   dircolors.d \
+		   gdbinit \
+		   gdbinit.d \
 		   bin
 DIRCOLORS = solarized.ansi-dark
 CONFIGFILES = matplotlib/matplotlibrc

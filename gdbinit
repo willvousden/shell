@@ -1,0 +1,7 @@
+# vim: set ft=gdb:
+source ~/.gdbinit.d/colours.gdb
+
+set confirm off
+set verbose off
+set history filename ~/.gdb_history
+set history save
