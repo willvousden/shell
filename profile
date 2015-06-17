@@ -1,3 +1,5 @@
+# vim: set ft=sh:
+
 PROFILE_SOURCED=true
 
 #export PROFILING=true
@@ -10,7 +12,7 @@ fi
 
 export PYTHONSTARTUP=$HOME/.profile.d/python-startup.py
 export EDITOR="/usr/bin/env vim"
-export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.bin:$HOME/.bin.local:$PATH"
 
 # Source local profile scripts.
 if [[ -d $HOME/.profile.d.local ]]; then
