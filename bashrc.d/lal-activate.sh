@@ -1,3 +1,10 @@
+_lal_activate() {
+    local word=${COMP_WORDS[COMP_CWORD]}
+    local branches=$(find $LAL_DIR -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0 -n 1 basename)
+    COMPREPLY=($(compgen -W "$branches" -- $word))
+}
+complete -F _lal_activate lal-activate
+
 lal-activate() {
     if [[ ! -d $LAL_DIR ]]; then
         echo "\$LAL_DIR not found."
