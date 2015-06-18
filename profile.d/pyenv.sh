@@ -3,7 +3,7 @@ if [[ -z $PYENV_ROOT ]] && [[ -d $HOME/.pyenv ]]; then
 fi
 
 if [[ -n $PYENV_ROOT ]]; then
-    ! which pyenc 2> /dev/null > /dev/null
+    which pyenv 2> /dev/null > /dev/null
     found=$?
     if [[ $found != 0 ]]; then
         # Wasn't in path.
