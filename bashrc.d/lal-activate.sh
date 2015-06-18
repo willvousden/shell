@@ -29,11 +29,21 @@ lal-activate() {
         fi
 
         echo "Activating $LAL_DIR/$branch..."
-        . $LAL_DIR/$branch/etc/lalsuiterc
-
+        . $LAL_DIR/$branch/lscsoft-user-env.sh
         local result=$?
+        local rc=0
+        if [[ $result == 0 && -f $LAL_DIR/$branch/etc/lalsuiterc ]]; then
+            . $LAL_DIR/$branch/etc/lalsuiterc
+            result=$?
+            rc=1
+        fi
+
         if [[ $result == 0 ]]; then
-            echo "Activated \"$branch\"."
+            echo -n "Activated \"$branch\""
+            if [[ $rc == 0 ]]; then
+                echo -n " (no rc file found)"
+            fi
+            echo .
             export LAL_BRANCH=$branch
         else
             echo "Something went wrong."
