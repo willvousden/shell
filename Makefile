@@ -21,10 +21,10 @@ DIRCOLORS = solarized.ansi-dark
 CONFIGFILES = matplotlib/matplotlibrc
 OS := $(shell uname)
 SHELL = /usr/bin/env bash
-ifeq ($(OS), Darwin)
-	CONFIGPREFIX := ${HOME}/.
-else
+ifeq ($(OS), Linux)
 	CONFIGPREFIX := ${HOME}/.config/
+else
+	CONFIGPREFIX := ${HOME}/.
 endif
 
 install: install_dotfiles
