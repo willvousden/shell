@@ -1,4 +1,14 @@
 if type qdel 2> /dev/null > /dev/null && type qstat 2> /dev/null > /dev/null; then
+    function qstat()
+    {
+        local args=$@
+        if [[ -z $args ]]; then
+            args="-u $USER"
+        fi
+        
+        env qstat $args
+    }
+
     _pbs_jobs()
     {
         local word=${COMP_WORDS[COMP_CWORD]}
