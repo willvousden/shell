@@ -14,7 +14,9 @@ try:
     target = 'TkAgg'
     try:
         plt.switch_backend(target)
-    except ImportError:
+        f = plt.figure()
+        del f
+    except:
         plt.switch_backend(default)
 except ImportError:
     pass
