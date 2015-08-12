@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ $(id -u) != 0 ]]; then
+    eval "sudo $0 $@"
+    exit $?
+fi
+
 port=10241                  # Local port on which to set up the proxy service.
 host=hydra.sr.bham.ac.uk    # Remote machine (through which the connection is bounced).
 user=will                   # User on remote machine (blank for default).
