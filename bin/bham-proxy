@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ $(id -u) != 0 ]]; then
-    eval "sudo $0 $@"
+    sudo $0 "$@"
     exit $?
 fi
 
