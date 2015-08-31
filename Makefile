@@ -45,6 +45,7 @@ install_dotfiles: $(DOTFILES) install_ssh
 
 install_ssh:
 	[ -d ${HOME}/.ssh/cm_socket ] || mkdir -p ${HOME}/.ssh/cm_socket
+	cp `pwd`/ssh/authorized_keys ${HOME}/.ssh/authorized_keys
 	chmod 700 ${HOME}/.ssh{,/cm_socket}
+	chmod 600 ${HOME}/.ssh/authorized_keys
 	@ln -snfv `pwd`/ssh/config ${HOME}/.ssh/config
-	@ln -snfv `pwd`/ssh/authorized_keys ${HOME}/.ssh/authorized_keys
