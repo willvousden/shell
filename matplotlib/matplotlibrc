@@ -224,7 +224,7 @@ legend.numpoints     : 1      # the number of points in the legend line
 
 ### FIGURE
 # See http://matplotlib.sourceforge.net/api/figure_api.html#matplotlib.figure.Figure
-figure.figsize   : 11, 8    # figure size in inches
+figure.figsize   : 6, 4.5    # figure size in inches
 #figure.dpi       : 80      # figure dots per inch
 figure.facecolor : 1.0    # figure facecolor; 0.75 is scalar gray
 figure.edgecolor : 0.50   # figure edgecolor
