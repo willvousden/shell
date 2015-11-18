@@ -76,6 +76,9 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias pf='ps aux | grep -v grep | grep'
 alias du='du -sh'
+if [[ -x $(which xdg-open) ]]; then
+    alias open=xdg-open
+fi
 
 alias pip-upgrade='pip install --upgrade $(pip list -o | grep -oP "^\S+")'
 
