@@ -37,4 +37,4 @@ if [[ -z $BASHRC_SORUCED ]]; then
     fi
 fi
 
-export TZ=/usr/share/zoneinfo/Europe/London
+export TZ=Europe/London
