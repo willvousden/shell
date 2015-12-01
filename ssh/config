@@ -1,7 +1,7 @@
-Host *
-    ControlMaster auto
-    ControlPath ~/.ssh/cm_socket/%r@%h:%p
-    ControlPersist 1
+# Host *
+    # ControlMaster auto
+    # ControlPath ~/.ssh/cm_socket/%r@%h:%p
+    # ControlPersist 1
 
 Host github github.com
     User git
