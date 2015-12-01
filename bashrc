@@ -76,7 +76,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias pf='ps aux | grep -v grep | grep'
 alias du='du -sh'
-if [[ -x $(which xdg-open) ]]; then
+if [[ -x $(which xdg-open 2> /dev/null) ]]; then
     alias open=xdg-open
 fi
 
