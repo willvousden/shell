@@ -24,3 +24,5 @@ CursorBlinks=no
 OpaqueWhenFocused=yes
 Font=Consolas
 FontHeight=11
+Scrollbar=none
+Locale=en_GB
