@@ -9,11 +9,6 @@ Host github github.com
     HostName ssh.github.com
     ClearAllForwardings yes
 
-Host fenrir
-    User will
-    Port 22
-    HostName fenrir.sr.bham.ac.uk
-
 Host vousden
     User wvousd01
     Port 22
@@ -48,26 +43,3 @@ Host punga
 Host styx
     HostName 178.62.107.144
     User will
-
-Host ligo-cit
-  HostName ldas-grid.ligo.caltech.edu
-  User will.vousden
-
-Host ligo-lho
-  HostName ldas-grid.ligo-wa.caltech.edu
-  User will.vousden
-
-Host ligo-uwm
-  HostName pcdev1.phys.uwm.edu
-  User will.vousden
-
-Host ligo-uwm2
-  HostName pcdev2.phys.uwm.edu
-  User will.vousden
-
-Host ligo-atlas
-  HostName atlas5.atlas.aei.uni-hannover.de
-  User will.vousden
-
-Host ligo-cf
-  HostName ligo.arcca.cf.ac.uk
