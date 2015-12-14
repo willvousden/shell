@@ -42,4 +42,5 @@ Host punga
 
 Host styx
     HostName 178.62.107.144
+    Port 8080
     User will
