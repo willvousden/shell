@@ -18,7 +18,12 @@ fi
 
 # Get PID of existing tunnels.
 function get_pid {
-    ps x | grep "$stub" | grep -v grep | awk '{ print $1 }'
+    ps=ps
+    if [[ -x $(which procps 2> /dev/null) ]]; then
+        # We're on Windows, so use procps (ps won't give arguments).
+        ps=procps
+    fi
+    $ps x | grep "$stub" | grep -v grep | awk '{ print $1 }'
 }
 
 if [[ $1 == -k ]]; then
