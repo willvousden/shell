@@ -1,12 +1,26 @@
 #!/usr/bin/env bash
 
-if [[ $(id -u) != 0 ]]; then
-    sudo $0 "$@"
-    exit $?
+
+contains () {
+    local e
+    for e in "${@:2}"; do [[ $e == $1 ]] && return 0; done
+    return 1
+}
+
+if contains -k "${@}"; then
+    kill=true
+fi
+
+if contains -s "${@}"; then
+    start=true
+    if [[ $EUID != 0 ]]; then
+        sudo $0 "$@"
+        exit $?
+    fi
 fi
 
 port=10241                  # Local port on which to set up the proxy service.
-host=hydra.sr.bham.ac.uk    # Remote machine (through which the connection is bounced).
+host=hydra                  # Remote machine (through which the connection is bounced).
 user=will                   # User on remote machine (blank for default).
 device=Wi-Fi
 
@@ -26,17 +40,19 @@ function get_pid {
     $ps x | grep "$stub" | grep -v grep | awk '{ print $1 }'
 }
 
-if [[ $1 == -k ]]; then
+if [[ $kill ]]; then
     # Kill the proxy.
 
-    # Disable SOCKS proxy (for Mac).
-    if [[ -x $(which networksetup 2> /dev/null) ]]; then
-        echo "Disabling SOCKS proxy..."
-        sudo networksetup -setsocksfirewallproxystate $device off
-        if [[ $? == 0 ]]; then
-            echo "...done."
-        else
-            echo "...failed."
+    if [[ $start ]] && [[ $EUID == 0 ]]; then
+        # Disable SOCKS proxy (for Mac).
+        if [[ -x $(which networksetup 2> /dev/null) ]]; then
+            echo "Disabling SOCKS proxy..."
+            sudo networksetup -setsocksfirewallproxystate $device off
+            if [[ $? == 0 ]]; then
+                echo "...done."
+            else
+                echo "...failed."
+            fi
         fi
     fi
 
@@ -67,15 +83,17 @@ else
     fi
     echo "Proxy started with PID: $(get_pid)."
 
-    # Enable SOCKS proxy (for Mac).
-    if [[ -x $(which networksetup 2> /dev/null) ]]; then
-        echo "Enabling SOCKS proxy..."
-        sudo networksetup -setsocksfirewallproxy $device localhost $port
-        sudo networksetup -setsocksfirewallproxystate $device on
-        if [[ $? == 0 ]]; then
-            echo "...done."
-        else
-            echo "...failed."
+    if [[ $start ]] && [[ $EUID == 0 ]]; then
+        # Enable SOCKS proxy (for Mac).
+        if [[ -x $(which networksetup 2> /dev/null) ]]; then
+            echo "Enabling SOCKS proxy..."
+            sudo networksetup -setsocksfirewallproxy $device localhost $port
+            sudo networksetup -setsocksfirewallproxystate $device on
+            if [[ $? == 0 ]]; then
+                echo "...done."
+            else
+                echo "...failed."
+            fi
         fi
     fi
 fi
