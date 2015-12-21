@@ -27,6 +27,6 @@
 [github]
 	user = willvousden
 [push]
-	default = tracking
+	default = simple
 [include]
 	path = .gitconfig_local
