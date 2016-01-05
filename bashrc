@@ -49,6 +49,9 @@ if [[ $TERM != 'dumb' ]]; then
     fi
 fi
 
+# An alias to "restart" the shell as a login shell.
+alias bash_new='exec env - HOME=$HOME TERM=$TERM bash -l'
+
 alias ls="ls $LS_OPTIONS -h"
 alias ll="ls $LS_OPTIONS -AlhF"
 alias la="ls $LS_OPTIONS -Ah"
