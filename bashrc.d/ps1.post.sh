@@ -73,7 +73,7 @@ __prompt_command() {
         ps1_inner+='$(__git_tag "'$(c $base02)'|'$(c $yellow)'%s")'
         ps1_inner+='$(__git_stash_flag "'$(c $yellow)$stash_flag'")'
         ps1_inner+='$(__git_status "'$(c $red)$dirty_flag'")'
-        ps1_inner+='$(__git_added_flag "'$(c $magenta)$added_flag'")'$(c $reset)
+        ps1_inner+='$(__git_added_flag "'$(c $violet)$added_flag'")'$(c $reset)
     fi
 
     # What prompt symbol shall we use?
@@ -88,7 +88,7 @@ __prompt_command() {
     t=$(date '+%H:%M')
 
     # Now wrap the contents in some decoration and export.
-    export PS1="$(c $base01)$d$(c $base02)+$(c $base01)$t$(c $base02)|$ps1_inner $prompt_symbol "
+    export PS1="$(c $base01)$d$(c $base02),$(c $base01)$t$(c $base02)|$ps1_inner $prompt_symbol "
 }
 
 # Set PS2 (secondary prompt) as well.
