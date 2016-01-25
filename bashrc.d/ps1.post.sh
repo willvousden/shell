@@ -71,7 +71,7 @@ __prompt_command() {
     fi
 
     # Now wrap the contents in some decoration and export.
-    export PS1="$(c $off)[$ps1_inner]$prompt_symbol "
+    export PS1="$(c $off)$ps1_inner $prompt_symbol "
 }
 
 # Set PS2 (secondary prompt) as well.
