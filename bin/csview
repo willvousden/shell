@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+if [[ $1 == -t ]]; then
+    sep=$'\t'
+elif [[ $1 == -c ]]; then
+    sep=,
+fi
+
+if [[ $sep ]]; then
+    column -s"$sep" -t | less -cS
+else
+    column -t | less -cS
+fi
