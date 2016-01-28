@@ -1,3 +1,13 @@
+PS1_USER_COLOUR=$green # User/host pair.
+PS1_ROOT_COLOUR=$red # User/host (when root).
+PS1_BRANCH_COLOUR=$yellow # Git branch name.
+PS1_TIME_COLOUR=$base01 # The date/time pair.
+PS1_DIR_COLOUR=$blue # The current directory.
+PS1_DIRTY_COLOUR=$red # The "dirty" indicator for Git repos.
+PS1_NEW_COLOUR=$violet # The "new files" indicator for Git repos.
+PS1_SYMBOL_COLOUR=$base01 # The prompt symbol colour.
+PS1_ERROR_COLOUR=$red # The prompt symbol colour (when the previous command failed).
+
 __abbreviate() {
     length=${2:-6}
     if [[ $length == 1 ]]; then
@@ -10,7 +20,7 @@ __abbreviate() {
 }
 
 # Generate dirty status flag for Git.
-__git_status () {
+__git_dirty () {
     if [[ $(type -t git) ]] && git status --porcelain 2> /dev/null | grep -q '^\s*[ACDMRU]'; then
 		# Generate Git output for PS1.
         echo -n $1
@@ -54,9 +64,9 @@ __prompt_command() {
 
     # Decide on a colour for the user name (are we root?).
     if [[ $EUID == 0 ]]; then
-        local user_color=$red
+        local user_color=$PS1_ROOT_COLOUR
     else
-        local user_color=$green
+        local user_color=$PS1_USER_COLOUR
     fi
 
     # Set a standard PS1 contents: user@host:dir (with colours).
@@ -70,17 +80,17 @@ __prompt_command() {
         local stash_flag='+'
         local added_flag='?'
 
-        ps1_inner+='$(__git_tag " '$(c $yellow)'%s")'
-        ps1_inner+='$(__git_stash_flag "'$(c $yellow)$stash_flag'")'
-        ps1_inner+='$(__git_status "'$(c $red)$dirty_flag'")'
-        ps1_inner+='$(__git_added_flag "'$(c $violet)$added_flag'")'$(c $reset)
+        ps1_inner+='$(__git_tag " '$(c $PS1_BRANCH_COLOUR)'%s")'
+        ps1_inner+='$(__git_stash_flag "'$(c $PS1_BRANCH_COLOUR)$stash_flag'")'
+        ps1_inner+='$(__git_dirty "'$(c $PS1_DIRTY_COLOUR)$dirty_flag'")'
+        ps1_inner+='$(__git_added_flag "'$(c $PS1_NEW_COLOUR)$added_flag'")'$(c $reset)
     fi
 
     # What prompt symbol shall we use?
-    local prompt_symbol="$(c $base01)"'\$'"$(c $reset)"
+    local prompt_symbol="$(c $PS1_SYMBOL_COLOUR)"'\$'"$(c $reset)"
     if [[ $exit_code != 0 ]]; then
         # Last command failed; spruce it up a bit.
-        prompt_symbol="$(c $red)!$(c $reset)"
+        prompt_symbol="$(c $PS1_ERROR_COLOUR)!$(c $reset)"
     fi
 
     # Add the date.
@@ -88,7 +98,7 @@ __prompt_command() {
     t=$(date '+%H:%M')
 
     # Now wrap the contents in some decoration and export.
-    export PS1="$(c $base01)$d$(c $base02),$(c $base01)$t $ps1_inner $prompt_symbol "
+    export PS1="$(c $PS1_TIME_COLOUR)$d$(c $base02),$(c $PS1_TIME_COLOUR)$t $ps1_inner $prompt_symbol "
 }
 
 # Set PS2 (secondary prompt) as well.
