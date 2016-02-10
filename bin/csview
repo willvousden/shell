@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
 if [[ $1 == -t ]]; then
-    sep=$'\t'
+    options=-s$'\t'
 elif [[ $1 == -c ]]; then
-    sep=,
+    options=-s,
 fi
 
-if [[ $sep ]]; then
-    column -s"$sep" -t | less -cS
+c="column \"$options\" -t $2"
+if [[ -t 1 ]]; then
+    eval "$c" | less -cS
 else
-    column -t | less -cS
+    eval "$c"
 fi
