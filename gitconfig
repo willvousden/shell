@@ -26,7 +26,5 @@
 	trustExitCode=true
 [github]
 	user = willvousden
-[push]
-	default = simple
 [include]
 	path = .gitconfig_local
