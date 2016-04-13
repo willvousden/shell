@@ -71,7 +71,7 @@ font.family          : sans-serif
 font.size           : 10.0
 # font.serif          : DejaVu Serif, Bitstream Vera Serif, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times New Roman, Times, Palatino, Charter, serif
 #font.sans-serif     : Bitstream Vera Sans, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif
-font.sans-serif     : Helvetiva, Arial, sans-serif
+font.sans-serif     : Helvetiva, Arial, sans-serif, Bitstream Vera Sans
 #font.cursive        : Apple Chancery, Textile, Zapf Chancery, Sand, cursive
 #font.fantasy        : Comic Sans MS, Chicago, Charcoal, Impact, Western, fantasy
 font.monospace      : DejaVu Sans Mono, Andale Mono, Nimbus Mono L, Courier New, Courier, Fixed, Terminal, monospace
@@ -123,11 +123,11 @@ text.usetex         : True  # use latex for all text handling. The following fon
                                 # In that case, all text will be sent to TeX for
                                 # processing.
 
-#text.hinting : True # If True, text will be hinted, otherwise not.  This only
-                     # affects the Agg backend.
+text.hinting : auto # If True, text will be hinted, otherwise not.  This only
+                    # affects the Agg backend.
 
-#text.antialiased : True # If True (default), the text will be antialiased.
-                         # This only affects the Agg backend.
+text.antialiased : True # If True (default), the text will be antialiased.
+                        # This only affects the Agg backend.
 
 # The following settings allow you to select the fonts in math mode.
 # They map from a TeX font name to a fontconfig font pattern.
