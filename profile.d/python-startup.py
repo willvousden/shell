@@ -18,7 +18,7 @@ try:
 
         # Try to activate TkAgg backend, but roll back on failure.
         default = mpl.get_backend()
-        target = 'TkAgg'
+        target = 'Qt4Agg'
         try:
             pp.switch_backend(target)
             f = pp.figure()
