@@ -7,3 +7,4 @@
 .python-version
 .lvimrc
 *.egg-info
+.ipynb_checkpoints
