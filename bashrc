@@ -83,6 +83,9 @@ alias lc='wc -l'
 if hash xdg-open 2> /dev/null; then
     alias open=xdg-open
 fi
+if hash htop 2> /dev/null; then
+    alias htop="htop -u $USER"
+fi
 
 alias pip-upgrade='pip install --upgrade $(pip list -o | grep -oP "^\S+")'
 
