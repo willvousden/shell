@@ -44,7 +44,7 @@ if [[ $TERM != 'dumb' ]]; then
         export LS_OPTIONS='--color=auto'
     fi
 
-    if [[ -x $(which dircolors 2> /dev/null) && -r $HOME/.dir_colors ]]; then
+    if hash dircolors 2> /dev/null && [[ -r $HOME/.dir_colors ]]; then
         eval $(dircolors -b $HOME/.dir_colors)
     fi
 fi
@@ -69,7 +69,7 @@ pathadd() {
     fi
 }
 
-if [[ -x $(which pbcopy 2> /dev/null) ]]; then
+if hash pbcopy 2> /dev/null; then
     # Remove trailing new line before piping to pbcopy.
     alias pbcopy='xargs echo -n | pbcopy'
 fi
@@ -80,7 +80,7 @@ alias egrep='egrep --color=auto'
 alias pf='ps aux | grep -v grep | grep'
 alias du='du -sh'
 alias lc='wc -l'
-if [[ -x $(which xdg-open 2> /dev/null) ]]; then
+if hash xdg-open 2> /dev/null; then
     alias open=xdg-open
 fi
 
@@ -122,7 +122,7 @@ elif [[ -d /etc/bash_completion.d ]]; then
 fi
 
 # Pip bash completion.
-if [[ -x $(which pip 2> /dev/null) ]]; then
+if hash pip 2> /dev/null; then
     eval $(pip completion --bash) 2> /dev/null
 fi
 

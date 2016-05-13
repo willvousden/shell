@@ -3,7 +3,7 @@
 if [[ -z $CLIPPER_PORT ]]; then
     echo '$CLIPPER_PORT not defined.' >&2
     exit 1
-elif [[ -x $(which nc) ]]; then
+elif hash nc 2> /dev/null; then
     text=$(nc -h 2>&1)
     old='^\[v1\.10'
     gnu='GNU'

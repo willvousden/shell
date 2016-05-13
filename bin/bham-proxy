@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 contains () {
     local e
     for e in "${@:2}"; do [[ $e == $1 ]] && return 0; done
@@ -33,7 +32,7 @@ fi
 # Get PID of existing tunnels.
 function get_pid {
     ps=ps
-    if [[ -x $(which procps 2> /dev/null) ]]; then
+    if hash procps 2> /dev/null; then
         # We're on Windows, so use procps (ps won't give arguments).
         ps=procps
     fi
@@ -45,7 +44,7 @@ if [[ $kill ]]; then
 
     if [[ $start ]] && [[ $EUID == 0 ]]; then
         # Disable SOCKS proxy (for Mac).
-        if [[ -x $(which networksetup 2> /dev/null) ]]; then
+        if hash networksetup 2> /dev/null; then
             echo "Disabling SOCKS proxy..."
             sudo networksetup -setsocksfirewallproxystate $device off
             if [[ $? == 0 ]]; then
@@ -85,7 +84,7 @@ else
 
     if [[ $start ]] && [[ $EUID == 0 ]]; then
         # Enable SOCKS proxy (for Mac).
-        if [[ -x $(which networksetup 2> /dev/null) ]]; then
+        if hash networksetup 2> /dev/null; then
             echo "Enabling SOCKS proxy..."
             sudo networksetup -setsocksfirewallproxy $device localhost $port
             sudo networksetup -setsocksfirewallproxystate $device on

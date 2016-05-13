@@ -3,7 +3,7 @@ if [[ -z $RBENV_ROOT ]] && [[ -d $HOME/.rbenv ]]; then
 fi
 
 if [[ -n $RBENV_ROOT ]]; then
-    which rbenv 2> /dev/null > /dev/null
+    hash rbenv 2> /dev/null
     found=$?
     if [[ $found != 0 ]]; then
         # Wasn't in path.

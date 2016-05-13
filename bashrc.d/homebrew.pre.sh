@@ -1,4 +1,4 @@
-if [[ -x $(which brew 2> /dev/null) ]]; then
+if hash brew 2> /dev/null; then
     prefix=$(brew --prefix)
 
     if [[ -f $prefix/share/bash-completion/bash_completion ]]; then

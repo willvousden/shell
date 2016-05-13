@@ -1,10 +1,10 @@
-if [[ ! -x $(which unix2dos 2> /dev/null) ]] && [[ -x $(which perl 2> /dev/null) ]]; then
+if ! hash unix2dos 2> /dev/null && hash perl 2> /dev/null; then
     function dos2unix {
         __patternify 's/\r$//' "$1" "$2"
     }
 fi
 
-if [[ ! -x $(which unix2dos 2> /dev/null) ]] && [[ -x $(which perl 2> /dev/null) ]]; then
+if ! hash unix2dos 2> /dev/null && hash perl 2> /dev/null; then
     function unix2dos {
         __patternify 's/\n/\r\n/' "$1" "$2"
     }
