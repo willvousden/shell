@@ -4,6 +4,8 @@ if [[ $1 == -t ]]; then
     options=-s$'\t'
 elif [[ $1 == -c ]]; then
     options=-s,
+elif [[ $1 == -p ]]; then
+    option="-s'|'"
 fi
 
 c="column \"$options\" -t $2"
