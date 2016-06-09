@@ -1,1 +1,2 @@
-set completion-ignore-case on
+set completion-ignore-case off
+set show-all-if-ambiguous on
