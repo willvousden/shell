@@ -4,6 +4,7 @@
 [color]
 	ui = auto
 [alias]
+	g = grep --line-number --heading --break
 	s = status --short --branch
 	c = checkout
 	d = diff
@@ -28,3 +29,5 @@
 	user = willvousden
 [include]
 	path = .gitconfig_local
+[grep]
+	extendRegexp = true
