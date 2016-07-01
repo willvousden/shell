@@ -1,0 +1,125 @@
+#!/usr/bin/env bash
+
+host=$SPROX_HOST # Local port on which to set up the proxy service.
+port=$SPROX_PORT # Remote machine (through which the connection is bounced).
+device=$SPROX_DEVICE
+
+# Get some arguments.
+while getopts sakp:h:d: arg; do
+    case $arg in
+        k)
+            # Kill the proxy tunnel.
+            halt=true
+            ;;
+        a)
+            # Set the system proxy.
+            activate=true
+            ;;
+        h)
+            host=$OPTARG
+            ;;
+        p)
+            port=$OPTARG
+            ;;
+        d)
+            device=$OPTARG
+            ;;
+        s)
+            sudo=true
+            ;;
+    esac
+done
+
+# Need to be root to set the system proxy.
+if [[ -z $sudo && $activate && $EUID != 0 ]]; then
+    sudo $0 -s "$@"
+    exit $?
+fi
+
+# The stub of the command (excluding user options).
+stub="ssh -fC2qTN -D"
+
+# Get PID of existing tunnels.
+function get_pid {
+    ps=ps
+    if hash procps 2> /dev/null; then
+        # We're on Windows, so use procps (ps won't give arguments).
+        ps=procps
+    fi
+    $ps x | grep "$stub" | grep -v grep | awk '{ print $1 }'
+}
+
+if [[ $halt ]]; then
+    # Kill the proxy.
+
+    if [[ $activate ]] && [[ $EUID == 0 ]]; then
+        # Disable SOCKS proxy (for Mac).
+        if hash networksetup 2> /dev/null; then
+            echo "Disabling SOCKS proxy..."
+            sudo networksetup -setsocksfirewallproxystate "$device" off
+            if [[ $? == 0 ]]; then
+                echo "...done."
+            else
+                echo "...failed."
+            fi
+        fi
+    fi
+
+    # Is there already a tunnel?
+    pid=$(get_pid)
+    if [[ -n $pid ]]; then
+        echo "Killing proxy with PID: $pid."
+        kill $pid
+    else
+        echo "No proxy exists."
+    fi
+else
+    # Set up the proxy.
+
+    if [[ -z $host ]]; then
+        echo Host not specified.
+        exit 1
+    fi
+    if [[ -z $port ]]; then
+        echo Port not specified.
+        exit 1
+    fi
+
+    # Is there already a tunnel?
+    if [[ -z $(get_pid) ]]; then
+        echo "Starting proxy on port $port to $host."
+    else
+        $0 -k > /dev/null
+        echo "Renewing proxy."
+    fi
+
+    eval $stub $port "-o 'ControlPath none'" $host
+    result=$?
+    if [[ $result != 0 ]]; then
+        echo "Couldn't start proxy."
+        exit $result
+    fi
+    echo "Proxy started with PID: $(get_pid)."
+
+    if [[ $activate ]] && [[ $EUID == 0 ]]; then
+        if [[ -z $host ]]; then
+            echo Device not specified.
+            exit 1
+        fi
+
+        # Enable SOCKS proxy (for Mac).
+        if hash networksetup 2> /dev/null; then
+            echo "Enabling SOCKS proxy..."
+            sudo networksetup -setsocksfirewallproxy "$device" localhost $port
+            sudo networksetup -setsocksfirewallproxystate "$device" on
+            if [[ $? == 0 ]]; then
+                echo "...done."
+            else
+                echo "...failed."
+            fi
+        else
+            echo Platform not recognised.
+            exit 1
+        fi
+    fi
+fi
