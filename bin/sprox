@@ -30,37 +30,37 @@ while getopts sakp:h:d: arg; do
     esac
 done
 
-# Need to be root to set the system proxy.
-if [[ -z $sudo && $activate && $EUID != 0 ]]; then
-    sudo $0 -s "$@"
-    exit $?
-fi
-
 # The stub of the command (excluding user options).
-stub="ssh -fC2qTN -D"
+stub='ssh -fC2qTN -D'
 
 # Get PID of existing tunnels.
+user=${SUDO_USER:-$USER}
 function get_pid {
-    ps=ps
+    local ps=ps
     if hash procps 2> /dev/null; then
         # We're on Windows, so use procps (ps won't give arguments).
         ps=procps
     fi
-    $ps x | grep "$stub" | grep -v grep | awk '{ print $1 }'
+    $ps x -U $user | grep "$stub" | grep -v grep | awk '{ print $1 }'
 }
 
 if [[ $halt ]]; then
     # Kill the proxy.
 
-    if [[ $activate ]] && [[ $EUID == 0 ]]; then
+    if [[ $activate ]]; then
+        if [[ -z $device ]]; then
+            echo Device not specified.
+            exit 1
+        fi
+
         # Disable SOCKS proxy (for Mac).
         if hash networksetup 2> /dev/null; then
-            echo "Disabling SOCKS proxy..."
+            echo -n "Disabling SOCKS proxy... "
             sudo networksetup -setsocksfirewallproxystate "$device" off
             if [[ $? == 0 ]]; then
-                echo "...done."
+                echo "Done."
             else
-                echo "...failed."
+                echo "Failed."
             fi
         fi
     fi
@@ -96,26 +96,26 @@ else
     eval $stub $port "-o 'ControlPath none'" $host
     result=$?
     if [[ $result != 0 ]]; then
-        echo "Couldn't start proxy."
+        echo "Couldn't start proxy: got code $result from ssh."
         exit $result
     fi
     echo "Proxy started with PID: $(get_pid)."
 
-    if [[ $activate ]] && [[ $EUID == 0 ]]; then
-        if [[ -z $host ]]; then
+    if [[ $activate ]]; then
+        if [[ -z $device ]]; then
             echo Device not specified.
             exit 1
         fi
 
         # Enable SOCKS proxy (for Mac).
         if hash networksetup 2> /dev/null; then
-            echo "Enabling SOCKS proxy..."
+            echo -n "Enabling SOCKS proxy... "
             sudo networksetup -setsocksfirewallproxy "$device" localhost $port
             sudo networksetup -setsocksfirewallproxystate "$device" on
             if [[ $? == 0 ]]; then
-                echo "...done."
+                echo "Done."
             else
-                echo "...failed."
+                echo "Failed."
             fi
         else
             echo Platform not recognised.
