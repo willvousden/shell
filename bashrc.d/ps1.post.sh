@@ -22,10 +22,7 @@ __abbreviate() {
 # Generate dirty status flag for Git.
 __git_dirty () {
     local status=${2:-$(git status --porcelain 2> /dev/null)}
-    if hash git 2> /dev/null  && <<< $status grep -q '^\s*[ACDMRU]'; then
-        # Generate Git output for PS1.
-        echo -n $1
-    fi
+    <<< $status grep -q '^\s*[ACDMRU]' && echo -n $1
 }
 
 __git_stash_flag () {
@@ -35,14 +32,6 @@ __git_stash_flag () {
 __git_added_flag () {
     local status=${2:-$(git status --porcelain 2> /dev/null)}
     <<< $status grep -q '^\s*??' && echo -n $1
-}
-
-# Generate branch/location information for Git repositories.
-__git_tag () {
-    if hash git 2> /dev/null && hash __git_ps1 2> /dev/null; then
-        # Generate Git output using standard completion function.
-        printf "${1:- (%s)}" $(__git_ps1 '%s')
-    fi
 }
 
 # Encase non-printing characters.
@@ -65,15 +54,16 @@ __prompt_command() {
     fi
 
     # Set a standard PS1 contents: user@host:dir (with colours).
-    user=$(__abbreviate $USER 1)
-    host=$(__abbreviate $(hostname -s) 1)
+    local user=$(__abbreviate $USER 1)
+    local host=$(__abbreviate $(hostname -s) 1)
     local ps1_inner="$(c $user_color)$user@$host$(c $base01):$(c $blue)\W$(c $reset)"
 
     # If "better PS1" is asked for, augment this with (coloured) Git information.
-    if [[ $GIT_PS1 || $GIT_PS1_BETTER ]]; then
-        local tag+='$(__git_tag " '$(c $PS1_BRANCH_COLOUR)'%s")'
-        ps1_inner+="$tag"
-        if [[ $tag && $GIT_PS1_BETTER ]]; then
+    if hash git 2> /dev/null && \
+       hash __git_ps1 2> /dev/null && \
+       [[ $GIT_PS1 || $GIT_PS1_BETTER ]]; then
+        ps1_inner+='$(__git_ps1 " '$(c $PS1_BRANCH_COLOUR)'%s")'
+        if [[ $GIT_PS1_BETTER ]]; then
             # Only get the status once.
             local status=$(git status --porcelain 2> /dev/null)
             local dirty_flag=*
