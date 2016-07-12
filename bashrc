@@ -25,7 +25,7 @@ if [[ -d $HOME/.bashrc.d.local ]]; then
         if [[ ! $file =~ \.post(\.sh)?$ ]]; then
             [[ ! -f $file ]] || . $file
         fi
-	done
+    done
 fi
 
 # Now execute global (tracked) scripts.
@@ -35,7 +35,7 @@ if [[ -d $HOME/.bashrc.d ]]; then
         if [[ ! $file =~ \.post(\.sh)?$ ]]; then
             [[ ! -f $file ]] || . $file
         fi
-	done
+    done
 fi
 
 if [[ $TERM != 'dumb' ]]; then
@@ -105,7 +105,7 @@ if [[ -d $HOME/.bashrc.d ]]; then
         if [[ $file =~ \.post(\.sh)?$ ]]; then
             [[ ! -f $file ]] || . $file
         fi
-	done
+    done
 fi
 
 # ...and untracked ones.
@@ -114,7 +114,7 @@ if [[ -d $HOME/.bashrc.d.local ]]; then
         if [[ $file =~ \.post(\.sh)?$ ]]; then
             [[ ! -f $file ]] || . $file
         fi
-	done
+    done
 fi
 
 if [[ -f /etc/bash_completion ]]; then

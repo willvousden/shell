@@ -23,9 +23,9 @@ __abbreviate() {
 __git_dirty () {
     local status=${2:-$(git status --porcelain 2> /dev/null)}
     if hash git 2> /dev/null  && <<< $status grep -q '^\s*[ACDMRU]'; then
-		# Generate Git output for PS1.
+        # Generate Git output for PS1.
         echo -n $1
-	fi
+    fi
 }
 
 __git_stash_flag () {
@@ -42,7 +42,7 @@ __git_tag () {
     if hash git 2> /dev/null && hash __git_ps1 2> /dev/null; then
         # Generate Git output using standard completion function.
         printf "${1:- (%s)}" $(__git_ps1 '%s')
-	fi
+    fi
 }
 
 # Encase non-printing characters.
