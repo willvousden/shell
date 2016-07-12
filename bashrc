@@ -8,8 +8,9 @@ if ls --color -d /dev/null &> /dev/null; then
     BSD_STYLE=
 fi
 
-BETTER_PS1=${BETTER_PS1:-true}
-LIVE_TERM_TITLE=${LIVE_TERM_TITLE:-true}
+GIT_PS1=${GIT_PS1-true}
+GIT_PS1_BETTER=${GIT_PS1_BETTER-true}
+LIVE_TERM_TITLE=${LIVE_TERM_TITLE-true}
 
 # Set term type.
 if [[ $COLORTERM = "gnome-terminal" ]] || [[ $COLORTERM = "xfce4-terminal" ]]; then

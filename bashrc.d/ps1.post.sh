@@ -21,7 +21,8 @@ __abbreviate() {
 
 # Generate dirty status flag for Git.
 __git_dirty () {
-    if [[ $(type -t git) ]] && git status --porcelain 2> /dev/null | grep -q '^\s*[ACDMRU]'; then
+    local status=${2:-$(git status --porcelain 2> /dev/null)}
+    if hash git 2> /dev/null  && <<< $status grep -q '^\s*[ACDMRU]'; then
 		# Generate Git output for PS1.
         echo -n $1
 	fi
@@ -32,28 +33,22 @@ __git_stash_flag () {
 }
 
 __git_added_flag () {
-    git status --porcelain 2> /dev/null | grep -q '^\s*??' && echo -n $1
+    local status=${2:-$(git status --porcelain 2> /dev/null)}
+    <<< $status grep -q '^\s*??' && echo -n $1
 }
 
 # Generate branch/location information for Git repositories.
 __git_tag () {
-	local tag=
-    if [[ $(type -t git) ]] && [[ $(type -t __git_ps1) ]]; then
+    if hash git 2> /dev/null && hash __git_ps1 2> /dev/null; then
         # Generate Git output using standard completion function.
-        tag=$(__git_ps1 '%s')
-    elif [[ $(type -t git) ]] && git status --porcelain &> /dev/null; then
-        tag=?
-	fi
-
-	if [[ $tag ]]; then
-		printf "${1:- (%s)}" $tag
+        printf "${1:- (%s)}" $(__git_ps1 '%s')
 	fi
 }
 
 # Encase non-printing characters.
 c()
 {
-    echo '\['$1'\]'
+    printf '\[%s\]' $1
 }
 
 export PROMPT_COMMAND="__prompt_command"
@@ -75,15 +70,20 @@ __prompt_command() {
     local ps1_inner="$(c $user_color)$user@$host$(c $base01):$(c $blue)\W$(c $reset)"
 
     # If "better PS1" is asked for, augment this with (coloured) Git information.
-    if [[ $BETTER_PS1 == true ]]; then
-        local dirty_flag='*'
-        local stash_flag='+'
-        local added_flag='?'
+    if [[ $GIT_PS1 || $GIT_PS1_BETTER ]]; then
+        local tag+='$(__git_tag " '$(c $PS1_BRANCH_COLOUR)'%s")'
+        ps1_inner+="$tag"
+        if [[ $tag && $GIT_PS1_BETTER ]]; then
+            # Only get the status once.
+            local status=$(git status --porcelain 2> /dev/null)
+            local dirty_flag=*
+            local stash_flag=+
+            local added_flag=?
 
-        ps1_inner+='$(__git_tag " '$(c $PS1_BRANCH_COLOUR)'%s")'
-        ps1_inner+='$(__git_stash_flag "'$(c $PS1_BRANCH_COLOUR)$stash_flag'")'
-        ps1_inner+='$(__git_dirty "'$(c $PS1_DIRTY_COLOUR)$dirty_flag'")'
-        ps1_inner+='$(__git_added_flag "'$(c $PS1_NEW_COLOUR)$added_flag'")'$(c $reset)
+            ps1_inner+='$(__git_stash_flag "'$(c $PS1_BRANCH_COLOUR)$stash_flag'")'
+            ps1_inner+='$(__git_dirty "'$(c $PS1_DIRTY_COLOUR)$dirty_flag'" "'$status'")'
+            ps1_inner+='$(__git_added_flag "'$(c $PS1_NEW_COLOUR)$added_flag'" "'$status'")'$(c $reset)
+        fi
     fi
 
     # What prompt symbol shall we use?
