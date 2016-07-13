@@ -27,3 +27,5 @@ FontHeight=11
 Scrollbar=none
 Locale=en_GB
 ConfirmExit=no
+BoldAsFont=no
+BoldAsColour=yes
