@@ -19,10 +19,10 @@ __abbreviate() {
     fi
 }
 
-# Generate dirty status flag for Git.
 __git_dirty () {
-    local status=${2:-$(git status --porcelain 2> /dev/null)}
-    <<< $status grep -q '^\s*[ACDMRU]' && echo -n $1
+    (git diff --no-ext-diff --quiet --exit-code || \
+     git diff --no-ext-diff --quiet --exit-code --cached) 2> /dev/null && \
+        echo -n $1
 }
 
 __git_stash_flag () {
@@ -30,8 +30,12 @@ __git_stash_flag () {
 }
 
 __git_added_flag () {
-    local status=${2:-$(git status --porcelain 2> /dev/null)}
-    <<< $status grep -q '^\s*??' && echo -n $1
+    git ls-files \
+        --others \
+        --exclude-standard \
+        --error-unmatch \
+        -- '*' > /dev/null 2> /dev/null && \
+        echo -n "$1"
 }
 
 # Encase non-printing characters.
@@ -64,15 +68,13 @@ __prompt_command() {
        [[ $GIT_PS1 || $GIT_PS1_BETTER ]]; then
         ps1_inner+='$(__git_ps1 " '$(c $PS1_BRANCH_COLOUR)'%s")'
         if [[ $GIT_PS1_BETTER ]]; then
-            # Only get the status once.
-            local status=$(git status --porcelain 2> /dev/null)
             local dirty_flag=*
             local stash_flag=+
             local added_flag=?
 
             ps1_inner+='$(__git_stash_flag "'$(c $PS1_BRANCH_COLOUR)$stash_flag'")'
-            ps1_inner+='$(__git_dirty "'$(c $PS1_DIRTY_COLOUR)$dirty_flag'" "'$status'")'
-            ps1_inner+='$(__git_added_flag "'$(c $PS1_NEW_COLOUR)$added_flag'" "'$status'")'$(c $reset)
+            ps1_inner+='$(__git_dirty "'$(c $PS1_DIRTY_COLOUR)$dirty_flag'")'
+            ps1_inner+='$(__git_added_flag "'$(c $PS1_NEW_COLOUR)$added_flag'")'$(c $reset)
         fi
     fi
 
