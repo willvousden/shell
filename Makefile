@@ -13,6 +13,7 @@ DOTFILES = bashrc \
 		   tmux.conf \
 		   tmux.conf.d \
 		   screenrc \
+		   minttyrc \
 		   dircolors.d \
 		   gdbinit \
 		   gdbinit.d \
