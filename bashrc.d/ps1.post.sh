@@ -4,7 +4,8 @@ PS1_BRANCH_COLOUR=$yellow # Git branch name.
 PS1_TIME_COLOUR=$base01 # The date/time pair.
 PS1_DIR_COLOUR=$blue # The current directory.
 PS1_DIRTY_COLOUR=$red # The "dirty" indicator for Git repos.
-PS1_NEW_COLOUR=$violet # The "new files" indicator for Git repos.
+PS1_CACHE_COLOUR=$green # The "dirty" indicator for Git repos.
+PS1_ADDED_COLOUR=$violet # The "new files" indicator for Git repos.
 PS1_SYMBOL_COLOUR=$base01 # The prompt symbol colour.
 PS1_ERROR_COLOUR=$red # The prompt symbol colour (when the previous command failed).
 
@@ -19,23 +20,39 @@ __abbreviate() {
     fi
 }
 
-__git_dirty () {
-    (git diff --no-ext-diff --quiet --exit-code || \
-     git diff --no-ext-diff --quiet --exit-code --cached) 2> /dev/null && \
-        echo -n $1
+__git_dirty() {
+    ! git diff \
+        --no-ext-diff \
+        --quiet \
+        --exit-code \
+        2> /dev/null
 }
 
-__git_stash_flag () {
-    [[ $(git stash list 2> /dev/null) ]] && echo -n $1
+__git_cache()
+{
+    ! git diff \
+        --no-ext-diff \
+        --quiet \
+        --exit-code \
+        --cached \
+        2> /dev/null
 }
 
-__git_added_flag () {
+__git_stash() {
+    git rev-parse \
+        --verify \
+        --quiet \
+        refs/stash \
+        > /dev/null
+}
+
+__git_added() {
     git ls-files \
         --others \
         --exclude-standard \
         --error-unmatch \
-        -- '*' > /dev/null 2> /dev/null && \
-        echo -n "$1"
+        -- '*' \
+        > /dev/null 2> /dev/null
 }
 
 # Encase non-printing characters.
@@ -58,23 +75,37 @@ __prompt_command() {
     fi
 
     # Set a standard PS1 contents: user@host:dir (with colours).
-    local user=$(__abbreviate $USER 1)
-    local host=$(__abbreviate $(hostname -s) 1)
+    local user="$(__abbreviate $USER 1)"
+    local host="$(__abbreviate $(hostname -s) 1)"
     local ps1_inner="$(c $user_color)$user@$host$(c $base01):$(c $blue)\W$(c $reset)"
 
     # If "better PS1" is asked for, augment this with (coloured) Git information.
     if hash git 2> /dev/null && \
        hash __git_ps1 2> /dev/null && \
        [[ $GIT_PS1 || $GIT_PS1_BETTER ]]; then
-        ps1_inner+='$(__git_ps1 " '$(c $PS1_BRANCH_COLOUR)'%s")'
-        if [[ $GIT_PS1_BETTER ]]; then
-            local dirty_flag=*
-            local stash_flag=+
-            local added_flag=?
+        local git_dir
+        git_dir="$(git rev-parse --git-dir 2> /dev/null)"
+        if [[ $? == 0 ]]; then
+            ps1_inner+="$(c $PS1_BRANCH_COLOUR; __git_ps1 ' %s')"
+            if [[ $GIT_PS1_BETTER ]]; then
+                local dirty_flag=*
+                local stash_flag=+
+                local added_flag=?
 
-            ps1_inner+='$(__git_stash_flag "'$(c $PS1_BRANCH_COLOUR)$stash_flag'")'
-            ps1_inner+='$(__git_dirty "'$(c $PS1_DIRTY_COLOUR)$dirty_flag'")'
-            ps1_inner+='$(__git_added_flag "'$(c $PS1_NEW_COLOUR)$added_flag'")'$(c $reset)
+                if __git_stash; then
+                    ps1_inner+="$stash_flag"
+                fi
+                if __git_dirty; then
+                    ps1_inner+="$(c $PS1_DIRTY_COLOUR)$dirty_flag"
+                fi
+                if __git_cache; then
+                    ps1_inner+="$(c $PS1_CACHE_COLOUR)$dirty_flag"
+                fi
+                if __git_added; then
+                    ps1_inner+="$(c $PS1_ADDED_COLOUR)$added_flag"
+                fi
+                ps1_inner+="$(c $reset)"
+            fi
         fi
     fi
 
