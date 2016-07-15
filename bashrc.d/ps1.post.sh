@@ -87,7 +87,7 @@ __prompt_command() {
         git_dir="$(git rev-parse --git-dir 2> /dev/null)"
         if [[ $? == 0 ]]; then
             ps1_inner+="$(c $PS1_BRANCH_COLOUR; __git_ps1 ' %s')"
-            if [[ $GIT_PS1_BETTER ]]; then
+            if [[ $(git rev-parse --is-bare-repository) != true && $GIT_PS1_BETTER ]]; then
                 local dirty_flag=*
                 local stash_flag=+
                 local added_flag=?
