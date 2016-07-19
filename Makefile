@@ -41,7 +41,7 @@ install_dotfiles: $(DOTFILES) install_ssh
 	done
 	
 	cp `pwd`/gitconfig ${HOME}/.gitconfig
-	./gitconfig.sh
+	bash ./gitconfig.sh
 
 install_ssh:
 	[ -d ${HOME}/.ssh/cm_socket ] || mkdir -p ${HOME}/.ssh/cm_socket
