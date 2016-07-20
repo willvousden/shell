@@ -51,7 +51,7 @@ __git_added() {
         --others \
         --exclude-standard \
         --error-unmatch \
-        -- '*' \
+        -- "$(git rev-parse --show-toplevel)" \
         > /dev/null 2> /dev/null
 }
 
