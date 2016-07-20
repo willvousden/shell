@@ -45,7 +45,10 @@ install_dotfiles: $(DOTFILES) install_ssh
 	bash ./gitconfig.sh
 
 install_ssh:
+	[ -d ${HOME}/.ssh ] || mkdir ${HOME}/.ssh
 	[ -d ${HOME}/.ssh/cm_socket ] || mkdir -p ${HOME}/.ssh/cm_socket
 	cp `pwd`/ssh/authorized_keys ${HOME}/.ssh/authorized_keys
-	@ln -snfv `pwd`/ssh/config ${HOME}/.ssh/config
-	chmod -R 600 ${HOME}/.ssh/config
+	# @ln -snfv `pwd`/ssh/config ${HOME}/.ssh/config
+	cp `pwd`/ssh/config ${HOME}/.ssh/config
+	[ ! -f ${HOME}/.ssh/config.local ] || cat ${HOME}/.ssh/config.local >> ${HOME}/.ssh/config
+	chmod -R og-rxw ${HOME}/.ssh
