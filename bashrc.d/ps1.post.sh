@@ -12,11 +12,11 @@ PS1_ERROR_COLOUR=$red # The prompt symbol colour (when the previous command fail
 __abbreviate() {
     length=${2:-6}
     if [[ $length == 1 ]]; then
-        echo ${1:0:1}
+        echo "${1:0:1}"
     elif [[ ${#1} -gt $length ]]; then
-        echo ${1:0:$(($length-2))}..
+        echo "${1:0:$(($length-2))}.."
     else
-        echo $1
+        echo "$1"
     fi
 }
 
@@ -58,7 +58,7 @@ __git_added() {
 # Encase non-printing characters.
 c()
 {
-    printf '\[%s\]' $1
+    printf '\[%s\]' "$1"
 }
 
 export PROMPT_COMMAND="__prompt_command"
@@ -75,8 +75,8 @@ __prompt_command() {
     fi
 
     # Set a standard PS1 contents: user@host:dir (with colours).
-    local user="$(__abbreviate $USER 1)"
-    local host="$(__abbreviate $(hostname -s) 1)"
+    local user="$(__abbreviate "$USER" 1)"
+    local host="$(__abbreviate "$(hostname -s)" 1)"
     local ps1_inner="$(c $user_color)$user@$host$(c $base01):$(c $blue)\W$(c $reset)"
 
     # If "better PS1" is asked for, augment this with (coloured) Git information.
