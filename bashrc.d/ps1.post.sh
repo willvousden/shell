@@ -86,7 +86,15 @@ __prompt_command() {
         local git_dir
         git_dir="$(git rev-parse --git-dir 2> /dev/null)"
         if [[ $? == 0 ]]; then
+            # Run __git_ps1.  Unfortunately, this doesn't work with the "nounset" shell option, so
+            # disable it temporarily.
+            local nounset="$(set -o | grep nounset)"
+            set +u
             ps1_inner+="$(c $PS1_BRANCH_COLOUR; __git_ps1 ' %s')"
+            if [[ $nounset == *on ]]; then
+                set -u
+            fi
+
             if [[ $(git rev-parse --is-bare-repository) != true && $GIT_PS1_BETTER ]]; then
                 local dirty_flag=*
                 local stash_flag=+
