@@ -75,6 +75,7 @@ if hash pbcopy 2> /dev/null; then
     alias pbcopy='xargs echo -n | pbcopy'
 fi
 
+alias sortu='sort | uniq -c | sort -n'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
