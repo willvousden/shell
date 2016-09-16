@@ -70,12 +70,21 @@ pathadd() {
     fi
 }
 
+# Make ordered list of item frequencies.
+sortu() {
+    local input=${1:-}
+    if [[ $input ]]; then
+        sort -- "$input" | uniq -c | sort -nr
+    else
+        sort | uniq -c | sort -nr
+    fi
+}
+
 if hash pbcopy 2> /dev/null; then
     # Remove trailing new line before piping to pbcopy.
     alias pbcopy='xargs echo -n | pbcopy'
 fi
 
-alias sortu='sort | uniq -c | sort -n'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
