@@ -5,7 +5,7 @@ if [[ $1 == -t ]]; then
 elif [[ $1 == -c ]]; then
     options=-s,
 elif [[ $1 == -p ]]; then
-    option="-s'|'"
+    options="-s'|'"
 fi
 
 c="column \"$options\" -t $2"
