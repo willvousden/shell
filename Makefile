@@ -1,6 +1,6 @@
 default: install
 
-.PHONY: default install install_dotfiles install_ssh
+.PHONY: default install install_dotfiles install_ssh matplotlib
 
 DOTFILES = bashrc \
 		   bashrc.d \
@@ -38,11 +38,12 @@ install_dotfiles: $(DOTFILES) install_ssh
 	
 	@for i in $(CONFIGFILES); do \
 		mkdir -p $(CONFIGPREFIX)$$(dirname $$i); \
-		ln -snfv `pwd`/$$i $(CONFIGPREFIX)$$i; \
+		cp `pwd`/$$i $(CONFIGPREFIX)$$i; \
 	done
 	
 	cp `pwd`/gitconfig ${HOME}/.gitconfig
 	bash ./gitconfig.sh
+	bash ./matplotlib.sh >> $(CONFIGPREFIX)matplotlib/matplotlibrc
 
 install_ssh:
 	[ -d ${HOME}/.ssh ] || mkdir ${HOME}/.ssh
