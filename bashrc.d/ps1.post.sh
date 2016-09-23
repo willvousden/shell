@@ -95,7 +95,12 @@ __prompt_command() {
                 set -u
             fi
 
-            if [[ $(git rev-parse --is-bare-repository) != true && $GIT_PS1_BETTER ]]; then
+            local better=${GIT_PS1_BETTER:-}
+            if [[ $(git config ps1.simple 2> /dev/null) ]]; then
+                # Should we disable fancy stuff for this repository?
+                better=
+            fi
+            if [[ $(git rev-parse --is-bare-repository) != true && $better ]]; then
                 local dirty_flag=*
                 local stash_flag=+
                 local added_flag=?
