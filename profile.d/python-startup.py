@@ -14,16 +14,21 @@ try:
         import matplotlib.pyplot as pp
 
         # Try to activate TkAgg backend, but roll back on failure.
+        targets = ('Qt4Agg', 'TkAgg')
         default = mpl.get_backend()
-        target = 'Qt4Agg'
-        try:
-            pp.switch_backend(target)
-            f = pp.figure()
-            del f
-        except:
-            pp.switch_backend(default)
-        finally:
-            del target, default
+        for t in targets:
+            try:
+                pp.switch_backend(t)
+                f = pp.figure()
+                del f
+                break
+            except:
+                pp.switch_backend(default)
+            finally:
+                del t
+        else:
+            print('Couldn\'t set interactive backend for Matplotlib.')
+        del default
     except ImportError:
         pass
 except ImportError:
