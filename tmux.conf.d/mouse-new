@@ -1,3 +1,4 @@
+# vim: set ft=tmux:
 set -g mouse on
 
 # The "=" refers to the pane in which the most recent mouse event occurred; keys are sent without
@@ -5,27 +6,36 @@ set -g mouse on
 
 # * If there's an intelligent program that can handle the scrolling, send it straight through
 #   (without repetition; let the program handle that).
-# * Otherwise, if we're in copy mode OR not in an an alt screen, enter copy mode and then send the
-#   keys.
+# * Otherwise, if we're in copy mode OR not in an an alt screen, then:
+#   - If "less" is running in this pane, send simple arrow characters to it;
+#   - otherwise, enter copy mode and then send the received keys.
 # * Finally, send simple arrow characters to the alt screen.
 bind -n WheelUpPane if -Ft= "#{mouse_any_flag}" \
     "send-keys -Mt=" \
     "if -Ft= '#{?pane_in_mode,1,#{?alternate_on,0,1}}' \
-        'copy-mode -et=; send-keys -Mt=; send-keys -Mt=; send-keys -Mt=' \
-        'send-keys -t= Up Up Up'"
+        'if -t= \"search-child #{pane_pid} less\" \
+            \"send-keys -t= Up Up Up\" \
+            \"copy-mode -et=; send-keys -Mt=; send-keys -Mt=; send-keys -Mt=\"' \
+        'send-keys -t= Up Up Up'" \
 
 # Same logic as above, but don't enter copy mode.
 bind -n WheelDownPane if -Ft= "#{mouse_any_flag}" \
     "send-keys -Mt=" \
     "if -Ft= '#{?pane_in_mode,1,#{?alternate_on,0,1}}' \
-        'send-keys -Mt=; send-keys -Mt=; send-keys -Mt=' \
-        'send-keys -t= Down Down Down'"
+        'if -t= \"search-child #{pane_pid} less\" \
+            \"send-keys -t= Down Down Down\" \
+            \"send-keys -Mt=; send-keys -Mt=; send-keys -Mt=\"' \
+        'send-keys -t= Down Down Down'" \
 
-# Send page-up through when in alternate screen mode.  Otherwise, enter copy mode and then re-send
-# so that it causes scroll-back.  Make sure that we exit copy mode when we reach the bottom (using
-# -e flag).
-bind -n PPage if -F "#{alternate_on}" "send-keys PPage" "copy-mode -e; send-keys PPage"
-bind -n NPage if -F "#{alternate_on}" "send-keys NPage" "copy-mode -e; send-keys NPage"
+# Send page-up through when in alternate screen mode (or in less, as defined in the above bindings).
+# Otherwise, enter copy mode and then re-send so that it causes scroll-back.  Make sure that we exit
+# copy mode when we reach the bottom (using -e flag).
+bind -n PPage if -F "#{alternate_on}" \
+    "send-keys PPage" \
+    "if '! search-child #{pane_pid} less' 'copy-mode -e'; send-keys PPage"
+bind -n NPage if -F "#{alternate_on}" \
+    "send-keys NPage" \
+    "if '! search-child #{pane_pid} less' 'copy-mode -e'; send-keys NPage"
 
 # In copy mode, scroll as normal.
 bind -t vi-copy PPage page-up
