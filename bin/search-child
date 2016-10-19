@@ -7,7 +7,7 @@ function _search()
     fi
 
     # Get child processes.
-    while read pid name; do
+    while read -r pid name; do
         if [[ -z $pid ]]; then
             continue
         fi
@@ -19,7 +19,7 @@ function _search()
         if _search "$pid" "$2"; then
             return 0
         fi
-    done <<<$(pgrep -lP "$1")
+    done <<< "$(pgrep -lP "$1")"
 
     return 1
 }
