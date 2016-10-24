@@ -1,2 +1,2 @@
-profile.d/*.local.sh
+bash_profile.d/*.local.sh
 bashrc.d/*.local.sh

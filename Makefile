@@ -5,8 +5,8 @@ default: install
 DOTFILES = bashrc \
 		   bashrc.d \
 		   bash_logout \
-		   profile \
-		   profile.d \
+		   bash_profile \
+		   bash_profile.d \
 		   inputrc \
 		   latexmkrc \
 		   gitignore \

@@ -1,6 +1,8 @@
-BASHRC_SOURCED=true
+# vim: set ft=sh:
+
+# If bash_profile isn't yet sourced, that has to be done first.
 if [[ -z $PROFILE_SOURCED ]]; then
-    . ~/.profile
+    . ~/.bash_profile
 fi
 
 BSD_STYLE=true
