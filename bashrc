@@ -21,6 +21,18 @@ elif [[ $COLORTERM = "rxvt-xpm" ]]; then
     export TERM=rxvt-256color
 fi
 
+if [[ $TERM != 'dumb' ]]; then
+    if [[ $BSD_STYLE ]]; then
+        export LS_OPTIONS='-G'
+    else
+        export LS_OPTIONS='--color=auto'
+    fi
+
+    if hash dircolors 2> /dev/null && [[ -r $HOME/.dir_colors ]]; then
+        eval $(dircolors -b $HOME/.dir_colors)
+    fi
+fi
+
 # First execute "one-off" local (untracked) scripts.  These are ignored by Git.
 if [[ -d $HOME/.bashrc.d.local ]]; then
     for file in $HOME/.bashrc.d.local/*; do
@@ -39,68 +51,6 @@ if [[ -d $HOME/.bashrc.d ]]; then
         fi
     done
 fi
-
-if [[ $TERM != 'dumb' ]]; then
-    if [[ $BSD_STYLE ]]; then
-        export LS_OPTIONS='-G'
-    else
-        export LS_OPTIONS='--color=auto'
-    fi
-
-    if hash dircolors 2> /dev/null && [[ -r $HOME/.dir_colors ]]; then
-        eval $(dircolors -b $HOME/.dir_colors)
-    fi
-fi
-
-# An alias to "restart" the shell as a login shell.
-alias bash_new='exec env - HOME=$HOME TERM=$TERM bash -l'
-
-alias ls="ls $LS_OPTIONS -h"
-alias ll="ls $LS_OPTIONS -lhF"
-alias la="ls $LS_OPTIONS -Ah"
-alias ..='cd ..'
-
-# Echo path list on separate lines.
-echp() {
-    echo $1 | tr : '\n'
-}
-
-# Helpful alias for adding new paths.
-pathadd() {
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        export PATH="${PATH:+"$PATH:"}$1"
-    fi
-}
-
-# Make ordered list of item frequencies.
-sortu() {
-    local input=${1:-}
-    if [[ $input ]]; then
-        sort -- "$input" | uniq -c | sort -nr
-    else
-        sort | uniq -c | sort -nr
-    fi
-}
-
-if hash pbcopy 2> /dev/null; then
-    # Remove trailing new line before piping to pbcopy.
-    alias pbcopy='xargs echo -n | pbcopy'
-fi
-
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias pf='ps aux | grep -v grep | grep'
-alias du='du -sh'
-alias lc='wc -l'
-if hash xdg-open 2> /dev/null; then
-    alias open=xdg-open
-fi
-if hash htop 2> /dev/null; then
-    alias htop="htop -u $USER"
-fi
-
-alias pip-upgrade='pip install --upgrade $(pip list -o | grep -oP "^\S+")'
 
 # Colours for man pages (via less).
 export LESS_TERMCAP_mb=$'\E[01;31m'       # Begin blinking
