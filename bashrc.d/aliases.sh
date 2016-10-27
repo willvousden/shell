@@ -1,5 +1,5 @@
 # An alias to "restart" the shell as a login shell.
-alias bash_new='exec env - HOME=$HOME TERM=$TERM bash -l'
+alias bash_new='exec env - HOME="$HOME" TERM="$TERM" DISPLAY="$DISPLAY" bash -l'
 
 alias ls="ls $LS_OPTIONS -h"
 alias ll="ls $LS_OPTIONS -lhF"
@@ -60,7 +60,7 @@ ag() {
         --color-line-number 33 \
         --group \
         $color \
-        "$@" | less -RS
+        "$@" | less -FRS
 }
 
 alias pip-upgrade='pip install --upgrade $(pip list -o | grep -oP "^\S+")'
