@@ -1,2 +1,3 @@
 set completion-ignore-case off
 set show-all-if-ambiguous on
+set mark-symlinked-directories on
