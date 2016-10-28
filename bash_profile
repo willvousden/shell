@@ -1,5 +1,11 @@
 # vim: set ft=sh:
 
+# Don't run any of this if we're starting a desktop environment (and non-interactive and login
+# shell)
+if [[ $- != *i* ]] && shopt -q login_shell && [[ $DESKTOP_SESSION ]]; then
+    return
+fi
+
 # This should only be sourced once.
 if [[ $PROFILE_SOURCED ]]; then
     # But still we need to ensure that .bashrc is sourced.
