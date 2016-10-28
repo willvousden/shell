@@ -42,4 +42,3 @@ if [[ -z $BASHRC_SOURCED ]]; then
 fi
 
 export TZ=Europe/London
-export LD_LIBRARY_PATH=foo
