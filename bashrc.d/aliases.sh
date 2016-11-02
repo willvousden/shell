@@ -1,5 +1,7 @@
 # An alias to "restart" the shell as a login shell.
-alias bash_new='exec env - HOME="$HOME" TERM="$TERM" DISPLAY="$DISPLAY" bash -l'
+bash_new() {
+    exec env - HOME="$HOME" TERM="$TERM" DISPLAY="$DISPLAY" TMUX="$TMUX" TMUX_PANE="$TMUX_PANE" bash -l
+}
 
 alias ls="ls $LS_OPTIONS -h"
 alias ll="ls $LS_OPTIONS -lhF"
