@@ -8,3 +8,5 @@
 .lvimrc
 *.egg-info
 .ipynb_checkpoints
+*.pax
+*.pax.i
