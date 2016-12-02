@@ -15,7 +15,9 @@ GIT_PS1_BETTER=${GIT_PS1_BETTER-true}
 LIVE_TERM_TITLE=${LIVE_TERM_TITLE-true}
 
 # Set term type.
-if [[ $COLORTERM = "gnome-terminal" ]] || [[ $COLORTERM = "xfce4-terminal" ]]; then
+if [[ $COLORTERM = "gnome-terminal" ]] || \
+   [[ $COLORTERM = "xfce4-terminal" ]] || \
+   [[ $COLORTERM = "mate-terminal" ]]; then
     export TERM=xterm-256color
 elif [[ $COLORTERM = "rxvt-xpm" ]]; then
     export TERM=rxvt-256color
