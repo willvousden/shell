@@ -30,10 +30,10 @@ export PATH="$HOME/.bin:$HOME/.bin.local:$PATH"
 
 # Make a list of files from ~/.bashrc.d{,.local}
 files=$(find -H ~/.bash_profile.d{,.local} -mindepth 1 -type f 2> /dev/null)
-lines=$(paste <(<<<"$files" xargs -n1 basename) - <<<"$files" | sort -k1,1)
-while read name path; do
-    [[ ! -f $path ]] || . $path
-done <<<"$lines"
+files=$(paste <(<<<"$files" xargs -n1 basename) - <<<"$files" | sort -k1,1 | cut -f2)
+while read file; do
+    [[ ! -f $file ]] || . $file
+done <<<"$files"
 
 # If we haven't already sourced .bashrc, source it.
 if [[ -z $BASHRC_SOURCED ]]; then

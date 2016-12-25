@@ -28,10 +28,10 @@ fi
 
 # Make a list of files from ~/.bashrc.d{,.local}
 files=$(find -H ~/.bashrc.d{,.local} -mindepth 1 -type f 2> /dev/null)
-lines=$(paste <(<<<"$files" xargs -n1 basename) - <<<"$files" | sort -k1,1)
-while read name path; do
-    [[ ! -f $path ]] || . $path
-done <<<"$lines"
+files=$(paste <(<<<"$files" xargs -n1 basename) - <<<"$files" | sort -k1,1 | cut -f 2)
+while read file; do
+    [[ ! -f $file ]] || . $file
+done <<<"$files"
 
 if [[ -f /etc/bash_completion ]]; then
     . /etc/bash_completion 2> /dev/null
