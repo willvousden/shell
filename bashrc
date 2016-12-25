@@ -14,15 +14,6 @@ GIT_PS1=${GIT_PS1-true}
 GIT_PS1_BETTER=${GIT_PS1_BETTER-true}
 LIVE_TERM_TITLE=${LIVE_TERM_TITLE-true}
 
-# Set term type.
-if [[ $COLORTERM = "gnome-terminal" ]] || \
-   [[ $COLORTERM = "xfce4-terminal" ]] || \
-   [[ $COLORTERM = "mate-terminal" ]]; then
-    export TERM=xterm-256color
-elif [[ $COLORTERM = "rxvt-xpm" ]]; then
-    export TERM=rxvt-256color
-fi
-
 if [[ $TERM != 'dumb' ]]; then
     if [[ $BSD_STYLE ]]; then
         export LS_OPTIONS='-G'
@@ -35,51 +26,12 @@ if [[ $TERM != 'dumb' ]]; then
     fi
 fi
 
-# First execute "one-off" local (untracked) scripts.  These are ignored by Git.
-if [[ -d $HOME/.bashrc.d.local ]]; then
-    for file in $HOME/.bashrc.d.local/*; do
-        if [[ ! $file =~ \.post(\.sh)?$ ]]; then
-            [[ ! -f $file ]] || . $file
-        fi
-    done
-fi
-
-# Now execute global (tracked) scripts.
-if [[ -d $HOME/.bashrc.d ]]; then
-    # N.B. Any file in .bashrc.d matching *.local.sh is also ignored by Git.
-    for file in $HOME/.bashrc.d/*; do
-        if [[ ! $file =~ \.post(\.sh)?$ ]]; then
-            [[ ! -f $file ]] || . $file
-        fi
-    done
-fi
-
-# Colours for man pages (via less).
-export LESS_TERMCAP_mb=$'\E[01;31m'       # Begin blinking
-export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # Begin bold (headings)
-export LESS_TERMCAP_me=$'\E[0m'           # End mode
-export LESS_TERMCAP_so=$'\E[0;34;107m'    # Begin standout-mode (search results)
-export LESS_TERMCAP_se=$'\E[0m'           # End standout-mode
-export LESS_TERMCAP_us=$'\E[04;38;5;146m' # Begin underline
-export LESS_TERMCAP_ue=$'\E[0m'           # End underline
-
-# Now execute post-bashrc scripts.
-if [[ -d $HOME/.bashrc.d ]]; then
-    for file in $HOME/.bashrc.d/*; do
-        if [[ $file =~ \.post(\.sh)?$ ]]; then
-            [[ ! -f $file ]] || . $file
-        fi
-    done
-fi
-
-# ...and untracked ones.
-if [[ -d $HOME/.bashrc.d.local ]]; then
-    for file in $HOME/.bashrc.d.local/*; do
-        if [[ $file =~ \.post(\.sh)?$ ]]; then
-            [[ ! -f $file ]] || . $file
-        fi
-    done
-fi
+# Make a list of files from ~/.bashrc.d{,.local}
+files=$(find -H ~/.bashrc.d{,.local} -mindepth 1 -type f 2> /dev/null)
+lines=$(paste <(<<<"$files" xargs -n1 basename) - <<<"$files" | sort -k1,1)
+while read name path; do
+    [[ ! -f $path ]] || . $path
+done <<<"$lines"
 
 if [[ -f /etc/bash_completion ]]; then
     . /etc/bash_completion 2> /dev/null
