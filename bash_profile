@@ -24,23 +24,16 @@ if [[ $PROFILING == true ]]; then
     set -x
 fi
 
-export PYTHONSTARTUP=$HOME/.bash_profile.d/python-startup.py
+export PYTHONSTARTUP=$HOME/.python-startup.py
 export EDITOR="/usr/bin/env vim"
 export PATH="$HOME/.bin:$HOME/.bin.local:$PATH"
 
-# Source local profile scripts.
-if [[ -d $HOME/.bash_profile.d.local ]]; then
-    for file in $HOME/.bash_profile.d.local/*.sh; do
-        [[ ! -f $file ]] || . $file
-    done
-fi
-
-# Source additional profile scripts.
-if [[ -d $HOME/.bash_profile.d ]]; then
-    for file in $HOME/.bash_profile.d/*.sh; do
-        [[ ! -f $file ]] || . $file
-    done
-fi
+# Make a list of files from ~/.bashrc.d{,.local}
+files=$(find -H ~/.bash_profile.d{,.local} -mindepth 1 -type f 2> /dev/null)
+files=$(paste <(<<<"$files" xargs -n1 basename) - <<<"$files" | sort -k1,1 | cut -f2)
+while read file; do
+    [[ ! -f $file ]] || . $file
+done <<<"$files"
 
 # If we haven't already sourced .bashrc, source it.
 if [[ -z $BASHRC_SOURCED ]]; then

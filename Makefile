@@ -7,6 +7,7 @@ DOTFILES = bashrc \
 		   bash_logout \
 		   bash_profile \
 		   bash_profile.d \
+		   python-startup.py \
 		   inputrc \
 		   latexmkrc \
 		   gitignore \
