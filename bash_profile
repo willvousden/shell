@@ -29,7 +29,7 @@ export EDITOR="/usr/bin/env vim"
 export PATH="$HOME/.bin:$HOME/.bin.local:$PATH"
 
 # Make a list of files from ~/.bashrc.d{,.local}
-files=$(find -H ~/.bash_profile.d{,.local} -mindepth 1 -type f 2> /dev/null)
+files=$(find -H ~/.bash_profile.d{,.local} -mindepth 1 -type f -o -type l 2> /dev/null)
 files=$(paste <(<<<"$files" xargs -n1 basename) - <<<"$files" | sort -k1,1 | cut -f2)
 while read file; do
     [[ ! -f $file ]] || . $file

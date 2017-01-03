@@ -10,7 +10,7 @@ GIT_PS1_BETTER=${GIT_PS1_BETTER-true}
 LIVE_TERM_TITLE=${LIVE_TERM_TITLE-true}
 
 # Make a list of files from ~/.bashrc.d{,.local}, sorting them by basename.
-files=$(find -H ~/.bashrc.d{,.local} -mindepth 1 -type f 2> /dev/null)
+files=$(find -H ~/.bashrc.d{,.local} -mindepth 1 -type f -o -type l 2> /dev/null)
 files=$(paste <(<<<"$files" xargs -n1 basename) - <<<"$files" | sort -k1,1 | cut -f 2)
 while read file; do
     [[ ! -f $file ]] || . $file
