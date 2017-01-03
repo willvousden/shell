@@ -5,7 +5,7 @@ lines.linewidth   : 1.0     # line width in points
 #lines.linestyle   : -       # solid line
 lines.color       : 0.35
 #lines.marker      : None    # the default marker
-#lines.markeredgewidth  : 0.5     # the line width around the marker symbol
+lines.markeredgewidth  : 0.5     # the line width around the marker symbol
 lines.markersize  : 5            # markersize, in points
 #lines.dash_joinstyle : miter        # miter|round|bevel
 #lines.dash_capstyle : butt          # butt|round|projecting
@@ -235,7 +235,7 @@ figure.edgecolor : 0.50   # figure edgecolor
 #figure.subplot.bottom  : 0.1    # the bottom of the subplots of the figure
 #figure.subplot.top     : 0.9    # the top of the subplots of the figure
 #figure.subplot.wspace  : 0.2    # the amount of width reserved for blank space between subplots
-figure.subplot.hspace  : 0.5    # the amount of height reserved for white space between subplots
+#figure.subplot.hspace  : 0.5    # the amount of height reserved for white space between subplots
 
 ### IMAGES
 #image.aspect : equal             # equal | auto | a number

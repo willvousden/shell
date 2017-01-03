@@ -19,7 +19,7 @@ DOTFILES = bashrc \
 		   gdbinit.d \
 		   bin
 DIRCOLORS = solarized.ansi-dark
-CONFIGFILES = matplotlib/matplotlibrc
+CONFIGFILES = matplotlib/stylelib
 OS := $(shell uname)
 SHELL = /usr/bin/env bash
 ifeq ($(OS), Linux)
@@ -38,12 +38,13 @@ install_dotfiles: $(DOTFILES) install_ssh
 	
 	@for i in $(CONFIGFILES); do \
 		mkdir -p $(CONFIGPREFIX)$$(dirname $$i); \
-		cp `pwd`/$$i $(CONFIGPREFIX)$$i; \
+		cp -r `pwd`/$$i $(CONFIGPREFIX)$$i; \
 	done
 	
 	cp `pwd`/gitconfig ${HOME}/.gitconfig
 	bash ./gitconfig.sh
-	bash ./matplotlib.sh >> $(CONFIGPREFIX)matplotlib/matplotlibrc
+	mkdir $(CONFIGPREFIX)matplotlib/stylelib
+	bash ./matplotlib.sh >> $(CONFIGPREFIX)matplotlib/stylelib/phd.mplstyle
 
 install_ssh:
 	[ -d ${HOME}/.ssh ] || mkdir ${HOME}/.ssh
