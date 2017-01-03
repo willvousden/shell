@@ -88,6 +88,20 @@ ag() {
         "$@" | less -FRS
 }
 
+# A function to refresh an existing shell's environment variables from the hosting tmux session.
+tmux-env() {
+    local i
+    while read i; do
+        if [[ $i == -* ]]; then
+            unset ${i/#-/}
+        else
+            local n=${i%%=*}
+            local v=${i#*=}
+            eval "export $n=$(printf '%q\n' "$v")"
+        fi
+    done < <(tmux show-environment)
+}
+
 alias pip-upgrade='pip install --upgrade $(pip list -o | grep -oP "^\S+")'
 
 if [[ $TERM != 'dumb' ]] && type dircolors > /dev/null 2> /dev/null && [[ -r $HOME/.dir_colors ]]; then
