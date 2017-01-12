@@ -39,6 +39,7 @@ install_dotfiles: $(DOTFILES) install_ssh
 	cp `pwd`/gitconfig ${HOME}/.gitconfig
 	bash ./gitconfig.sh
 	[ -d $(CONFIGPREFIX)matplotlib/stylelib ] || mkdir $(CONFIGPREFIX)matplotlib/stylelib
+	cp ./matplotlib/stylelib/phd.mplstyle $(CONFIGPREFIX)matplotlib/stylelib/
 	bash ./matplotlib.sh >> $(CONFIGPREFIX)matplotlib/stylelib/phd.mplstyle
 
 install_ssh:
