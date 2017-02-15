@@ -17,7 +17,8 @@ else
     # Is there an existing ssh-agent with the specified PID?
     _existing=
     _ps_output=$(ps -p "$SSH_AGENT_PID" -o comm= -o user= 2>&1)
-    if [[ $? != 0 && $_ps_output ]]; then
+    _result=$?
+    if [[ $_result != 0 && $_ps_output ]]; then
         # Error, but got some output.  Assume that we're on Cygwin; can't use -o.  Do some
         # error-prone and hacky ps-parsing.
         _ps_output=$(ps -p "$SSH_AGENT_PID" | awk 'NR > 1 {print $6, $NF}')
@@ -28,7 +29,7 @@ else
             fi
         fi
     else
-        if [[ $? == 0 ]]; then
+        if [[ $_result == 0 ]]; then
             read -r _comm _user <<<"$_ps_output"
             if [[ $_user == $USER && $_comm == ssh-agent ]]; then
                 _existing=1
