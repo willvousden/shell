@@ -1,3 +1,5 @@
+set -o pipefail
+
 export SSH_AGENT_FILE=$HOME/.ssh-agent/$(hostname -s)
 export SSH_AGENT_CONTENT=
 [[ -d $HOME/.ssh-agent ]] || mkdir $HOME/.ssh-agent
@@ -13,18 +15,24 @@ else
     eval "$(<<<"$SSH_AGENT_CONTENT" grep -v echo)"
 
     # Is there an existing ssh-agent with the specified PID?
-    _existing=1
-    _ps_output=$(ps -p "$SSH_AGENT_PID" -o comm= -o user= 2>/dev/null)
-    if [[ $? == 0 ]]; then
-        read -r _comm _user <<<"$_ps_output"
-        if [[ $_comm != ssh-agent || $_user != $USER ]]; then
-            _existing=
+    _existing=
+    _ps_output=$(ps -p "$SSH_AGENT_PID" -o comm= -o user= 2>&1)
+    if [[ $? != 0 && $_ps_output ]]; then
+        # Error, but got some output.  Assume that we're on Cygwin; can't use -o.  Do some
+        # error-prone and hacky ps-parsing.
+        _ps_output=$(ps -p "$SSH_AGENT_PID" | awk 'NR > 1 {print $6, $NF}')
+        if [[ $? == 0 ]]; then
+            read -r _uid _comm <<<"$_ps_output"
+            if [[ $_uid == $UID && $(basename "$_comm") == ssh-agent ]]; then
+                _existing=1
+            fi
         fi
     else
-        # Assume that we're on Cygwin; can't use -o.
-        _ps_output=$(ps -s -p "$SSH_AGENT_PID" -u "$UID" | awk '{print $(NF)}')
-        if [[ -z $_ps_output || $(basename "$_ps_output") != ssh-agent ]]; then
-            _existing=
+        if [[ $? == 0 ]]; then
+            read -r _comm _user <<<"$_ps_output"
+            if [[ $_user == $USER && $_comm == ssh-agent ]]; then
+                _existing=1
+            fi
         fi
     fi
     if [[ -z $_existing ]]; then
