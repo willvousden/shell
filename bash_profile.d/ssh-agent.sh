@@ -13,8 +13,21 @@ else
     eval "$(<<<"$SSH_AGENT_CONTENT" grep -v echo)"
 
     # Is there an existing ssh-agent with the specified PID?
-    read _comm _user <<<"$(ps -p "$SSH_AGENT_PID" -o comm= -o user=)"
-    if [[ $_comm != ssh-agent || $_user != $USER ]]; then
+    _existing=1
+    _ps_output=$(ps -p "$SSH_AGENT_PID" -o comm= -o user= 2>/dev/null)
+    if [[ $? == 0 ]]; then
+        read -r _comm _user <<<"$_ps_output"
+        if [[ $_comm != ssh-agent || $_user != $USER ]]; then
+            _existing=
+        fi
+    else
+        # Assume that we're on Cygwin; can't use -o.
+        _ps_output=$(ps -s -p "$SSH_AGENT_PID" -u "$UID" | awk '{print $(NF)}')
+        if [[ -z $_ps_output || $(basename "$_ps_output") != ssh-agent ]]; then
+            _existing=
+        fi
+    fi
+    if [[ -z $_existing ]]; then
         # No, so create a new one.
         killall ssh-agent 2> /dev/null
         SSH_AGENT_CONTENT=$(ssh-agent)
