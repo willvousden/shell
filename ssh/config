@@ -43,3 +43,7 @@ Host styx
 Host cirrus
     HostName 139.59.165.183
     User will
+
+Host lethe
+    HostName 178.62.101.114
+    User will
