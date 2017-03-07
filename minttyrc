@@ -29,3 +29,4 @@ Locale=en_GB
 ConfirmExit=no
 BoldAsFont=no
 BoldAsColour=yes
+FontSmoothing=full
