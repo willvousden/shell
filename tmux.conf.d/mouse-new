@@ -39,5 +39,5 @@ bind -n NPage if -F "#{alternate_on}" \
     "if \"! $is_less\" 'copy-mode -e'; send NPage"
 
 # In copy mode, scroll as normal.
-bind -T copy-mode PPage send -X page-up
-bind -T copy-mode NPage send -X page-down
+bind -T copy-mode-vi PPage send -X page-up
+bind -T copy-mode-vi NPage send -X page-down
