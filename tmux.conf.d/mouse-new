@@ -10,7 +10,7 @@ set -g mouse on
 #   - If "less" is running in this pane, send simple arrow characters to it;
 #   - otherwise, enter copy mode and then send the received keys.
 # * Finally, send simple arrow characters to the alt screen.
-is_less="ps -o state= -o comm= -t \\\"#{pane_tty}\\\" | grep -iqE \\\"^[^TXZ ]+ less\\\$\\\""
+is_less="ps -o state= -o comm= -t \\\"#{pane_tty}\\\" | grep -iqE \\\"^[^TXZ ]+ +less\\\$\\\""
 bind -n WheelUpPane if -Ft= "#{mouse_any_flag}" \
     "send -Mt=" \
     "if -Ft= '#{?pane_in_mode,1,#{?alternate_on,0,1}}' \
@@ -33,10 +33,14 @@ bind -n WheelDownPane if -Ft= "#{mouse_any_flag}" \
 # copy mode when we reach the bottom (using -e flag).
 bind -n PPage if -F "#{alternate_on}" \
     "send PPage" \
-    "if \"! $is_less\" 'copy-mode -e'; send PPage"
+    "if \"! $is_less\" \
+        'copy-mode -e; send -X page-up' \
+        'send PPage'"
 bind -n NPage if -F "#{alternate_on}" \
     "send NPage" \
-    "if \"! $is_less\" 'copy-mode -e'; send NPage"
+    "if \"! $is_less\" \
+        'copy-mode -e; send -X page-down' \
+        'send NPage'"
 
 # In copy mode, scroll as normal.
 bind -T copy-mode-vi PPage send -X page-up
