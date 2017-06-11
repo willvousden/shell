@@ -1,4 +1,7 @@
 # vim: set ft=tmux:
+
+bind -T copy-mode-vi v send -X begin-selection
+bind -T copy-mode-vi y send -X copy-pipe-and-cancel 'xsel -i -b'
 set -g mouse on
 
 # The "=" refers to the pane in which the most recent mouse event occurred; keys are sent without
@@ -10,34 +13,38 @@ set -g mouse on
 #   - If "less" is running in this pane, send simple arrow characters to it;
 #   - otherwise, enter copy mode and then send the received keys.
 # * Finally, send simple arrow characters to the alt screen.
-is_less="ps -o state= -o comm= -t \\\"#{pane_tty}\\\" | grep -iqE \\\"^[^TXZ ]+ less\\\$\\\""
+is_less="ps -o state= -o comm= -t \\\"#{pane_tty}\\\" | grep -iqE \\\"^[^TXZ ]+ +less\\\$\\\""
 bind -n WheelUpPane if -Ft= "#{mouse_any_flag}" \
-    "send-keys -Mt=" \
+    "send -Mt=" \
     "if -Ft= '#{?pane_in_mode,1,#{?alternate_on,0,1}}' \
         'if -t= \"$is_less\" \
-            \"send-keys -t= Up Up Up\" \
-            \"copy-mode -et=; send-keys -Mt=; send-keys -Mt=; send-keys -Mt=\"' \
-        'send-keys -t= Up Up Up'"
+            \"send -t= Up Up Up\" \
+            \"copy-mode -et=; send -Mt=; send -Mt=; send -Mt=\"' \
+        'send -t= Up Up Up'"
 
 # Same logic as above, but don't enter copy mode.
 bind -n WheelDownPane if -Ft= "#{mouse_any_flag}" \
-    "send-keys -Mt=" \
+    "send -Mt=" \
     "if -Ft= '#{?pane_in_mode,1,#{?alternate_on,0,1}}' \
         'if -t= \"$is_less\" \
-            \"send-keys -t= Down Down Down\" \
-            \"send-keys -Mt=; send-keys -Mt=; send-keys -Mt=\"' \
-        'send-keys -t= Down Down Down'"
+            \"send -t= Down Down Down\" \
+            \"send -Mt=; send -Mt=; send -Mt=\"' \
+        'send -t= Down Down Down'"
 
 # Send page-up through when in alternate screen mode (or in less, as defined in the above bindings).
 # Otherwise, enter copy mode and then re-send so that it causes scroll-back.  Make sure that we exit
 # copy mode when we reach the bottom (using -e flag).
 bind -n PPage if -F "#{alternate_on}" \
-    "send-keys PPage" \
-    "if \"! $is_less\" 'copy-mode -e'; send-keys PPage"
+    "send PPage" \
+    "if \"! $is_less\" \
+        'copy-mode -e; send -X page-up' \
+        'send PPage'"
 bind -n NPage if -F "#{alternate_on}" \
-    "send-keys NPage" \
-    "if \"! $is_less\" 'copy-mode -e'; send-keys NPage"
+    "send NPage" \
+    "if \"! $is_less\" \
+        'copy-mode -e; send -X page-down' \
+        'send NPage'"
 
 # In copy mode, scroll as normal.
-bind -t vi-copy PPage page-up
-bind -t vi-copy NPage page-down
+bind -T copy-mode-vi PPage send -X page-up
+bind -T copy-mode-vi NPage send -X page-down
