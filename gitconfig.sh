@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-git_version=$(git --version)
-git_version=${git_version#'git version'}
+git_version=$(git --version | cut -d' ' -f 3)
 
 if vercomp "$git_version" '<' 1.7.11; then
     git config --global push.default nothing
