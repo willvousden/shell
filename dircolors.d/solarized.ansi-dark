@@ -461,3 +461,5 @@ EXEC 01;31  # Unix
 
 .pax 33
 .pax.i 01;32
+
+.pyc 01;32
