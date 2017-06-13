@@ -18,18 +18,21 @@ bind -n WheelUpPane if -Ft= "#{mouse_any_flag}" \
     "send -Mt=" \
     "if -Ft= '#{?pane_in_mode,1,#{?alternate_on,0,1}}' \
         'if -t= \"$is_less\" \
-            \"send -t= Up Up Up\" \
-            \"copy-mode -et=; send -Mt=; send -Mt=; send -Mt=\"' \
-        'send -t= Up Up Up'"
+            \"send -t= -N3 Up\" \
+            \"copy-mode -et=; send -t= -X -N3 scroll-up\"' \
+        'send -t= -N3 Up'"
 
 # Same logic as above, but don't enter copy mode.
 bind -n WheelDownPane if -Ft= "#{mouse_any_flag}" \
     "send -Mt=" \
     "if -Ft= '#{?pane_in_mode,1,#{?alternate_on,0,1}}' \
         'if -t= \"$is_less\" \
-            \"send -t= Down Down Down\" \
-            \"send -Mt=; send -Mt=; send -Mt=\"' \
-        'send -t= Down Down Down'"
+            \"send -t= -N3 Down\"' \
+        'send -t= -N3 Down'"
+
+# If we're already in copy mode, send scroll commands to it.
+bind -T copy-mode-vi WheelUpPane send -X -N3 scroll-up
+bind -T copy-mode-vi WheelDownPane send -X -N3 scroll-down
 
 # Send page-up through when in alternate screen mode (or in less, as defined in the above bindings).
 # Otherwise, enter copy mode and then re-send so that it causes scroll-back.  Make sure that we exit
