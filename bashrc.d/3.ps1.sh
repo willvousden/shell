@@ -8,6 +8,8 @@ PS1_CACHE_COLOUR=$green # The "dirty" indicator for Git repos.
 PS1_ADDED_COLOUR=$violet # The "new files" indicator for Git repos.
 PS1_SYMBOL_COLOUR=$base01 # The prompt symbol colour.
 PS1_ERROR_COLOUR=$red # The prompt symbol colour (when the previous command failed).
+PS1_NESTED_SHELL_COLOUR=$violet # The colour to use when the current shell is a child of another (so
+                                # that we can safely exit without killing the terminal).
 
 __abbreviate() {
     length=${2:-6}
@@ -124,8 +126,12 @@ __prompt_command() {
 
     # What prompt symbol shall we use?
     local prompt_symbol="$(c $PS1_SYMBOL_COLOUR)"'\$'"$(c $reset)"
+    if (($SHLVL>1)); then
+        # We're inside a nested shell, so add some colour.
+        prompt_symbol="$(c $PS1_NESTED_SHELL_COLOUR)"'\$'"$(c $reset)"
+    fi
     if [[ $exit_code != 0 ]]; then
-        # Last command failed; spruce it up a bit.
+        # Last command failed; add some colour.
         prompt_symbol="$(c $PS1_ERROR_COLOUR)!$(c $reset)"
     fi
 
