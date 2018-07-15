@@ -1,9 +1,3 @@
-Host github github.com
-    User git
-    Port 443
-    HostName ssh.github.com
-    ClearAllForwardings yes
-
 Host vousden
     User wvousd01
     Port 22
