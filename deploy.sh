@@ -2,22 +2,24 @@
 
 set -euo pipefail
 
-DOTFILES=(bashrc bashrc.d
-          bash_logout
-          bash_profile
-          bash_profile.d
-          python-startup.py
-          inputrc
-          latexmkrc
-          gitignore
-          tmux.conf
-          tmux.conf.d
-          screenrc
-          minttyrc
-          dircolors.d
-          gdbinit
-          gdbinit.d
-          bin)
+DOTFILES=(
+    bashrc bashrc.d
+    bash_logout
+    bash_profile
+    bash_profile.d
+    python-startup.py
+    inputrc
+    latexmkrc
+    gitignore
+    tmux.conf
+    tmux.conf.d
+    screenrc
+    minttyrc
+    dircolors.d
+    gdbinit
+    gdbinit.d
+    bin
+)
 DIRCOLORS=solarized.ansi-dark
 if [[ $(uname) == Linux ]]; then
     CONFIGPREFIX=~/.config/
