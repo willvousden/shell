@@ -24,6 +24,11 @@ alias grep="$(gcommand grep) --color=auto"
 alias fgrep="$(gcommand fgrep) --color=auto"
 alias egrep="$(gcommand egrep) --color=auto"
 
+# Use Neovim if it's available.
+if hash nvim 2> /dev/null; then
+    alias vim=nvim
+fi
+
 # Colours for man pages (via less).
 export LESS_TERMCAP_mb=$'\E[01;31m'       # Begin blinking
 export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # Begin bold (headings)
