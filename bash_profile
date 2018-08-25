@@ -41,3 +41,7 @@ if [[ -z $BASHRC_SOURCED ]]; then
 fi
 
 export TZ=Europe/London
+
+# Must be at the end of the file to work.
+export SDKMAN_DIR=~/.sdkman
+[[ -s $SDKMAN_DIR/bin/sdkman-init.sh ]] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
