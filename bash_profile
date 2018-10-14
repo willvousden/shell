@@ -24,7 +24,6 @@ if [[ $PROFILING == true ]]; then
     set -x
 fi
 
-export PYTHONSTARTUP=$HOME/.python-startup.py
 export EDITOR="/usr/bin/env vim"
 export PATH="$HOME/.bin:$HOME/.bin.local:$PATH"
 
