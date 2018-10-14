@@ -21,11 +21,6 @@ DOTFILES=(
     bin
 )
 DIRCOLORS=solarized.ansi-dark
-if [[ $(uname) == Linux ]]; then
-    CONFIGPREFIX=~/.config/
-else
-    CONFIGPREFIX=~/.
-fi
 
 install_dotfiles()
 {
@@ -37,12 +32,6 @@ install_dotfiles()
 
     cp "$(pwd)/gitconfig" ~/.gitconfig
     . ./gitconfig.sh
-    if [[ ! -d "${CONFIGPREFIX}matplotlib/stylelib" ]]; then
-        mkdir "${CONFIGPREFIX}matplotlib/stylelib"
-    fi
-
-    cp ./matplotlib/stylelib/phd.mplstyle "${CONFIGPREFIX}matplotlib/stylelib/"
-    . ./matplotlib.sh >> "${CONFIGPREFIX}matplotlib/stylelib/phd.mplstyle"
 }
 
 install_ssh()
