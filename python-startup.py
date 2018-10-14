@@ -22,13 +22,12 @@ try:
                 pp.switch_backend(t)
                 f = pp.figure()
                 del f
+                print('Using {} backend.'.format(t))
                 break
             except:
                 pp.switch_backend(default)
             finally:
                 del t
-        else:
-            print('Couldn\'t set interactive backend for Matplotlib.')
         del default
     except ImportError:
         pass
