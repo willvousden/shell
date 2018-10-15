@@ -10,3 +10,4 @@
 .ipynb_checkpoints
 *.pax
 *.pax.i
+.mypy_cache
