@@ -24,8 +24,12 @@ if [[ $PROFILING == true ]]; then
     set -x
 fi
 
-export EDITOR="/usr/bin/env vim"
 export PATH="$HOME/.bin:$HOME/.bin.local:$PATH"
+if hash nvim 2> /dev/null; then
+    export EDITOR="/usr/bin/env nvim"
+else
+    export EDITOR="/usr/bin/env vim"
+fi
 
 # Make a list of files from ~/.bashrc.d{,.local}
 files=$(find -H ~/.bash_profile.d{,.local} -mindepth 1 -type f -o -type l 2> /dev/null)
