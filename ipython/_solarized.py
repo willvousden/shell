@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from prompt_toolkit.output.vt100 import _256_colors
+try:
+    from prompt_toolkit.output.vt100 import _256_colors
+except ImportError:
+    from prompt_toolkit.terminal.vt100_output import _256_colors
 from pygments.style import Style
 from pygments.token import (Keyword, Name, Comment, String, Error, Text,
                             Number, Operator, Literal, Token)
@@ -41,6 +44,8 @@ codes = {
     'purple':  13,
     'base1':  14,
     'base02':  0,
+    'base3':  15,
+    'base2':  7,
 }
 
 colours = {n: c for n, c in colours.items() if n in codes}
