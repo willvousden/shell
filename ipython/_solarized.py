@@ -62,7 +62,7 @@ class SolarizedStyle(Style):
 
     styles = {
         Text: colours['base0'],
-        Error: '%s bold' % colours['red'],
+        Error: colours['red'],
         Comment: colours['base01'],
         Keyword: colours['green'],
         Keyword.Constant: colours['green'],
@@ -83,11 +83,8 @@ class SolarizedStyle(Style):
 # See https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/prompt_toolkit/styles/defaults.py
 # for a description of prompt_toolkit related pseudo-tokens.
 overrides = {
-    Token.Prompt: colours['base01'],
-    Token.PromptNum: '%s bold' % colours['base0'],
+    Token.Prompt: colours['green'],
+    Token.PromptNum: colours['base0'],
     Token.OutPrompt: colours['base01'],
-    Token.OutPromptNum: '%s bold' % colours['base0'],
-    Token.Menu.Completions.Completion: 'bg:%s %s' % (colours['base01'], colours['base01']),
-    Token.Menu.Completions.Completion.Current: 'bg:%s %s' % (colours['base01'], colours['base01']),
-    Token.MatchingBracket.Other: 'bg:%s %s' % (colours['base01'], colours['base01'])
+    Token.OutPromptNum: colours['base0'],
 }
