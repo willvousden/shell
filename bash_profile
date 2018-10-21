@@ -6,6 +6,12 @@ if [[ $- != *i* ]] && shopt -q login_shell && [[ $DESKTOP_SESSION ]]; then
     return
 fi
 
+# Sort a list of files by base name.
+sort_files()
+{
+    printf "%s\n" "$@" | paste <(printf "%s\n" "$@" | awk -F/ '{print $NF}') - | sort -k1,1 | cut -f2
+}
+
 # This should only be sourced once.
 if [[ $PROFILE_SOURCED ]]; then
     # But still we need to ensure that .bashrc is sourced.
@@ -31,12 +37,10 @@ else
     export EDITOR="/usr/bin/env vim"
 fi
 
-# Make a list of files from ~/.bashrc.d{,.local}
-files=$(find -H ~/.bash_profile.d{,.local} -mindepth 1 -type f -o -type l 2> /dev/null)
-files=$(paste <(<<<"$files" xargs -n1 basename) - <<<"$files" | sort -k1,1 | cut -f2)
-while read file; do
+# Source fiels files from ~/.bashrc.d{,.local}.
+for file in $(sort_files ~/.bash_profile.d/* ~/.bash_profile.d.local/*); do
     [[ ! -f $file ]] || . $file
-done <<<"$files"
+done
 
 # If we haven't already sourced .bashrc, source it.
 if [[ -z $BASHRC_SOURCED ]]; then
@@ -48,5 +52,7 @@ export LC_ALL=en_GB.UTF-8
 export TZ=Europe/London
 
 # Must be at the end of the file to work.
-export SDKMAN_DIR=~/.sdkman
-[[ -s $SDKMAN_DIR/bin/sdkman-init.sh ]] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
+if [[ -d ~/.sdkman ]]; then
+    export SDKMAN_DIR=~/.sdkman
+    [[ -s $SDKMAN_DIR/bin/sdkman-init.sh ]] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
+fi
