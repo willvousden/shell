@@ -1,5 +1,11 @@
 # vim: set ft=sh:
 
+# Sort a list of files by base name.
+sort_files()
+{
+    printf "%s\n" "$@" | paste <(printf "%s\n" "$@" | awk -F/ '{print $NF}') - | sort -k1,1 | cut -f2
+}
+
 # If bash_profile isn't yet sourced, that has to be done first.
 if [[ -z $PROFILE_SOURCED ]]; then
     . ~/.bash_profile
