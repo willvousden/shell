@@ -124,15 +124,12 @@ __prompt_command() {
         fi
     fi
 
-    # What prompt symbol shall we use?
-    local prompt_symbol="$(c $PS1_SYMBOL_COLOUR)"'\$'"$(c $reset)"
-    if (($SHLVL>1)); then
-        # We're inside a nested shell, so add some colour.
-        prompt_symbol="$(c $PS1_NESTED_SHELL_COLOUR)"'\$'"$(c $reset)"
-    fi
+    local prompt_symbol
     if [[ $exit_code != 0 ]]; then
         # Last command failed; add some colour.
-        prompt_symbol="$(c $PS1_ERROR_COLOUR)!$(c $reset)"
+        prompt_symbol="$(c $PS1_SYMBOL_COLOUR)$SHLVL$(c $PS1_ERROR_COLOUR)!$(c $reset)"
+    else
+        prompt_symbol="$(c $PS1_SYMBOL_COLOUR)$SHLVL\\\$$(c $reset)"
     fi
 
     # Add the date.
@@ -140,7 +137,7 @@ __prompt_command() {
     t=$(date '+%H:%M')
 
     # Now wrap the contents in some decoration and export.
-    export PS1="$(c $PS1_TIME_COLOUR)$d$(c $base02),$(c $PS1_TIME_COLOUR)$t $ps1_inner $prompt_symbol "
+    export PS1="$(c $PS1_TIME_COLOUR)$d $t $ps1_inner $prompt_symbol "
 }
 
 # Set PS2 (secondary prompt) as well.
