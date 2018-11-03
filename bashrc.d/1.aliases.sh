@@ -75,7 +75,7 @@ ag() {
     fi
 
     command ag \
-        --color-match '30;43' \
+        --color-match 91 \
         --color-path 32 \
         --color-line-number 33 \
         --group \
