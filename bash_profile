@@ -49,7 +49,6 @@ fi
 
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8
-export TZ=Europe/London
 
 # Must be at the end of the file to work.
 if [[ -d ~/.sdkman ]]; then
