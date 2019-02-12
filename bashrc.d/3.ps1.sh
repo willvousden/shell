@@ -92,7 +92,7 @@ __prompt_command() {
             # disable it temporarily.
             local nounset="$(set -o | grep nounset)"
             set +u
-            ps1_inner+="$(c $PS1_BRANCH_COLOUR; __git_ps1 ' %s')"
+            ps1_inner+=" $(c $PS1_BRANCH_COLOUR; __git_ps1 '%s' | awk -v len=10 '{ if (length($0) > len) print substr($0, 1, len-1) "…"; else print; }')"
             if [[ $nounset == *on ]]; then
                 set -u
             fi
