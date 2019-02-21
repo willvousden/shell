@@ -36,6 +36,7 @@ if hash nvim 2> /dev/null; then
 else
     export EDITOR="/usr/bin/env vim"
 fi
+export GIT_EDITOR=$EDITOR
 
 # Source fiels files from ~/.bashrc.d{,.local}.
 for file in $(sort_files ~/.bash_profile.d/* ~/.bash_profile.d.local/*); do
