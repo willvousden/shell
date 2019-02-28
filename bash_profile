@@ -22,7 +22,7 @@ if [[ $PROFILE_SOURCED ]]; then
 fi
 export PROFILE_SOURCED=true
 
-#export PROFILING=true
+# export PROFILING=true
 if [[ $PROFILING == true ]]; then
     # Add profiling code.
     PS4='+ $(date "+%s.%N")\011 '
@@ -38,7 +38,7 @@ else
 fi
 export GIT_EDITOR=$EDITOR
 
-# Source fiels files from ~/.bashrc.d{,.local}.
+# Source files from ~/.bashrc.d{,.local}.
 for file in $(sort_files ~/.bash_profile.d/* ~/.bash_profile.d.local/*); do
     [[ ! -f $file ]] || . $file
 done
