@@ -3,41 +3,7 @@ Host vousden
     Port 22
     HostName willvousden.co.uk
 
-Host ejl
-    User janelee
-    Port 22
-    HostName eleanorjanelee.co.uk
-
-Host eos
+Host nimbus
     User will
     Port 22
-    HostName 147.188.32.54
-
-Host hydra
-    User will
-    Port 22
-    HostName hydra.sr.bham.ac.uk
-
-Host lnx0
-    User will
-    Port 22
-    HostName lnx0.sr.bham.ac.uk
-
-Host punga
-    HostName punga
-    User will
-    Port 22
-    ProxyCommand ssh -q will@hydra.sr.bham.ac.uk -W %h:%p
-
-Host styx
-    HostName 178.62.107.144
-    Port 443
-    User will
-
-Host cirrus
-    HostName 139.59.165.183
-    User will
-
-Host lethe
-    HostName 178.62.101.114
-    User will
+    HostName 68.183.65.194
