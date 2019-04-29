@@ -1,5 +1,8 @@
 # vim: set ft=tmux:
 
+# Source statusline config from Vim.
+source-file ~/.tmux.conf.d/statusline-old
+
 # Pre-2.1 bindings.
 setw -g mode-mouse on
 set -g mouse-select-pane on

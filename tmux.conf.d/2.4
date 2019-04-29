@@ -1,5 +1,8 @@
 # vim: set ft=tmux:
 
+# Source statusline config from Vim.
+source-file ~/.tmux.conf.d/statusline-old
+
 bind -T copy-mode-vi v send -X begin-selection
 bind -T copy-mode-vi y send -X copy-pipe-and-cancel 'xsel -i -b'
 set -g mouse on
