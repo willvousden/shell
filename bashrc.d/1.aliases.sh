@@ -33,6 +33,11 @@ if hash pbcopy 2> /dev/null; then
     alias pbcopy='xargs echo -n | pbcopy'
 fi
 
+# Docker things.
+alias dc=docker-compose
+alias d=docker
+alias dri='docker run --rm -it'
+
 alias du="du -sh"
 alias lc="wc -l"
 alias ..='cd ..'
