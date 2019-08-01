@@ -29,8 +29,8 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # Begin underline
 export LESS_TERMCAP_ue=$'\E[0m'           # End underline
 
 if hash pbcopy 2> /dev/null; then
-    # Remove trailing new line before piping to pbcopy.
-    alias pbcopy='xargs echo -n | pbcopy'
+    # Remove a single trailing new line before piping to pbcopy.
+    alias npbcopy="perl -pe 'chomp if eof' | pbcopy"
 fi
 
 # Docker things.
