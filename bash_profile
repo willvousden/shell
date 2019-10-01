@@ -38,6 +38,8 @@ else
 fi
 export GIT_EDITOR=$EDITOR
 
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+
 # Source files from ~/.bashrc.d{,.local}.
 for file in $(sort_files ~/.bash_profile.d/* ~/.bash_profile.d.local/*); do
     [[ ! -f $file ]] || . $file

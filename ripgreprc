@@ -1,0 +1,5 @@
+--type-add
+ice:*.ice
+
+--type-add
+test:*{test,Test}*

@@ -18,6 +18,7 @@ DOTFILES=(
     gdbinit
     gdbinit.d
     bin
+    ripgreprc
 )
 DIRCOLORS=solarized.ansi-dark
 
