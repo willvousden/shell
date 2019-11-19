@@ -1,20 +1,38 @@
 # Reset
 export reset='\033[0m'
 
+# ANSI colour names.
+export black='\033[38;5;0m'
+export red='\033[38;5;1m'
+export green='\033[38;5;2m'
+export yellow='\033[38;5;3m'
+export blue='\033[38;5;4m'
+export magenta='\033[38;5;5m'
+export cyan='\033[38;5;6m'
+export white='\033[38;5;7m'
+export brblack='\033[38;5;8m'
+export brred='\033[38;5;9m'
+export brgreen='\033[38;5;10m'
+export bryellow='\033[38;5;11m'
+export brblue='\033[38;5;12m'
+export brmagenta='\033[38;5;13m'
+export brcyan='\033[38;5;14m'
+export brwhite='\033[38;5;15m'
+
 # Solarized colours.
-export base03='\033[1;30m'
-export base02='\033[0;30m'
-export base01='\033[1;32m'
-export base00='\033[1;33m'
-export base0='\033[1;34m'
-export base1='\033[1;36m'
-export base2='\033[0;37m'
-export base3='\033[1;37m'
-export yellow='\033[0;33m'
-export orange='\033[1;31m'
-export red='\033[0;31m'
-export magenta='\033[0;35m'
-export violet='\033[1;35m'
-export blue='\033[0;34m'
-export cyan='\033[0;36m'
-export green='\033[0;32m'
+export base03=$brblack
+export base02=$black
+export base01=$brgreen
+export base00=$bryellow
+export base0=$brblue
+export base1=$brcyan
+export base2=$white
+export base3=$brwhite
+export yellow=$yellow
+export orange=$brred
+export red=$red
+export magenta=$magenta
+export violet=$brmagenta
+export blue=$blue
+export cyan=$cyan
+export green=$green
