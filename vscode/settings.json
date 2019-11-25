@@ -38,9 +38,14 @@
         "**/.settings": true
     },
     "editor.minimap.enabled": false,
-    "editor.renderWhitespace": "all",
+    "editor.renderWhitespace": "boundary",
     "editor.renderControlCharacters": false,
     "C_Cpp.clang_format_path": "/usr/local/bin/clang-format",
     "files.insertFinalNewline": true,
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "vim.camelCaseMotion.enable": true,
+    "vim.enableNeovim": true,
+    "vim.hlsearch": true,
+    "vim.neovimPath": "/usr/local/bin/nvim",
+    "vim.useSystemClipboard": true
 }
