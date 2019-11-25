@@ -47,5 +47,6 @@
     "vim.enableNeovim": true,
     "vim.hlsearch": true,
     "vim.neovimPath": "/usr/local/bin/nvim",
-    "vim.useSystemClipboard": true
+    "vim.useSystemClipboard": true,
+    "editor.lineNumbers": "relative"
 }
