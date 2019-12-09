@@ -48,5 +48,13 @@
     "vim.hlsearch": true,
     "vim.neovimPath": "/usr/local/bin/nvim",
     "vim.useSystemClipboard": true,
-    "editor.lineNumbers": "relative"
+    "editor.lineNumbers": "relative",
+    "vim.cursorStylePerMode.insert": "block",
+    "vim.cursorStylePerMode.normal": "block",
+    "vim.cursorStylePerMode.replace": "block",
+    "vim.cursorStylePerMode.visual": "block",
+    "vim.cursorStylePerMode.visualblock": "block",
+    "vim.cursorStylePerMode.visualline": "block",
+    "vim.gdefault": true,
+    "vim.leader": ","
 }
