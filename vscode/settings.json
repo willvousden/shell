@@ -35,7 +35,8 @@
         "**/.idea": true,
         "**/.project": true,
         "**/.pytest_cache": true,
-        "**/.settings": true
+        "**/.settings": true,
+        "**/node_modules": true
     },
     "editor.minimap.enabled": false,
     "editor.renderWhitespace": "boundary",
@@ -49,12 +50,20 @@
     "vim.neovimPath": "/usr/local/bin/nvim",
     "vim.useSystemClipboard": true,
     "editor.lineNumbers": "relative",
-    "vim.cursorStylePerMode.insert": "block",
-    "vim.cursorStylePerMode.normal": "block",
-    "vim.cursorStylePerMode.replace": "block",
-    "vim.cursorStylePerMode.visual": "block",
-    "vim.cursorStylePerMode.visualblock": "block",
-    "vim.cursorStylePerMode.visualline": "block",
     "vim.gdefault": true,
-    "vim.leader": ","
+    "vim.leader": ",",
+    "python.formatting.provider": "black",
+    "go.formatTool": "gofmt",
+    "go.useLanguageServer": true,
+    "cSpell.userWords": [
+        "ppro",
+        "struct",
+        "substr"
+    ],
+    "[go]": {
+        "editor.useTabStops": true
+    },
+    "files.associations": {
+        "Dockerfile.*": "dockerfile"
+    }
 }
