@@ -1,8 +1,6 @@
 # Set up Bash completion.
-if [[ -f $BREW_PREFIX/etc/bash_completion ]]; then
-    if [[ ! $BASH_COMPLETION ]]; then
-        BASH_COMPLETION=$BREW_PREFIX/etc/bash_completion
-    fi
+if [[ -f $BREW_PREFIX/etc/profile.d/bash_completion.sh ]]; then
+    . $BREW_PREFIX/etc/profile.d/bash_completion.sh
 elif [[ -f /etc/bash_completion ]]; then
     # Source completion from default directory.
     . /etc/bash_completion 2> /dev/null
