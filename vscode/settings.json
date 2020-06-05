@@ -1,7 +1,6 @@
 {
     "workbench.colorTheme": "Solarized Custom Dark",
-    "workbench.colorCustomizations":
-    {
+    "workbench.colorCustomizations": {
         "editorGutter.background": "#073642",
         "terminal.foreground": "#839496",
         "terminal.background": "#002b36",
@@ -38,6 +37,7 @@
         "**/.settings": true,
         "**/node_modules": true
     },
+    "terminal.integrated.macOptionClickForcesSelection": true,
     "editor.minimap.enabled": false,
     "editor.renderWhitespace": "boundary",
     "editor.renderControlCharacters": false,
@@ -55,15 +55,139 @@
     "python.formatting.provider": "black",
     "go.formatTool": "gofmt",
     "go.useLanguageServer": true,
+    "go.inferGopath": true,
+    "window.zoomLevel": 0,
     "cSpell.userWords": [
+        "Girogate",
+        "Proto",
+        "cors",
+        "girolink",
+        "gitlab",
+        "grpc",
+        "kube",
+        "kubernetes",
+        "pkgconfig",
+        "postgresql",
         "ppro",
+        "println",
+        "protobuf",
+        "pytest",
         "struct",
-        "substr"
+        "submodule",
+        "substr",
+        "vararg"
     ],
+    "sqltools.autoOpenSessionFiles": false,
+    "python.jediEnabled": false,
     "[go]": {
         "editor.useTabStops": true
     },
+    "[makefile]": {
+        "editor.useTabStops": true,
+        "editor.insertSpaces": false,
+        "editor.detectIndentation": false
+    },
     "files.associations": {
         "Dockerfile.*": "dockerfile"
-    }
+    },
+    "extensions.ignoreRecommendations": false,
+    "[kotlin]": {
+        "editor.defaultFormatter": "esafirm.kotlin-formatter"
+    },
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    "gitlab.instanceUrl": "https://gitlab.ppro.com",
+    "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "c",
+                "c"
+            ],
+            "commands": [
+                "editor.action.addCommentLine"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "c",
+                "u"
+            ],
+            "commands": [
+                "editor.action.removeCommentLine",
+                "<esc>"
+            ]
+        },
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "k"
+            ],
+            "commands": [
+                ":nohl"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "c",
+                "c"
+            ],
+            "commands": [
+                "editor.action.addCommentLine"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "c",
+                "u"
+            ],
+            "commands": [
+                "editor.action.removeCommentLine"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "h"
+            ],
+            "commands": [
+                "editor.action.peekDefinition"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "r"
+            ],
+            "commands": [
+                "references-view.find"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "d"
+            ],
+            "commands": [
+                "editor.action.revealDefinition"
+            ]
+        },
+    ],
+    "git.autofetch": true,
+    "cSpell.enableFiletypes": [
+        "kotlin"
+    ]
 }
