@@ -30,6 +30,9 @@ if [[ $PROFILING == true ]]; then
     set -x
 fi
 
+# For pipx.
+export PATH="$PATH:$HOME/.local/bin"
+
 export PATH="$HOME/.bin:$HOME/.bin.local:$PATH"
 if hash nvim 2> /dev/null; then
     export EDITOR="/usr/bin/env nvim"
