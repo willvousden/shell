@@ -15,7 +15,6 @@
 [core]
 	pager = less -RS -x4
 	excludesfile = ~/.gitignore
-	editor = /usr/bin/env vim
 [merge]
 	tool = splice
 	conflictstyle = diff3
