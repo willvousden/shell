@@ -3,6 +3,8 @@
 set -euo pipefail
 
 DOTFILES=(
+    zshrc zshrc.d
+    zshenv zshenv.d
     bashrc bashrc.d
     bash_logout
     bash_profile
