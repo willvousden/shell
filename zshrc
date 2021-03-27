@@ -7,5 +7,3 @@ export PATH=/usr/local/opt/findutils/libexec/gnubin:$PATH
 for file in ~/.zshrc.d/*(.N); do
     . "$file"
 done
-
-[[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
