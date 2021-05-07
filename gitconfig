@@ -34,3 +34,5 @@
     linenumber = yellow
     filename = green
     match = bold red
+[pull]
+	rebase = false
