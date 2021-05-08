@@ -14,8 +14,9 @@ bindkey '^W' kill-word
 
 setopt AUTO_CD
 
-export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-export PATH=/usr/local/opt/findutils/libexec/gnubin:$PATH
+path=(/usr/local/opt/coreutils/libexec/gnubin $path)
+path=(/usr/local/opt/findutils/libexec/gnubin $path)
+export PATH
 
 for file in ~/.zshrc.d/*(.N); do
     . "$file"
