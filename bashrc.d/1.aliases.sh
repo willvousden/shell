@@ -38,8 +38,12 @@ alias dc=docker-compose
 alias d=docker
 alias dri='docker run --rm -it'
 
-alias k=kubectl
-complete -F __start_kubectl k
+if hash kubectl 2> /dev/null; then
+    kubectl completion bash > /tmp/kubectl-completion.bash
+    . /tmp/kubectl-completion.bash
+    alias k=kubectl
+    complete -F __start_kubectl k
+fi
 
 alias du="du -sh"
 alias lc="wc -l"
