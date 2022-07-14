@@ -200,4 +200,5 @@
         "terminal.ansiBrightBlack": "#fdf6e3", //base3
     }
 },
+"go.toolsManagement.autoUpdate": true
 }
