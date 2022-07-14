@@ -36,9 +36,8 @@
     "go.inferGopath": true,
     "window.zoomLevel": 0,
     "cSpell.userWords": [
-        "Girogate",
-        "Proto",
         "cors",
+        "Girogate",
         "girolink",
         "gitlab",
         "grpc",
@@ -48,12 +47,14 @@
         "postgresql",
         "ppro",
         "println",
+        "Proto",
         "protobuf",
         "pytest",
         "struct",
         "submodule",
         "substr",
-        "vararg"
+        "vararg",
+        "Vousden"
     ],
     "sqltools.autoOpenSessionFiles": false,
     "python.jediEnabled": false,
