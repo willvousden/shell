@@ -1,6 +1,9 @@
 [user]
 	name = Will Vousden
-	email = will@vousden.me
+	email = 152388+willvousden@users.noreply.github.com
+	signingKey = 6DEF72FB1B54FB0B
+[commit]
+    gpgSign = true
 [color]
 	ui = auto
 [alias]
@@ -27,7 +30,7 @@
 [github]
 	user = willvousden
 [include]
-	path = .gitconfig_local
+	path = ~/.gitconfig_local
 [grep]
 	extendRegexp = true
 [color "grep"]
