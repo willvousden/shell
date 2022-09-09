@@ -1,3 +1,10 @@
+if [[ -d /opt/homebrew ]]; then
+    export BREW_PREFIX=/opt/homebrew
+    path=($BREW_PREFIX/bin $path)
+else
+    export BREW_PREFIX=/usr/local
+fi
+
 bindkey -e
 bindkey "\e[3~" delete-char
 
@@ -14,8 +21,8 @@ bindkey '^W' kill-word
 
 setopt AUTO_CD
 
-path=(/usr/local/opt/coreutils/libexec/gnubin $path)
-path=(/usr/local/opt/findutils/libexec/gnubin $path)
+path=($BREW_PREFIX/opt/coreutils/libexec/gnubin $path)
+path=($BREW_PREFIX/opt/findutils/libexec/gnubin $path)
 export PATH
 
 for file in ~/.zshrc.d/*(.N); do
@@ -23,4 +30,3 @@ for file in ~/.zshrc.d/*(.N); do
 done
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
