@@ -25,8 +25,8 @@ path=($BREW_PREFIX/opt/coreutils/libexec/gnubin $path)
 path=($BREW_PREFIX/opt/findutils/libexec/gnubin $path)
 export PATH
 
+autoload -U +X bashcompinit && bashcompinit
+
 for file in ~/.zshrc.d/*(.N); do
     . "$file"
 done
-
-autoload -U +X bashcompinit && bashcompinit
