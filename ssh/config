@@ -1,9 +1,5 @@
-Host vousden
-    User wvousd01
-    Port 22
-    HostName willvousden.co.uk
+Host vousden.me
+    User root
 
-Host nimbus
+Host cloud.vousden.me
     User will
-    Port 22
-    HostName 68.183.65.194
