@@ -2,9 +2,7 @@
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.fontWeightBold": "normal",
     "workbench.startupEditor": "newUntitledFile",
-    "C_Cpp.updateChannel": "Insiders",
     "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "files.exclude": {
         "**/__pycache__": true,
         "**/.classpath": true,
@@ -82,8 +80,6 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.python"
     },
-    "gitlab.instanceUrl": "https://gitlab.ppro.com",
-    "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
     "vim.visualModeKeyBindingsNonRecursive": [
         {
             "before": [
@@ -202,7 +198,6 @@
         }
     },
     "go.toolsManagement.autoUpdate": true,
-    "aws.profile": "profile:personal",
     "aws.suppressPrompts": {
         "fileViewerEdit": true
     },
