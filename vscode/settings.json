@@ -1,4 +1,7 @@
 {
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.fontWeightBold": "normal",
     "workbench.startupEditor": "newUntitledFile",
