@@ -5,7 +5,7 @@ else
 fi
 export GIT_EDITOR=$EDITOR
 
-path=(~/.bin $path)
+path=(~/.bin ~/.local/bin $path)
 export PATH
 
 for file in ~/.zshenv.d/*(.N); do
