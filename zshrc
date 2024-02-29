@@ -22,6 +22,8 @@ path=($BREW_PREFIX/opt/coreutils/libexec/gnubin $path)
 path=($BREW_PREFIX/opt/findutils/libexec/gnubin $path)
 export PATH
 
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+
 autoload -U +X bashcompinit && bashcompinit
 
 for file in ~/.zshrc.d/*(.N); do
