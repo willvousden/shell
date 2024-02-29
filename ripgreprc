@@ -3,3 +3,6 @@ ice:*.ice
 
 --type-add
 test:*{test,Test}*
+
+--hidden
+--glob=!.git/*
