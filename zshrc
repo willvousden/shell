@@ -5,6 +5,8 @@ else
     export BREW_PREFIX=/usr/local
 fi
 
+unsetopt BEEP
+
 bindkey -e
 bindkey "\e[3~" delete-char
 
