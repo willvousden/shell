@@ -16,3 +16,4 @@
 .netrwhist
 .terraform
 *.me.*
+tfplan
