@@ -61,5 +61,3 @@ if [[ -d ~/.sdkman ]]; then
     export SDKMAN_DIR=~/.sdkman
     [[ -s $SDKMAN_DIR/bin/sdkman-init.sh ]] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
 fi
-
-complete -C /usr/local/bin/terraform terraform
