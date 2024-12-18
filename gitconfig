@@ -1,42 +1,46 @@
 [user]
-	name = Will Vousden
-	email = 152388+willvousden@users.noreply.github.com
-	signingKey = 6DEF72FB1B54FB0B
+    name = Will Vousden
+    email = 152388+willvousden@users.noreply.github.com
+    signingKey = 6DEF72FB1B54FB0B
 [commit]
     gpgSign = true
 [color]
-	ui = auto
+    ui = auto
 [alias]
-	g = grep --line-number --heading --break
-	s = status --short --branch
-	c = checkout
-	d = diff
-	dc = diff --cached
-	dw = diff --word-diff
-	dcw = diff --cached --word-diff
-	pf = pull --ff-only
-	amend = commit --amend --no-edit
+    g = grep --line-number --heading --break
+    s = status --short --branch
+    c = checkout
+    d = diff
+    dc = diff --cached
+    dw = diff --word-diff
+    dcw = diff --cached --word-diff
+    pf = pull --ff-only
+    amend = commit --amend --no-edit
 [core]
-	pager = less -RS -x4
-	excludesfile = ~/.gitignore
+    pager = less -RS -x4
+    excludesfile = ~/.gitignore
 [merge]
-	tool = splice
-	conflictstyle = diff3
+    tool = splice
+    conflictstyle = diff3
 [mergetool "vimdiff"]
-	cmd=vim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
-	keepbackup=false
+    cmd=vim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
+    keepbackup=false
 [mergetool "splice"]
-	cmd="vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
-	trustExitCode=true
+    cmd="vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+    trustExitCode=true
 [github]
-	user = willvousden
+    user = willvousden
 [include]
-	path = ~/.gitconfig_local
+    path = ~/.gitconfig_local
 [grep]
-	extendRegexp = true
+    extendRegexp = true
 [color "grep"]
     linenumber = yellow
     filename = green
     match = bold red
 [pull]
-	rebase = false
+    rebase = false
+[push]
+    default = simple
+[init]
+    defaultBranch = main

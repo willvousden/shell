@@ -31,9 +31,6 @@ install_dotfiles()
     for file in "${DOTFILES[@]}"; do
         ln -snfv "$(pwd)/$file" ~/".$file"
     done
-
-    cp "$(pwd)/gitconfig" ~/.gitconfig
-    . ./gitconfig.sh
 }
 
 install_ssh()
