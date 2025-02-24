@@ -1,9 +1,9 @@
-export LS_OPTIONS='-h'
+export LS_OPTIONS='-hF'
 LS_OPTIONS="$LS_OPTIONS --color=auto"
 alias ls="ls $LS_OPTIONS"
 alias la="ls $LS_OPTIONS -A"
-alias ll="ls $LS_OPTIONS -lF"
-alias lla="ls $LS_OPTIONS -lFA"
+alias ll="ls $LS_OPTIONS -l"
+alias lla="ls $LS_OPTIONS -lA"
 
 # Set up grep aliases.
 alias grep="grep --color=auto"
