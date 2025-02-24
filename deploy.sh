@@ -11,6 +11,7 @@ DOTFILES=(
     bash_profile.d
     inputrc
     latexmkrc
+    gitconfig
     gitignore
     tmux.conf
     tmux.conf.d
