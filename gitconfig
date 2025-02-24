@@ -21,7 +21,7 @@
     excludesfile = ~/.gitignore
 [merge]
     tool = nvim
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 [mergetool "nvim"]
     cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
     keepBackup = false
