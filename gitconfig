@@ -20,14 +20,11 @@
     pager = less -RS -x4
     excludesfile = ~/.gitignore
 [merge]
-    tool = splice
+    tool = nvim
     conflictstyle = diff3
-[mergetool "vimdiff"]
-    cmd=vim -d -f -c "wincmd J" "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
-    keepbackup=false
-[mergetool "splice"]
-    cmd="vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
-    trustExitCode=true
+[mergetool "nvim"]
+    cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+    keepBackup = false
 [github]
     user = willvousden
 [include]
