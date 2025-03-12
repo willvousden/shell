@@ -61,3 +61,15 @@ sortu() {
 if [[ $TERM != 'dumb' ]] && type dircolors > /dev/null 2> /dev/null && [[ -r $HOME/.dir_colors ]]; then
     eval $(dircolors -b "$HOME/.dir_colors")
 fi
+
+# Delete all branches not merged to origin/main or origin/master and then prune.
+branch-clean() {
+    (
+        git branch --merged origin/main
+        git branch --merged origin/master
+    ) 2>/dev/null \
+        | tr -d '*' \
+        | grep -Ev '^ *(main|master)$' \
+        | xargs -r git branch -d
+    git remote prune origin
+}

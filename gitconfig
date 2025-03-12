@@ -41,3 +41,10 @@
     default = simple
 [init]
     defaultBranch = main
+[color "decorate"]
+    HEAD = cyan bold
+    branch = green bold
+    remoteBranch = red bold
+    tag = blue bold
+[color "status"]
+    untracked = yellow
