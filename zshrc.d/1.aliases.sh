@@ -5,6 +5,8 @@ alias la="ls $LS_OPTIONS -A"
 alias ll="ls $LS_OPTIONS -l"
 alias lla="ls $LS_OPTIONS -lA"
 
+alias diff="diff --color=auto -u"
+
 # Set up grep aliases.
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
