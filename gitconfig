@@ -6,6 +6,8 @@
     gpgSign = true
 [color]
     ui = auto
+[advice]
+    skippedCherryPicks = false
 [alias]
     g = grep --line-number --heading --break
     s = status --short --branch
