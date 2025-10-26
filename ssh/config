@@ -5,6 +5,3 @@ Host *
 
 Host vousden.me
     User root
-
-Host cloud.vousden.me
-    User will
