@@ -50,19 +50,20 @@ install_ipython_profile()
         return
     fi
 
-    local dir=$(ipython locate profile)
+    local dir
+    dir=$(ipython locate profile)
     [[ -d $dir/startup ]] || mkdir -p "$dir/startup"
 
     (
     cd ipython || return 1
 
     local f
-    while read f; do
+    while read -r f; do
         f=$(basename "$f")
         ln -snfv "$(pwd)/$f" "$dir/$f"
     done < <(find . -maxdepth 1 -type f)
 
-    while read f; do
+    while read -r f; do
         f=$(basename f)
         ln -snfv "$(pwd)/$f" "$dir/$f"
     done < <(find startup -maxdepth 1 -type f)
