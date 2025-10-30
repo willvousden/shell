@@ -6,17 +6,13 @@ DOTFILES=(
     zshrc zshrc.d
     zshenv zshenv.d
     bashrc bashrc.d
-    bash_logout
     bash_profile
     bash_profile.d
     inputrc
-    latexmkrc
     gitconfig
     gitignore
     tmux.conf
     tmux.conf.d
-    screenrc
-    minttyrc
     dircolors.d
     gdbinit
     gdbinit.d
@@ -30,7 +26,11 @@ install_dotfiles()
     ln -svf ~/.dircolors.d/"${DIRCOLORS}" ~/.dir_colors
 
     for file in "${DOTFILES[@]}"; do
-        ln -snfv "$(pwd)/$file" ~/".$file"
+        if [[ -f $file || -d $file ]]; then
+            ln -snfv "$(readlink -f "$file")" ~/."$file"
+        else
+            printf 'File not found: %s\n' "$file"
+        fi
     done
 }
 
