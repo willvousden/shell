@@ -2,45 +2,21 @@
 
 set -euo pipefail
 
-DOTFILES=(
-    zshrc zshrc.d
-    zshenv zshenv.d
-    bashrc bashrc.d
-    bash_profile
-    bash_profile.d
-    inputrc
-    gitconfig
-    gitignore
-    tmux.conf
-    tmux.conf.d
-    dircolors.d
-    gdbinit
-    gdbinit.d
-    bin
-    ripgreprc
-)
 DIRCOLORS=solarized.ansi-dark
 
 install_dotfiles()
 {
-    ln -svf ~/.dircolors.d/"${DIRCOLORS}" ~/.dir_colors
-
-    for file in "${DOTFILES[@]}"; do
-        if [[ -f $file || -d $file ]]; then
-            ln -snfv "$(readlink -f "$file")" ~/."$file"
-        else
-            printf 'File not found: %s\n' "$file"
-        fi
-    done
-
+    # Symlink to files only; create directories as necessary.
     shopt -s globstar
-    for item in config/**/*; do
-        target_path=~/."$item"
+    for item in dotfiles/**/*; do
+        target_path=~/."${item#dotfiles/}"
         mkdir -p "$(dirname "$target_path")"
         if [[ -f $item ]]; then
             ln -snfv "$(readlink -f "$item")" "$target_path"
         fi
     done
+
+    ln -svf ~/.dircolors.d/"${DIRCOLORS}" ~/.dir_colors
 }
 
 install_ssh()
@@ -82,3 +58,5 @@ install_ipython_profile()
 install_dotfiles
 install_ssh
 install_ipython_profile
+
+ln -snfv "$(readlink -f bin)" ~/.bin
