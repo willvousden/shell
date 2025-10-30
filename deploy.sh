@@ -32,6 +32,15 @@ install_dotfiles()
             printf 'File not found: %s\n' "$file"
         fi
     done
+
+    shopt -s globstar
+    for item in config/**/*; do
+        target_path=~/."$item"
+        mkdir -p "$(dirname "$target_path")"
+        if [[ -f $item ]]; then
+            ln -snfv "$(readlink -f "$item")" "$target_path"
+        fi
+    done
 }
 
 install_ssh()
