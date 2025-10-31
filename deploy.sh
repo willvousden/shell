@@ -35,24 +35,17 @@ install_ipython_profile()
         return
     fi
 
-    local dir
-    dir=$(ipython locate profile)
-    [[ -d $dir/startup ]] || mkdir -p "$dir/startup"
+    local profile_dir
+    profile_dir=$(ipython locate profile)
 
-    (
-    cd ipython || return 1
-
-    local f
-    while read -r f; do
-        f=$(basename "$f")
-        ln -snfv "$(pwd)/$f" "$dir/$f"
-    done < <(find . -maxdepth 1 -type f)
-
-    while read -r f; do
-        f=$(basename f)
-        ln -snfv "$(pwd)/$f" "$dir/$f"
-    done < <(find startup -maxdepth 1 -type f)
-    )
+    shopt -s globstar
+    for item in ipython/**/*; do
+        target_path="$profile_dir/${item#ipython/}"
+        mkdir -p "$(dirname "$target_path")"
+        if [[ -f $item ]]; then
+            ln -snfv "$(readlink -f "$item")" "$target_path"
+        fi
+    done
 }
 
 install_dotfiles
