@@ -13,5 +13,6 @@ def get_style_by_name(name, original=interactiveshell.get_style_by_name):
 
 interactiveshell.get_style_by_name = get_style_by_name
 
+# FIXME: UserWarning: highlighting_style is deprecated since 9.0 and have no effect, use themeing.
 c.TerminalInteractiveShell.highlighting_style = "solarized"
 c.TerminalInteractiveShell.highlighting_style_overrides = overrides
