@@ -14,13 +14,5 @@ if [ -z "$PROFILE_SOURCED" ]; then
 fi
 ```
 
-For Neovim, don't forget to add `~/.config/nvim/init.vim`. Something like this:
-
-```
-let g:python3_host_prog = '~/.python3-neovim/bin/python3'
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath=&runtimepath
-source ~/git/vim/vimrc
-```
-
-Make a Python venv in `~/.python3-neovim` and install `pip install pynvim` there.
+See [this GitHub
+page](https://gist.github.com/Linerre/f11ad4a6a934dcf01ee8415c9457e7b2#what-is-it-).
