@@ -1,18 +1,12 @@
 import sys
 
-from IPython.terminal import interactiveshell
 from IPython.paths import locate_profile
 
 sys.path.insert(1, locate_profile())
-from _solarized import SolarizedStyle, overrides
 
+from IPython.utils.PyColorize import theme_table
 
-def get_style_by_name(name, original=interactiveshell.get_style_by_name):
-    return SolarizedStyle if name == "solarized" else original(name)
+from _solarized import solarized_theme
 
-
-interactiveshell.get_style_by_name = get_style_by_name
-
-# FIXME: UserWarning: highlighting_style is deprecated since 9.0 and have no effect, use themeing.
-c.TerminalInteractiveShell.highlighting_style = "solarized"
-c.TerminalInteractiveShell.highlighting_style_overrides = overrides
+theme_table["solarized"] = solarized_theme
+c.TerminalInteractiveShell.colors = "solarized"
