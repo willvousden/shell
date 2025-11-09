@@ -33,12 +33,13 @@ solarized_theme = Theme(
         Token.Text: BASE0,
         Token.Error: RED,
         Token.Comment: BASE01,
-        Token.Keyword: GREEN,
+        Token.Keyword: f"noinherit {GREEN}",
         Token.Keyword.Constant: GREEN,
-        Token.Keyword.Namespace: ORANGE,
+        Token.Keyword.Namespace: f"noinherit {MAGENTA}",
+        Token.Name.Namespace: f"noinherit {GREEN}",
         Token.Name.Builtin: BLUE,
         Token.Name.Function: BLUE,
-        Token.Name.Class: BLUE,
+        Token.Name.Class: f"noinherit {BLUE}",
         Token.Name.Decorator: BLUE,
         Token.Name.Exception: BLUE,
         Token.Number: CYAN,
@@ -51,5 +52,11 @@ solarized_theme = Theme(
         Token.PromptNum: BASE0,
         Token.OutPrompt: BASE01,
         Token.OutPromptNum: BASE0,
+        Token.ExcName: RED,
+        Token.Topline: RED,
+        Token.FilenameEm: GREEN,
+        Token.Filename: VIOLET,
     },
 )
+
+TRACEBACK_HIGHLIGHT = f"bg:{YELLOW} {BASE2}"
