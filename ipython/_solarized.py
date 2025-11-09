@@ -62,7 +62,7 @@ ansi_numbers = {
 
 # Token reference:
 # * Regular tokens: http://pygments.org/docs/tokens/ for a description of the different
-# * Prompt pseudo-tokens: https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/prompt_toolkit/styles/defaults.py
+# * Prompt pseudo-tokens: https://github.com/jonathanslenders/python-prompt-toolkit/blob/main/src/prompt_toolkit/styles/defaults.py
 
 # Here we use the hex colour code.
 solarized_theme = Theme(
