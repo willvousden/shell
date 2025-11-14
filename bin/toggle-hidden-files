@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-if [[ $(defaults read com.apple.finder AppleShowAllFiles 2> /dev/null) == 1 ]]; then 
+if [[ $(defaults read com.apple.finder AppleShowAllFiles 2> /dev/null) == 1 ]]; then
   echo "Hiding hidden files."
   defaults write com.apple.finder AppleShowAllFiles -bool false
-else 
+else
   echo "Showing hidden files."
   defaults write com.apple.finder AppleShowAllFiles -bool true
-fi   
-     
+fi
+
 killall Finder
