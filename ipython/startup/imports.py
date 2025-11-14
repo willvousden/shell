@@ -1,12 +1,9 @@
-import os
-import sys
-
 # Try to import useful modules but fail silently if they aren't there.
 try:
-    import numpy as np
+    import numpy as np  # noqa: F401
 
     try:
-        import pandas as pd
+        import pandas as pd  # noqa: F401
     except ImportError:
         pass
 
@@ -23,7 +20,8 @@ try:
             del f
             print(f"Using {t} backend.")
             break
-        except:
+        except ValueError, ImportError:
+            # TODO: Is this the right type?
             pp.switch_backend(default)
         finally:
             del t

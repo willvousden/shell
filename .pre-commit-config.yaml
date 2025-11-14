@@ -9,3 +9,11 @@ repos:
     hooks:
       - id: shellcheck
         exclude: ^dotfiles/
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.5
+    hooks:
+      - id: ruff-check
+        args: [ --fix ]
+        exclude: ^bin/git-filter-repo$
+      - id: ruff-format
+        exclude: ^bin/git-filter-repo$
