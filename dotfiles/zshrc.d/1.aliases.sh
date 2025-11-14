@@ -40,7 +40,7 @@ fi
 
 # Echo path list on separate lines.
 echp() {
-    echo $1 | tr : '\n'
+    echo "$1" | tr : '\n'
 }
 
 # Helpful alias for adding new paths.
@@ -61,7 +61,7 @@ sortu() {
 }
 
 if [[ $TERM != 'dumb' ]] && type dircolors > /dev/null 2> /dev/null && [[ -r $HOME/.dir_colors ]]; then
-    eval $(dircolors -b "$HOME/.dir_colors")
+    eval "$(dircolors -b "$HOME/.dir_colors")"
 fi
 
 # Delete all branches not merged to origin/main or origin/master and then prune.

@@ -5,7 +5,7 @@ port=$SPROX_PORT # Remote machine (through which the connection is bounced).
 device=$SPROX_DEVICE
 
 # Get some arguments.
-while getopts sakp:h:d: arg; do
+while getopts akp:h:d: arg; do
     case $arg in
         k)
             # Kill the proxy tunnel.
@@ -24,8 +24,9 @@ while getopts sakp:h:d: arg; do
         d)
             device=$OPTARG
             ;;
-        s)
-            sudo=true
+        *)
+            printf 'Invalid arguments\n'
+            exit 1
             ;;
     esac
 done
@@ -41,7 +42,7 @@ function get_pid {
         # We're on Windows, so use procps (ps won't give arguments).
         ps=procps
     fi
-    $ps x -U $user | grep "$stub" | grep -v grep | awk '{ print $1 }'
+    "$ps" x -U "$user" | grep "$stub" | grep -v grep | awk '{ print $1 }'
 }
 
 if [[ $halt ]]; then
@@ -56,8 +57,8 @@ if [[ $halt ]]; then
         # Disable SOCKS proxy (for Mac).
         if hash networksetup 2> /dev/null; then
             echo -n "Disabling SOCKS proxy... "
-            sudo networksetup -setsocksfirewallproxystate "$device" off
-            if [[ $? == 0 ]]; then
+
+            if sudo networksetup -setsocksfirewallproxystate "$device" off; then
                 echo "Done."
             else
                 echo "Failed."
@@ -69,7 +70,7 @@ if [[ $halt ]]; then
     pid=$(get_pid)
     if [[ -n $pid ]]; then
         echo "Killing proxy with PID: $pid."
-        kill $pid
+        kill "$pid"
     else
         echo "No proxy exists."
     fi
@@ -93,7 +94,7 @@ else
         echo "Renewing proxy."
     fi
 
-    eval $stub $port "-o 'ControlPath none'" $host
+    "${stub[@]}" "$port" -o 'ControlPath none' "$host"
     result=$?
     if [[ $result != 0 ]]; then
         echo "Couldn't start proxy: got code $result from ssh."
@@ -110,9 +111,8 @@ else
         # Enable SOCKS proxy (for Mac).
         if hash networksetup 2> /dev/null; then
             echo -n "Enabling SOCKS proxy... "
-            sudo networksetup -setsocksfirewallproxy "$device" localhost $port
-            sudo networksetup -setsocksfirewallproxystate "$device" on
-            if [[ $? == 0 ]]; then
+            sudo networksetup -setsocksfirewallproxy "$device" localhost "$port"
+            if sudo networksetup -setsocksfirewallproxystate "$device" on; then
                 echo "Done."
             else
                 echo "Failed."
