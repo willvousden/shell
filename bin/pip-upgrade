@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-exec pip list --outdated --format=freeze | cut -f1 -d= | xargs pip install -U

@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-tempfile=$(mktemp)
-for file in "$@"; do
-    pdf2ps "$file" "$tempfile" && ps2pdf "$tempfile" "$file"
-    rm "$tempfile"
-done
