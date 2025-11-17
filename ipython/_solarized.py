@@ -42,11 +42,13 @@ solarized_theme = Theme(
         Token.Name.Class: f"noinherit {BLUE}",
         Token.Name.Decorator: BLUE,
         Token.Name.Exception: BLUE,
+        Token.Name.Variable.Magic: BLUE,
         Token.Number: CYAN,
         Token.Operator: GREEN,
         Token.Operator.Word: GREEN,
         Token.Literal: CYAN,
         Token.String: CYAN,
+        Token.String.Affix: RED,
         # Prompt stuff
         Token.Prompt: GREEN,
         Token.PromptNum: BASE0,
