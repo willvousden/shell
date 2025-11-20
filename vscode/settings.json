@@ -1,238 +1,320 @@
 {
-    "extensions.experimental.affinity": {
-        "asvetliakov.vscode-neovim": 1
-    },
-    "terminal.external.osxExec": "iTerm.app",
-    "terminal.integrated.fontWeightBold": "normal",
-    "workbench.startupEditor": "newUntitledFile",
-    "editor.suggestSelection": "first",
-    "files.exclude": {
-        "**/__pycache__": true,
-        "**/.classpath": true,
-        "**/.factorypath": true,
-        "**/.idea": true,
-        "**/.project": true,
-        "**/.pytest_cache": true,
-        "**/.settings": true,
-        "**/node_modules": true
-    },
-    "terminal.integrated.macOptionClickForcesSelection": true,
-    "editor.minimap.enabled": false,
-    "editor.renderWhitespace": "boundary",
-    "editor.renderControlCharacters": false,
-    "C_Cpp.clang_format_path": "/usr/local/bin/clang-format",
-    "files.insertFinalNewline": true,
-    "cmake.configureOnOpen": true,
-    "vim.camelCaseMotion.enable": true,
-    "vim.enableNeovim": true,
-    "vim.hlsearch": true,
-    "vim.neovimPath": "/usr/local/bin/nvim",
-    "vim.useSystemClipboard": true,
-    "editor.lineNumbers": "relative",
-    "vim.gdefault": true,
-    "vim.leader": ",",
-    "python.formatting.provider": "black",
-    "go.formatTool": "gofmt",
-    "go.useLanguageServer": true,
-    "go.inferGopath": true,
-    "window.zoomLevel": 0,
-    "cSpell.userWords": [
-        "cors",
-        "Girogate",
-        "girolink",
-        "gitlab",
-        "grpc",
-        "kube",
-        "kubernetes",
-        "pkgconfig",
-        "postgresql",
-        "ppro",
-        "println",
-        "Proto",
-        "protobuf",
-        "pytest",
-        "struct",
-        "submodule",
-        "substr",
-        "vararg",
-        "Vousden"
-    ],
-    "sqltools.autoOpenSessionFiles": false,
-    "python.jediEnabled": false,
-    "[go]": {
-        "editor.useTabStops": true
-    },
-    "[makefile]": {
-        "editor.useTabStops": true,
-        "editor.insertSpaces": false,
-        "editor.detectIndentation": false
-    },
-    "files.associations": {
-        "Dockerfile.*": "dockerfile"
-    },
-    "extensions.ignoreRecommendations": false,
-    "[kotlin]": {
-        "editor.defaultFormatter": "esafirm.kotlin-formatter"
-    },
-    "[cpp]": {
-        "editor.defaultFormatter": "ms-vscode.cpptools"
-    },
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.python"
-    },
-    "vim.visualModeKeyBindingsNonRecursive": [
-        {
-            "before": [
-                "<leader>",
-                "c",
-                "c"
-            ],
-            "commands": [
-                "editor.action.addCommentLine"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "c",
-                "u"
-            ],
-            "commands": [
-                "editor.action.removeCommentLine",
-                "<esc>"
-            ]
-        },
-    ],
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": [
-                "<leader>",
-                "k"
-            ],
-            "commands": [
-                ":nohl"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "c",
-                "c"
-            ],
-            "commands": [
-                "editor.action.addCommentLine"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "c",
-                "u"
-            ],
-            "commands": [
-                "editor.action.removeCommentLine"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "h"
-            ],
-            "commands": [
-                "editor.action.peekDefinition"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "r"
-            ],
-            "commands": [
-                "references-view.find"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "d"
-            ],
-            "commands": [
-                "editor.action.revealDefinition"
-            ]
-        },
-    ],
-    "git.autofetch": true,
-    "cSpell.enableFiletypes": [
-        "kotlin"
-    ],
-    "workbench.preferredLightColorTheme": "Solarized Custom Light",
-    "window.autoDetectColorScheme": true,
-    "workbench.preferredDarkColorTheme": "Solarized Custom Dark",
-    "workbench.colorTheme": "Solarized Custom Light",
-    "workbench.colorCustomizations": {
-        "[Solarized Custom Dark]": {
-            "editorGutter.background": "#073642",
-            "terminal.foreground": "#839496",
-            "terminal.background": "#002b36",
-            "terminal.ansiBrightBlack": "#002b36", // base03
-            "terminal.ansiBlack": "#073642", // base02
-            "terminal.ansiBrightGreen": "#586e75", // base01
-            "terminal.ansiBrightYellow": "#657b83", // base00
-            "terminal.ansiBrightBlue": "#839496", // base0
-            "terminal.ansiBrightCyan": "#93a1a1", // base1
-            "terminal.ansiWhite": "#eee8d5", // base2
-            "terminal.ansiBrightWhite": "#fdf6e3", //base3
-        },
-        "[Solarized Custom Light]": {
-            "editorGutter.background": "#eee8d5",
-            "terminal.foreground": "#657b83",
-            "terminal.background": "#fdf6e3",
-            "terminal.ansiBrightWhite": "#002b36", // base03
-            "terminal.ansiWhite": "#073642", // base02
-            "terminal.ansiBrightCyan": "#586e75", // base01
-            "terminal.ansiBrightBlue": "#657b83", // base00
-            "terminal.ansiBrightYellow": "#839496", // base0
-            "terminal.ansiBrightGreen": "#93a1a1", // base1
-            "terminal.ansiBlack": "#eee8d5", // base2
-            "terminal.ansiBrightBlack": "#fdf6e3", //base3
-        }
-    },
-    "go.toolsManagement.autoUpdate": true,
-    "aws.suppressPrompts": {
-        "fileViewerEdit": true
-    },
+  "[cpp]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "[go]": {
+    "editor.useTabStops": true
+  },
+  "[jinja-sql]": {
+    "editor.defaultFormatter": "dorzey.vscode-sqlfluff"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[kotlin]": {
+    "editor.defaultFormatter": "cstef.kotlin-formatter"
+  },
+  "[kotlinscript]": {
+    "editor.defaultFormatter": "cstef.kotlin-formatter"
+  },
+  "[makefile]": {
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": false,
+    "editor.useTabStops": true
+  },
+  "[nginx]": {
+    "editor.defaultFormatter": "raynigon.nginx-formatter"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
     "editor.formatOnSave": true,
-    "yaml.customTags": [
-        "!And",
-        "!And sequence",
-        "!If",
-        "!If sequence",
-        "!Not",
-        "!Not sequence",
-        "!Equals",
-        "!Equals sequence",
-        "!Or",
-        "!Or sequence",
-        "!FindInMap",
-        "!FindInMap sequence",
-        "!Base64",
-        "!Join",
-        "!Join sequence",
-        "!Cidr",
-        "!Ref",
-        "!Sub",
-        "!Sub sequence",
-        "!GetAtt",
-        "!GetAZs",
-        "!ImportValue",
-        "!ImportValue sequence",
-        "!Select",
-        "!Select sequence",
-        "!Split",
-        "!Split sequence"
-    ],
-    "redhat.telemetry.enabled": false
+    "editor.formatOnSaveMode": "file"
+  },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "aws.suppressPrompts": {
+    "ecsRunCommand": true,
+    "fileViewerEdit": true
+  },
+  "C_Cpp.clang_format_path": "/usr/local/bin/clang-format",
+  "cSpell.diagnosticLevel": "Hint",
+  "cSpell.enabledFileTypes": {
+    "*": true,
+    "kotlin": false
+  },
+  "cSpell.userWords": [
+    "cors",
+    "elif",
+    "Girogate",
+    "girolink",
+    "gitlab",
+    "grpc",
+    "IBAN",
+    "kube",
+    "kubernetes",
+    "nonprod",
+    "pipenv",
+    "pkgconfig",
+    "postgresql",
+    "ppro",
+    "println",
+    "Proto",
+    "protobuf",
+    "pyenv",
+    "pytest",
+    "secretmanager",
+    "shellcheck",
+    "struct",
+    "submodule",
+    "substr",
+    "terragrunt",
+    "vararg",
+    "venv",
+    "Vousden"
+  ],
+  "dbt.enableCollaboration": false,
+  "editor.codeLens": true,
+  "editor.formatOnSave": true,
+  "editor.lineNumbers": "relative",
+  "editor.minimap.enabled": false,
+  "editor.renderControlCharacters": false,
+  "editor.renderWhitespace": "boundary",
+  "editor.suggestSelection": "first",
+  "editor.wordWrap": "on",
+  "emmet.excludeLanguages": [
+    "markdown",
+    "slim"
+  ],
+  "explorer.confirmDelete": false,
+  "explorer.excludeGitIgnore": true,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "extensions.ignoreRecommendations": false,
+  "files.associations": {
+    "Dockerfile.*": "dockerfile"
+  },
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.classpath": true,
+    "**/.factorypath": true,
+    "**/.idea": true,
+    "**/.project": true,
+    "**/.pytest_cache": true,
+    "**/.settings": true,
+    "**/node_modules": true
+  },
+  "files.insertFinalNewline": true,
+  "git.autofetch": true,
+  "git.enableCommitSigning": true,
+  "git.pruneOnFetch": true,
+  "git.terminalGitEditor": true,
+  "githubPullRequests.pullBranch": "never",
+  "go.formatTool": "gofmt",
+  "go.inferGopath": true,
+  "window.zoomLevel": 0,
+  "go.toolsManagement.autoUpdate": true,
+  "go.useLanguageServer": true,
+  "makefile.configureAfterCommand": false,
+  "makefile.configureOnEdit": false,
+  "makefile.configureOnOpen": false,
+  "redhat.telemetry.enabled": false,
+  "scss.format.spaceAroundSelectorSeparator": true,
+  "settingsSync.ignoredExtensions": [
+    "dorzey.vscode-sqlfluff"
+  ],
+  "sqlfluff.suppressNotifications": true,
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.integrated.drawBoldTextInBrightColors": false,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.fontWeightBold": "600",
+  "terminal.integrated.macOptionClickForcesSelection": true,
+  "terminal.integrated.minimumContrastRatio": 1,
+  "terminal.integrated.shellIntegration.enabled": true,
+  "update.showReleaseNotes": false,
+  "vim.camelCaseMotion.enable": true,
+  "vim.enableNeovim": true,
+  "vim.gdefault": true,
+  "vim.hlsearch": true,
+  "vim.leader": ",",
+  "python.defaultInterpreterPath": "/usr/local/bin/python3",
+  "vim.neovimPath": "/usr/local/bin/nvim",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "<leader>",
+        "k"
+      ],
+      "commands": [
+        ":nohl"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "c"
+      ],
+      "commands": [
+        "editor.action.addCommentLine"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "u"
+      ],
+      "commands": [
+        "editor.action.removeCommentLine"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "h"
+      ],
+      "commands": [
+        "editor.action.peekDefinition"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "r"
+      ],
+      "commands": [
+        "references-view.find"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "d"
+      ],
+      "commands": [
+        "editor.action.revealDefinition"
+      ]
+    }
+  ],
+  "vim.useSystemClipboard": true,
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "c"
+      ],
+      "commands": [
+        "editor.action.addCommentLine"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "c",
+        "u"
+      ],
+      "commands": [
+        "editor.action.removeCommentLine",
+        "<esc>"
+      ]
+    }
+  ],
+  "window.autoDetectColorScheme": true,
+  "workbench.colorCustomizations": {
+    "[Solarized Custom Dark]": {
+      "editorGutter.background": "#073642",
+      "terminal.ansiBlack": "#073642", // base02
+      "terminal.ansiBlue": "#268bd2",
+      "terminal.ansiBrightBlack": "#002b36", // base03
+      "terminal.ansiBrightBlue": "#839496", // base0
+      "terminal.ansiBrightCyan": "#93a1a1", // base1
+      "terminal.ansiBrightGreen": "#586e75", // base01
+      "terminal.ansiBrightWhite": "#fdf6e3", //base3
+      "terminal.ansiBrightYellow": "#657b83", // base00
+      "terminal.ansiCyan": "#2aa198",
+      "terminal.ansiGreen": "#859900",
+      "terminal.ansiMagenta": "#d33682",
+      "terminal.ansiRed": "#dc322f",
+      "terminal.ansiWhite": "#eee8d5", // base2
+      "terminal.ansiYellow": "#b58901",
+      "terminal.background": "#002b36",
+      "terminal.foreground": "#839496"
+    },
+    "[Solarized Custom Light]": {
+      "editorGutter.background": "#eee8d5",
+      "terminal.ansiBlack": "#eee8d5", // base2
+      "terminal.ansiBlue": "#268bd2",
+      "terminal.ansiBrightBlack": "#fdf6e3", //base3
+      "terminal.ansiBrightBlue": "#657b83", // base00
+      "terminal.ansiBrightCyan": "#586e75", // base01
+      "terminal.ansiBrightGreen": "#93a1a1", // base1
+      "terminal.ansiBrightWhite": "#002b36", // base03
+      "terminal.ansiBrightYellow": "#839496", // base0
+      "terminal.ansiCyan": "#2aa198",
+      "terminal.ansiGreen": "#859901",
+      "terminal.ansiMagenta": "#d33682",
+      "terminal.ansiRed": "#dc322f",
+      "terminal.ansiWhite": "#073642", // base02
+      "terminal.ansiYellow": "#b58901",
+      "terminal.background": "#fdf6e3",
+      "terminal.foreground": "#657b83"
+    }
+  },
+  "workbench.colorTheme": "Solarized Custom Light",
+  "workbench.preferredDarkColorTheme": "Solarized Custom Dark",
+  "workbench.preferredLightColorTheme": "Solarized Custom Light",
+  "workbench.startupEditor": "newUntitledFile",
+  "yaml.customTags": [
+    "!And",
+    "!And sequence",
+    "!If",
+    "!If sequence",
+    "!Not",
+    "!Not sequence",
+    "!Equals",
+    "!Equals sequence",
+    "!Or",
+    "!Or sequence",
+    "!FindInMap",
+    "!FindInMap sequence",
+    "!Base64",
+    "!Join",
+    "!Join sequence",
+    "!Cidr",
+    "!Ref",
+    "!Sub",
+    "!Sub sequence",
+    "!GetAtt",
+    "!GetAZs",
+    "!ImportValue",
+    "!ImportValue sequence",
+    "!Select",
+    "!Select sequence",
+    "!Split",
+    "!Split sequence"
+  ],
+  "zenMode.hideLineNumbers": false,
+  "altimate.onboardedMcpServer": true,
+  "python.analysis.typeCheckingMode": "standard",
+  "remote.defaultExtensionsIfInstalledLocally": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "GitHub.vscode-pull-request-github"
+  ],
+  "git.openRepositoryInParentFolders": "never",
+  "github.copilot.nextEditSuggestions.enabled": true
 }

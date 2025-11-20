@@ -1,50 +1,64 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
-    {
-        "key": "alt+backspace",
-        "command": "deleteWordPartLeft",
-        "when": "textInputFocus && !editorReadonly"
+  {
+    "key": "shift+cmd+c",
+    "command": "git.checkout"
+  },
+  {
+    "command": "deleteWordPartLeft",
+    "key": "alt+backspace",
+    "when": "textInputFocus && !editorReadonly"
+  },
+  {
+    "command": "-deleteWordPartLeft",
+    "key": "ctrl+alt+backspace",
+    "when": "textInputFocus && !editorReadonly"
+  },
+  {
+    "args": {
+      "text": "\u001b\u007f"
     },
-    {
-        "key": "ctrl+alt+backspace",
-        "command": "-deleteWordPartLeft",
-        "when": "textInputFocus && !editorReadonly"
-    },
-    {
-        "key": "alt+backspace",
-        "command": "-workbench.action.terminal.deleteWordLeft",
-        "when": "terminalFocus"
-    },
-    {
-        "key": "alt+backspace",
-        "command": "-deleteWordLeft",
-        "when": "textInputFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+b",
-        "command": "-cursorLeft",
-        "when": "textInputFocus"
-    },
-    {
-        "key": "alt+cmd+b",
-        "command": "cmake.compileFile"
-    },
-    {
-        "key": "ctrl+k",
-        "command": "workbench.action.navigateUp",
-        "when": "!panelFocus"
-    },
-    {
-        "key": "ctrl+j",
-        "command": "workbench.action.navigateDown",
-        "when": "!panelFocus"
-    },
-    {
-        "key": "ctrl+h",
-        "command": "workbench.action.navigateLeft"
-    },
-    {
-        "key": "ctrl+l",
-        "command": "workbench.action.navigateRight"
-    }
+    "command": "workbench.action.terminal.sendSequence",
+    "key": "alt+backspace",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "-deleteWordLeft",
+    "key": "alt+backspace",
+    "when": "textInputFocus && !editorReadonly"
+  },
+  {
+    "command": "-cursorLeft",
+    "key": "ctrl+b",
+    "when": "textInputFocus"
+  },
+  {
+    "command": "cmake.compileFile",
+    "key": "alt+cmd+b"
+  },
+  {
+    "command": "workbench.action.navigateUp",
+    "key": "ctrl+k"
+  },
+  {
+    "command": "workbench.action.navigateDown",
+    "key": "ctrl+j"
+  },
+  {
+    "command": "workbench.action.navigateLeft",
+    "key": "ctrl+h"
+  },
+  {
+    "command": "workbench.action.navigateRight",
+    "key": "ctrl+l"
+  },
+  {
+    "key": "cmd+l",
+    "command": "workbench.action.toggleAuxiliaryBar"
+  },
+  {
+    "command": "workbench.action.toggleMaximizedPanel",
+    "key": "cmd+k",
+    "when": "terminalFocus"
+  }
 ]

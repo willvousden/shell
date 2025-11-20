@@ -29,12 +29,14 @@ def set_background(text: str, *, ansi_code: int) -> str:
 
 
 def main() -> None:
-    lines = (line.strip() for line in SOLARIZED_TABLE.strip().splitlines())
-    for i, line in enumerate(lines):
+    for i, line in enumerate(
+        line.strip() for line in SOLARIZED_TABLE.strip().splitlines()
+    ):
         swatch_content = " " * 6
         if i >= 2:
             swatch = set_background(
-                swatch_content, ansi_code=int(line.split()[2].split("/")[0])
+                swatch_content,
+                ansi_code=int(line.split()[2].split("/")[0]),
             )
             if i % 2 == 0:
                 line = set_background(line, ansi_code=0)
