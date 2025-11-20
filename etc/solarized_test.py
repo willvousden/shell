@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-solarized_table = """
+SOLARIZED_TABLE = """
 SOLARIZED HEX     16/8 TERMCOL  XTERM/HEX   L*A*B      RGB         HSB
 --------- ------- ---- -------  ----------- ---------- ----------- -----------
 base03    #002b36  8/4 brblack  234 #1c1c1c 15 -12 -12   0  43  54 193 100  21
@@ -21,14 +21,27 @@ cyan      #2aa198  6/6 cyan      37 #00afaf 60 -35 -05  42 161 152 175  74  63
 green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 """
 
-rows = [line.split() for line in solarized_table.splitlines() if line]
-for row in rows[2:]:
-    solarized_name = row[0]
-    ansi_code = int(row[2].split("/")[0])
-    term_name = row[3]
 
+def set_background(text: str, *, ansi_code: int) -> str:
     colour_code = ansi_code % 8
     background_code = 10 if ansi_code > 7 else 4
-    print(
-        f"{solarized_name:<7} {ansi_code: >2} {term_name:<9} \033[{background_code}{colour_code}m        \033[0m"
-    )
+    return f"\033[{background_code}{colour_code}m{text}\033[0m"
+
+
+def main() -> None:
+    lines = (line.strip() for line in SOLARIZED_TABLE.strip().splitlines())
+    for i, line in enumerate(lines):
+        swatch_content = " " * 6
+        if i >= 2:
+            swatch = set_background(
+                swatch_content, ansi_code=int(line.split()[2].split("/")[0])
+            )
+            if i % 2 == 0:
+                line = set_background(line, ansi_code=0)
+        else:
+            swatch = swatch_content
+        print(f"{swatch} {line}")
+
+
+if __name__ == "__main__":
+    main()
