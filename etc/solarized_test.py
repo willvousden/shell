@@ -21,10 +21,14 @@ cyan      #2aa198  6/6 cyan      37 #00afaf 60 -35 -05  42 161 152 175  74  63
 green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 """
 
-rows = [line.split() for line in solarized_table.splitlines() if line][2:]
-names_to_ansi_codes = {row[0]: int(row[2].split("/")[0]) for row in rows}
+rows = [line.split() for line in solarized_table.splitlines() if line]
+for row in rows[2:]:
+    solarized_name = row[0]
+    ansi_code = int(row[2].split("/")[0])
+    term_name = row[3]
 
-for name, ansi_code in names_to_ansi_codes.items():
     colour_code = ansi_code % 8
-    bright_code = 9 if ansi_code > 7 else 3
-    print(f"\033[{bright_code}{colour_code}mANSI {ansi_code: <2} ({name})\033[0m")
+    background_code = 10 if ansi_code > 7 else 4
+    print(
+        f"{solarized_name:<7} {ansi_code: >2} {term_name:<9} \033[{background_code}{colour_code}m        \033[0m"
+    )
