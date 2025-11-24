@@ -20,8 +20,7 @@ try:
             del f
             print(f"Using {t} backend.")
             break
-        except ValueError, ImportError:
-            # TODO: Is this the right type?
+        except ModuleNotFoundError:
             pp.switch_backend(default)
         finally:
             del t
